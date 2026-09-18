@@ -1,0 +1,16 @@
+{
+  "as_of": "2026-06-27",
+  "rows": {
+    "crm/accounts": 50,
+    "crm/contacts": 50,
+    "crm/opportunities": 50,
+    "support/cases": 37,
+    "support/cases_left_out_as_internal": 2,
+    "billing/customers": 17,
+    "billing/subscriptions": 21,
+    "billing/invoices": 49,
+    "billing/payments": 48,
+    "billing/refunds": 5,
+    "billing/disputes": 3
+  }
+}

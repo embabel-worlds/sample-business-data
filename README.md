@@ -20,9 +20,33 @@ after (HubSpot, Stripe, GitHub Issues), or stand-ins for them (Odoo, Lago, Chatw
 | `csv/github-issues/` | `issues` 39, plus `labels_reference` and `team_reference` |
 | `csv/*/README.txt` | The author's own notes from each workbook's README tab: edge cases, ID conventions, how columns map to the real APIs |
 | `convert.py` | Regenerates `csv/` from `source/` and checks the three datasets agree with each other |
+| `book/` | The same data with every product name taken out: `crm/`, `support/`, `billing/`, joined by `account_key`. **This is what loaders read.** |
+| `to_book.py` | Regenerates `book/` from `csv/` |
 
-Read the CSVs, not the workbooks. Pin a tag, not `main`: a data edit must not be able to
+Load from `book/`. Read `csv/` when you want the data as its author shaped it, and the
+workbooks never. Pin a tag, not `main`: a data edit must not be able to
 change a demo's answers silently.
+
+## The book, and why it exists
+
+`csv/` speaks HubSpot, Stripe and GitHub, because that is how the data was written. A loader
+for Odoo should not need to know what a HubSpot lifecycle stage is. So `to_book.py` does
+that translation once, into a vocabulary with no product in it:
+
+| File | One row per | Notes |
+|---|---|---|
+| `crm/accounts.csv` | customer company | `account_key` is its domain |
+| `crm/contacts.csv` | person | |
+| `crm/opportunities.csv` | deal | `stage` as authored, `stage_order`, and `status`: open, won or lost |
+| `support/cases.csv` | customer case | `status` open or resolved; `priority` urgent to none; `filed_on_behalf` when staff wrote it up, not the customer. The two internal engineering issues are left out |
+| `billing/customers.csv` | billing customer | `known_to_crm` is `no` for the three the CRM has never heard of |
+| `billing/subscriptions.csv`, `invoices.csv`, `payments.csv`, `refunds.csv`, `disputes.csv` | | a payment is one ATTEMPT, succeeded or failed |
+| `book.json` | | the as-of date and the row counts |
+
+With D datasets and P products, product-shaped loaders cost D x P. With a book in the middle
+it is D + P: a new dataset writes one `to_book.py` and every loader works; a new product
+writes one loader and every dataset works. Loaders exist today for Odoo, Chatwoot and Lago,
+each in its realm under `seed/load_book.py`.
 
 ## How the three link
 
@@ -81,9 +105,9 @@ Left as authored, recorded here so nobody rediscovers them:
 Edit in Google Sheets, never here. Then, per sheet: File → Download → Microsoft Excel, put
 the file in `source/` under the same name, and run:
 
-    python3 convert.py
+    python3 convert.py && python3 to_book.py
 
-It rewrites `csv/` and exits non-zero if the datasets stopped agreeing — a billing customer
+The first rewrites `csv/` and exits non-zero if the datasets stopped agreeing — a billing customer
 pointing at a missing company, an issue from an unknown contact, a deals total that no
 longer matches its rows. Review the CSV diff, commit both, tag.
 
