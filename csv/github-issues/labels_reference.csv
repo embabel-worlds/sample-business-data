@@ -1,0 +1,41 @@
+Label,Category,Description,Color
+bug,type,Something is broken or behaving incorrectly,#d73a4a
+feature-request,type,New feature or capability being requested,#a2eeef
+enhancement,type,Improvement to an existing feature,#84b6eb
+question,type,Customer or internal user asking how to do something,#cc317c
+documentation,type,"Issue with docs (missing, wrong, unclear)",#0075ca
+security,type,Security-related issue or improvement,#b60205
+regression,type,Previously-working behavior has broken,#e99695
+p0,priority,"Critical — drop everything (security, production-down)",#b60205
+p1,priority,High — fix this sprint,#d93f0b
+p2,priority,Medium — fix next sprint,#fbca04
+p3,priority,"Low — backlog, fix when time permits",#0e8a16
+p4,priority,"Nice-to-have, no commitment",#c2e0c6
+area:api,area,Public/internal API,#7057ff
+area:ui,area,Web UI,#7057ff
+area:auth,area,Authentication / SSO / OAuth,#7057ff
+area:webhooks,area,Webhook delivery,#7057ff
+area:integrations,area,Third-party integrations,#7057ff
+area:performance,area,Performance / latency / throughput,#7057ff
+area:export,area,Data export,#7057ff
+area:reporting,area,Reports and analytics,#7057ff
+area:mobile,area,iOS / Android apps,#7057ff
+area:i18n,area,Internationalization / localization,#7057ff
+area:compliance,area,"Compliance (GDPR, HIPAA, SOC2, etc.)",#7057ff
+area:docs,area,Documentation,#7057ff
+area:search,area,Search and indexing,#7057ff
+area:audit,area,Audit logs,#7057ff
+area:workflow,area,Workflows and automation,#7057ff
+area:reliability,area,Uptime / reliability / error handling,#7057ff
+area:dx,area,Developer experience,#7057ff
+area:validation,area,Input validation,#7057ff
+area:cache,area,Caching layer,#7057ff
+area:dependencies,area,Third-party dependencies,#7057ff
+area:onboarding,area,New user onboarding,#7057ff
+area:org,area,Organization / hierarchy / multi-tenancy,#7057ff
+customer:enterprise,context,Reported by or impacts Enterprise-tier customer,#1d76db
+filed-on-behalf,context,Internal team filed on behalf of customer,#bfd4f2
+good-first-issue,context,Good first issue for new contributors,#7057ff
+gdpr,context,GDPR-related,#fef2c0
+hipaa,context,HIPAA-related,#fef2c0
+internal,context,"Internal engineering issue, not customer-facing",#e4e669

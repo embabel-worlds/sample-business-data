@@ -1,0 +1,115 @@
+Issue #,Title,State,Author,Assignees,Labels,Milestone,Created At,Updated At,Closed At,Comments,Repository,Reporter Contact (HubSpot),Reporter Company (HubSpot),Body
+1247,SSO timeout after 15 minutes despite enterprise tier setting,closed,sarahj-acme,"eng-alex, eng-tomek","bug, p1, area:auth, customer:enterprise",v3.4,2026-03-12,2026-03-28,2026-03-28,14,embabel/platform,Sarah Johnson,Acme Corporation,"SSO sessions timing out at 15 minutes regardless of the SAML session timeout we set in our IdP (60 min). Affects all users at our org. Started after the 3.3.2 release.
+
+Steps to reproduce:
+1. Log in via Okta SSO
+2. Stay idle for 15 min
+3. Session expires, forced re-auth
+
+Expected: respect IdP timeout. Actual: hardcoded 15 min.
+
+This is breaking flow for our team — Sarah"
+1251,API rate limiting too aggressive on /v2/contacts endpoint,closed,priya-stark,"eng-jordan, eng-mei","bug, p2, area:api, customer:enterprise",v3.4,2026-03-18,2026-04-02,2026-04-02,22,embabel/platform,Priya Patel,Stark Industries,"Hitting 429s at ~50 req/sec on /v2/contacts even though our tier docs say 200/sec. We have a backfill job that needs to run nightly and it's timing out.
+
+Rate-limit-Remaining header values look inconsistent. Sometimes resets faster than the Retry-After suggests.
+
+Need: confirm actual limits for Enterprise tier, fix inconsistent headers."
+1263,Dashboard loads in >12s with 5000+ records,open,hannah-tyrell,eng-sam-w,"bug, p2, area:performance, area:ui",v3.5,2026-04-02,2026-04-22,,8,embabel/platform,Hannah Mitchell,Tyrell Corporation,"Our main dashboard takes 12-18s to load when we have more than 5000 records. Users are complaining. Suspect N+1 in the activity feed query.
+
+Profile shows ~340 DB queries per page load. Would expect <50 with proper joins."
+1274,Webhook deliveries failing silently with no retry log,closed,davidc-globex,eng-tomek,"bug, p1, area:webhooks, area:reliability",v3.4,2026-04-08,2026-04-19,2026-04-19,17,embabel/platform,David Chen,Globex Industries,"During POC: webhook deliveries to our endpoint fail and we see no log/no retry. Set up a simple httpbin.org/post listener — works on first delivery, then random ones drop.
+
+Need visibility into webhook delivery status and configurable retry behavior."
+1289,"CSV export truncated at exactly 10,000 rows without warning",closed,olivia-oscorp,eng-jordan,"bug, p2, area:export",v3.4,2026-04-15,2026-04-25,2026-04-25,6,embabel/platform,Olivia Brown,Oscorp Industries,"Exported a contact list and got exactly 10,000 rows — we have 14,233. No warning, no pagination prompt. Just silently truncated.
+
+Either paginate, raise the limit, or at minimum show a warning + offer a background job for large exports."
+1294,Mobile UI: long-press menu doesn't appear on iPad,open,priya-stark,eng-mei,"bug, p3, area:mobile, area:ui",v3.6,2026-04-18,2026-05-02,,3,embabel/platform,Priya Patel,Stark Industries,"Long-press context menu on the contact list works on iPhone but not iPad (tested on iPadOS 17.4 and 18.0). Tapping and holding does nothing.
+
+Low priority but annoying for our exec team who all use iPads."
+1301,Date picker defaults to UTC even when user timezone is set,open,yuki-nakamoto,eng-alex,"bug, p2, area:ui, area:i18n",v3.5,2026-04-20,2026-04-29,,11,embabel/platform,Yuki Tanaka,Nakamoto Trading,"When I set a date in the deal close-date picker, it saves as UTC even though my profile timezone is JST. This means dates shift by ~9 hours and we get reports complaining about wrong close dates."
+1308,Export to PDF garbles Japanese characters,closed,yuki-nakamoto,"eng-mei, eng-alex","bug, p2, area:export, area:i18n",v3.4,2026-04-22,2026-05-01,2026-05-01,9,embabel/platform,Yuki Tanaka,Nakamoto Trading,PDF export renders Japanese (and we tested also Chinese and Korean) characters as boxes/garbled text. Need proper CJK font embedding in the PDF engine.
+1315,Slack integration disconnects every 24-48 hours,open,marcus-wayne,eng-tomek,"bug, p2, area:integrations, customer:enterprise",v3.5,2026-04-25,2026-05-05,,19,embabel/platform,Marcus Williams,Wayne Enterprises,"Slack workspace integration keeps disconnecting. Have to re-auth roughly daily. Affecting our deal notification automation.
+
+Logs show OAuth token refresh failing with 401 from Slack. Suspect refresh token logic."
+1322,Search returns stale results after bulk delete,open,eli-aperture-sys,eng-jordan,"bug, p3, area:search, area:performance",v3.6,2026-04-28,2026-05-08,,4,embabel/platform,Eli Stewart,Aperture Systems,"Deleted ~200 contacts via bulk action; they still appear in search results for ~30 minutes after. Index lag is too long. Should be near-real-time or at least show a ""syncing"" indicator."
+1235,Add bulk export API for all object types,open,davidc-globex,eng-jordan,"feature-request, p2, area:api",v3.6,2026-03-05,2026-04-22,,28,embabel/platform,David Chen,Globex Industries,"Current /v2 API only supports paginated GETs. We need a bulk export endpoint that returns all records of an object type as NDJSON or CSV streamed.
+
+Use case: nightly data warehouse sync. Right now we paginate which takes 4+ hours.
+
+Willing to share our implementation thoughts."
+1238,EU data residency option for Hooli GmbH deployment,open,anna-hooli,"eng-riya, eng-tomek","feature-request, p1, area:compliance, customer:enterprise, gdpr",v4.0,2026-03-08,2026-04-22,,31,embabel/platform,Anna Müller,Hooli GmbH,"We cannot move forward with the deal without EU data residency. Customer data must be stored in Frankfurt or Dublin region. US region is a non-starter for our DPO.
+
+This is a blocker for our deal closure. Sales has flagged this as needed by Q3."
+1242,Japanese language UI support,open,yuki-nakamoto,eng-mei,"feature-request, p2, area:i18n",v4.0,2026-03-10,2026-04-19,,7,embabel/platform,Yuki Tanaka,Nakamoto Trading,"Need full Japanese UI translation. We currently have English only. Many of our users prefer/require Japanese. Would unlock APAC expansion.
+
+Willing to assist with translation review if it helps."
+1255,Custom report builder with drag-drop fields,open,ethan-rekall,eng-sam-w,"feature-request, p2, area:reporting",v3.6,2026-03-22,2026-04-30,,14,embabel/platform,Ethan Foster,Rekall Inc,"Current reports are pre-built templates. Would love a drag-drop report builder where I can pick fields, group/filter, and save as a custom report.
+
+This is critical for our sales ops team. Showed our team during demo, they were excited."
+1268,Multi-site / franchise hierarchy support,closed,jasmine-lospollos,"eng-riya, eng-jordan","feature-request, p1, area:org, customer:enterprise",v3.4,2026-04-05,2026-04-20,2026-04-20,23,embabel/platform,Jasmine Ross,Los Pollos Hermanos,"As a franchise group with 60+ locations, we need parent-child org structure where each location can have its own users + data, but the parent sees aggregated views.
+
+UPDATE: Shipped in v3.4 — closing. Thanks team, this unblocked our 12-location expansion!"
+1278,"API rate limits should be per-token, not per-org",open,priya-stark,eng-jordan,"feature-request, p2, area:api, customer:enterprise",v3.6,2026-04-10,2026-04-29,,11,embabel/platform,Priya Patel,Stark Industries,"We have multiple internal systems (ETL, reporting, ops) all using our API. Currently they share one org-level rate limit and step on each other.
+
+Proposal: rate limits per-token, with org-level cap as ceiling. Allows us to isolate noisy neighbors internally."
+1283,Webhook event filtering by deal stage,open,davidc-globex,eng-tomek,"feature-request, p3, area:webhooks",v3.6,2026-04-12,2026-04-30,,5,embabel/platform,David Chen,Globex Industries,"Right now I subscribe to `deal.updated` and have to filter on my side. Would prefer to subscribe to `deal.updated where stage = closed_won` and only get those events.
+
+Reduces our processing load 95%+."
+1296,Native Salesforce two-way sync,open,sarahj-acme,"eng-tomek, eng-riya","feature-request, p1, area:integrations, customer:enterprise",v4.0,2026-04-18,2026-05-01,,18,embabel/platform,Sarah Johnson,Acme Corporation,"Currently using Zapier to sync between us and SFDC — unreliable and lossy on custom fields. Need native bidirectional sync with field mapping UI.
+
+This is the #1 ask from our EMEA team rolling out next quarter."
+1305,Dark mode for the web app,open,thomas-metacortex,eng-mei,"feature-request, p4, area:ui, good-first-issue",backlog,2026-04-21,2026-04-26,,42,embabel/platform,Thomas Anderson,Metacortex,"Please add dark mode. My eyes thank you.
+
+(I know this isn't a priority — adding for the +1 count :)"
+1318,Approval workflows for deals over a threshold,open,audrey-momcorp,"eng-sam-w, eng-riya","feature-request, p1, area:workflow, customer:enterprise",v4.0,2026-04-26,2026-05-03,,9,embabel/platform,Audrey Clark,Mom Corp,"As CFO I need approval workflows for any deal > $100K — multiple approver chain, email + Slack notifications, full audit trail.
+
+This is a procurement-mandated requirement for our deal to close."
+1259,How to filter API response by custom property?,closed,rkim-cyberdyne,eng-alex,"question, area:api, area:docs",,2026-03-25,2026-03-26,2026-03-26,3,embabel/platform,Rebecca Kim,Cyberdyne Systems,"Trying to GET /v2/contacts filtered by a custom property `industry_vertical`. Docs only show standard fields. Is this supported?
+
+UPDATE: Got it working with the `properties=industry_vertical&filter` query. Docs could be clearer though."
+1271,Best practice for handling pagination tokens?,closed,caleb-arasaka,eng-jordan,"question, area:api, area:docs",,2026-04-07,2026-04-09,2026-04-09,5,embabel/platform,Caleb Wright,Arasaka Corp Tokyo,"Our cursor-based pagination — do tokens expire? How long? Need to know for our retry/resume logic.
+
+Answered: tokens valid for 24 hours, document update PR"
+1287,GDPR data export — full user data dump?,closed,anna-hooli,eng-riya,"question, area:compliance, gdpr",,2026-04-14,2026-04-17,2026-04-17,4,embabel/platform,Anna Müller,Hooli GmbH,"For DSAR requests, we need to export everything we have stored about a contact. Is there an API or UI flow?
+
+Resolution: Documented in compliance section."
+1262,Customer requesting Calendly integration,open,jenna-cs,eng-tomek,"feature-request, p3, area:integrations, filed-on-behalf",v3.6,2026-03-30,2026-04-12,,6,embabel/platform,Sofia Garcia,Soylent Green Foods,"Filed on behalf of Sofia Garcia (Soylent Green Foods) during demo. They use Calendly heavily for prospect meetings and want bidirectional sync.
+
+Not blocking the deal, but high signal — second customer asking."
+1276,Onboarding doc unclear on multi-region deployment,closed,mike-cs,eng-riya,"documentation, p2, filed-on-behalf",,2026-04-09,2026-04-15,2026-04-15,3,embabel/platform,Marcus Williams,Wayne Enterprises,"Wayne Enterprises team got confused during onboarding on how to set up the multi-region cluster. Sections 4.2 and 4.3 contradict on the VPC setup order.
+
+Resolution: Docs updated, screenshots added."
+1284,Customer reports performance degradation after upgrading to v3.3.2,closed,jenna-cs,"eng-jordan, eng-sam-w","bug, p1, area:performance, filed-on-behalf, regression",v3.4,2026-04-13,2026-04-19,2026-04-19,28,embabel/platform,Hannah Mitchell,Tyrell Corporation,"Tyrell reports 3-4x slowdown on report generation after auto-upgrade to v3.3.2. Several other customers (Stark, Acme) reporting similar.
+
+Resolution: Hotfix v3.3.3 released. Bad index migration script."
+1299,Demo feedback: chart annotation feature requested,open,mike-cs,eng-mei,"feature-request, p3, area:ui, filed-on-behalf",v3.6,2026-04-19,2026-04-25,,2,embabel/platform,Ruby Knight,Duff Beer Company,"During webinar Q&A, Ruby (Duff Beer Co) asked if they could annotate charts to flag specific data points for their team. Worth tracking — also asked by 2 other prospects in similar industries."
+1311,Customer asking about HIPAA compliance,open,jenna-cs,eng-riya,"question, area:compliance, hipaa, filed-on-behalf",,2026-04-23,2026-04-29,,4,embabel/platform,Olivia Brown,Oscorp Industries,"Oscorp (biotech) asked whether we support HIPAA workflows. Currently we don't but they're willing to wait if there's a roadmap commitment.
+
+Looping in compliance + product."
+1245,CVE-2024-XXXX dependency update (urgent),closed,eng-tomek,eng-tomek,"security, p0, area:dependencies",v3.3.3,2026-03-11,2026-03-12,2026-03-12,4,embabel/platform,,,"Critical CVE in `auth-lib` v2.4.1. Patched in 2.4.2. Need urgent upgrade + verify nothing broke in our SSO flow.
+
+Resolution: Patched, deployed, customer notification sent."
+1267,Penetration test findings — H1 2026,closed,eng-riya,"eng-riya, eng-tomek, eng-alex","security, p1, area:security, internal",v3.4,2026-04-04,2026-04-21,2026-04-21,16,embabel/platform,,,Q2 pen test (vendor: Bishop Fox) surfaced 3 medium findings. Filed sub-issues #1268-1270. All resolved in v3.4.
+1290,IP allowlist feature for Enterprise customers,open,sarahj-acme,eng-tomek,"feature-request, p2, area:security, customer:enterprise",v3.5,2026-04-15,2026-04-29,,12,embabel/platform,Sarah Johnson,Acme Corporation,"Need ability to allowlist IP ranges for our org. Currently anyone with valid creds can log in from anywhere. Security team flagged this during their review.
+
+Multiple customers asking — this should be Enterprise tier."
+1248,"Typo on billing page — ""Receieved"" should be ""Received""",closed,sarahj-acme,eng-mei,"bug, p4, area:ui, good-first-issue",v3.4,2026-03-13,2026-03-14,2026-03-14,1,embabel/platform,Sarah Johnson,Acme Corporation,"Tiny typo on the invoice receipt page. Says ""Receieved"" instead of ""Received"". Linking screenshot."
+1253,Duplicate email address validation inconsistent,closed,priya-stark,eng-jordan,"bug, p3, area:validation",v3.4,2026-03-19,2026-04-01,2026-04-01,5,embabel/platform,Priya Patel,Stark Industries,"Bulk import allows duplicate emails but single-create UI blocks them. Inconsistent behavior. Should be uniform.
+
+Resolution: bulk import now checks duplicates with merge option."
+1261,Webhook signature verification example wrong in docs,closed,davidc-globex,eng-alex,"documentation, p3, area:docs, area:webhooks",,2026-03-28,2026-04-01,2026-04-01,3,embabel/platform,David Chen,Globex Industries,"Docs example shows HMAC-SHA256 of `body + timestamp` but implementation expects `timestamp + body`. Order matters. Cost me an afternoon to debug.
+
+Resolution: docs corrected, added Node + Python examples."
+1280,API response includes deleted records for ~5 min,closed,eli-aperture-sys,eng-jordan,"bug, p3, area:api, area:cache",v3.4,2026-04-11,2026-04-22,2026-04-22,8,embabel/platform,Eli Stewart,Aperture Systems,"After DELETE, GET still returns the record for several minutes. Cache invalidation bug.
+
+Resolution: cache invalidation moved to write-through."
+1293,Add `created_by` to deal audit log,closed,liam-dunder,eng-sam-w,"feature-request, p3, area:audit",v3.4,2026-04-17,2026-04-26,2026-04-26,4,embabel/platform,Liam O'Connor,Dunder Mifflin Ireland,Audit log shows what changed but not who created the deal originally. Adding `created_by` would close the loop.
+1320,OAuth scope reduction request from customer,open,caleb-arasaka,"eng-tomek, eng-riya","feature-request, p2, area:auth, customer:enterprise, security",v3.5,2026-04-27,2026-05-04,,7,embabel/platform,Caleb Wright,Arasaka Corp Tokyo,"Our security team flagged that the OAuth scopes we request are too broad — specifically `admin:org` when we only need `read:contacts`. Can we offer more granular scopes?
+
+This is blocking our security review approval."
+1324,In-app onboarding tour for new users,open,jenna-cs,"eng-mei, eng-sam-w","feature-request, p2, area:onboarding, area:ui, filed-on-behalf",v3.6,2026-04-29,2026-05-06,,11,embabel/platform,Stella Morgan,Krusty Burger PNW,"Multiple new customers (Stella, Ruby, Sofia) asked for an in-app guided tour after signup. Would dramatically reduce CS onboarding time.
+
+CS estimate: ~15 hours/customer saved."
+1328,Improve error messages on failed API requests,open,davidc-globex,eng-alex,"enhancement, p3, area:api, area:dx",v3.6,2026-05-01,2026-05-08,,6,embabel/platform,David Chen,Globex Industries,"Current 400 responses are like `{""error"": ""Bad request""}`. Want field-level errors like `{""errors"": [{""field"": ""email"", ""code"": ""invalid_format""}]}`.
+
+Will make our integration much more debuggable."

@@ -1,0 +1,49 @@
+Charge ID,Payment Intent ID,Invoice ID,Customer ID,Customer Name,Amount,Currency,Status,Created Date,Payment Method,Card Brand,Card Last 4,Refunded,Disputed,Failure Code,Description
+ch_acme_2024_001,pi_acme_2024_001,in_acme_2024_001,cus_AcmeCorp00001,Acme Corporation,125000,USD,succeeded,2024-04-15,card,visa,4242,No,No,,Acme Year 1 renewal
+ch_acme_2025_001,pi_acme_2025_001,in_acme_2025_001,cus_AcmeCorp00001,Acme Corporation,125000,USD,succeeded,2025-04-10,card,visa,4242,No,No,,Acme Year 2 renewal
+ch_acme_2026_001,pi_acme_2026_001,in_acme_2026_001,cus_AcmeCorp00001,Acme Corporation,125000,USD,succeeded,2026-04-12,card,visa,4242,No,No,,Acme Year 3 renewal
+ch_stark_2023_001,pi_stark_2023_001,in_stark_2024_001,cus_StarkInd00002,Stark Industries,180000,USD,succeeded,2023-09-05,card,amex,0005,No,No,,Stark Year 1
+ch_stark_2024_001,pi_stark_2024_001,in_stark_2025_001,cus_StarkInd00002,Stark Industries,180000,USD,succeeded,2024-09-02,card,amex,0005,No,No,,Stark Year 2
+ch_stark_2025_001,pi_stark_2025_001,in_stark_2026_001,cus_StarkInd00002,Stark Industries,180000,USD,succeeded,2025-09-04,card,amex,0005,No,No,,Stark Year 3
+ch_stark_train_001,pi_stark_train_001,in_stark_training_2026,cus_StarkInd00002,Stark Industries,35000,USD,succeeded,2026-03-12,card,amex,0005,No,No,,Stark training services one-time
+ch_oscorp_2024_001,pi_oscorp_2024_001,in_oscorp_2024_001,cus_OscorpInd00003,Oscorp Industries,85000,USD,succeeded,2024-07-05,ach_credit_transfer,,,No,No,,Oscorp Year 1 ACH
+ch_oscorp_2025_001,pi_oscorp_2025_001,in_oscorp_2025_001,cus_OscorpInd00003,Oscorp Industries,85000,USD,succeeded,2025-07-07,ach_credit_transfer,,,No,No,,Oscorp Year 2 ACH
+ch_oscorp_addon_001,pi_oscorp_addon_001,in_oscorp_2026_002,cus_OscorpInd00003,Oscorp Industries,78000,USD,succeeded,2026-04-30,ach_credit_transfer,,,No,No,,Oscorp Research Lab add-on
+ch_tyrell_2024_001,pi_tyrell_2024_001,in_tyrell_2024_001,cus_Tyrell0000004,Tyrell Corporation,272000,USD,succeeded,2024-12-10,card,visa,8841,No,No,,Tyrell Year 1
+ch_tyrell_2025_001,pi_tyrell_2025_001,in_tyrell_2025_001,cus_Tyrell0000004,Tyrell Corporation,272000,USD,succeeded,2025-12-08,card,visa,8841,No,No,,Tyrell Year 2
+ch_tyrell_support_001,pi_tyrell_support_001,in_tyrell_2026_002,cus_Tyrell0000004,Tyrell Corporation,48000,USD,succeeded,2026-04-05,card,visa,8841,No,No,,Tyrell premium support add-on
+ch_cyberlife_2024_001,pi_cyberlife_2024_001,in_cyberlife_2024_001,cus_Cyberlife000005,Cyberlife Detroit,96000,USD,succeeded,2024-02-28,card,mastercard,3782,No,No,,Cyberlife Year 1
+ch_cyberlife_2025_001,pi_cyberlife_2025_001,in_cyberlife_2025_001,cus_Cyberlife000005,Cyberlife Detroit,96000,USD,succeeded,2025-02-25,card,mastercard,3782,No,No,,Cyberlife Year 2
+ch_cyberlife_2026_001,pi_cyberlife_2026_001,in_cyberlife_2026_001,cus_Cyberlife000005,Cyberlife Detroit,96000,USD,succeeded,2026-02-20,card,mastercard,3782,No,No,,Cyberlife Year 3
+ch_dharma_2023_001,pi_dharma_2023_001,in_dharma_2023_001,cus_Dharma00000006,Dharma Initiative,28000,USD,succeeded,2023-12-22,card,visa,0119,No,No,,Dharma Year 1
+ch_dharma_2024_001,pi_dharma_2024_001,in_dharma_2024_001,cus_Dharma00000006,Dharma Initiative,28000,USD,succeeded,2024-12-18,card,visa,0119,No,No,,Dharma Year 2
+ch_dharma_2025_001,pi_dharma_2025_001,in_dharma_2025_001,cus_Dharma00000006,Dharma Initiative,28000,USD,succeeded,2025-12-15,card,visa,0119,No,No,,Dharma Year 3
+ch_bluesky_2024_001,pi_bluesky_2024_001,in_bluesky_2024_001,cus_BlueSky00000007,Blue Sky Studios,60000,USD,succeeded,2024-10-08,card,mastercard,6677,No,No,,Blue Sky Year 1
+ch_bluesky_2025_001,pi_bluesky_2025_001,in_bluesky_2025_001,cus_BlueSky00000007,Blue Sky Studios,60000,USD,succeeded,2025-10-04,card,mastercard,6677,No,No,,Blue Sky Year 2
+ch_bluesky_prod_001,pi_bluesky_prod_001,in_bluesky_2026_002,cus_BlueSky00000007,Blue Sky Studios,42000,USD,succeeded,2026-03-30,card,mastercard,6677,No,No,,Blue Sky production add-on
+ch_ferrari_2024_001,pi_ferrari_2024_001,in_ferrari_2024_001,cus_FerrariT00008,Ferrari Tech Bologna,58000,EUR,succeeded,2024-08-12,sepa_debit,,2233,No,No,,Ferrari Year 1 SEPA
+ch_ferrari_2025_001,pi_ferrari_2025_001,in_ferrari_2025_001,cus_FerrariT00008,Ferrari Tech Bologna,58000,EUR,succeeded,2025-05-07,sepa_debit,,2233,No,No,,Ferrari Year 2 SEPA
+ch_ferrari_2026_001,pi_ferrari_2026_001,in_ferrari_2026_001,cus_FerrariT00008,Ferrari Tech Bologna,58000,EUR,succeeded,2026-05-05,sepa_debit,,2233,No,No,,Ferrari Year 3 SEPA
+ch_chumbucket_2025_001,pi_chumbucket_2025_001,in_chumbucket_2025_001,cus_ChumBucket0009,Chum Bucket Holdings,12000,USD,succeeded,2025-05-22,card,visa,4499,No,No,,Chum Bucket Year 1
+ch_wernham_2024_001,pi_wernham_2024_001,in_wernham_2024_001,cus_Wernham0000010,Wernham Hogg Slough,14000,GBP,succeeded,2024-10-30,bacs_debit,,5566,No,No,,Wernham Year 1 BACS
+ch_wernham_2025_001,pi_wernham_2025_001,in_wernham_2025_001,cus_Wernham0000010,Wernham Hogg Slough,14000,GBP,succeeded,2025-10-28,bacs_debit,,5566,No,No,,Wernham Year 2 BACS
+ch_wernham_2026_001,pi_wernham_2026_001,in_wernham_2026_001,cus_Wernham0000010,Wernham Hogg Slough,14000,GBP,succeeded,2026-04-22,bacs_debit,,5566,No,No,,Wernham Year 3 BACS
+ch_lospollos_2024_001,pi_lospollos_2024_001,in_lospollos_2024_001,cus_LosPollos00011,Los Pollos Hermanos,84000,USD,succeeded,2024-06-05,card,amex,7711,No,No,,Los Pollos Year 1
+ch_lospollos_2025_001,pi_lospollos_2025_001,in_lospollos_2025_001,cus_LosPollos00011,Los Pollos Hermanos,84000,USD,succeeded,2025-06-04,card,amex,7711,No,No,,Los Pollos Year 2
+ch_lospollos_2026_001,pi_lospollos_2026_001,in_lospollos_2026_001,cus_LosPollos00011,Los Pollos Hermanos,145000,USD,succeeded,2026-05-02,card,amex,7711,No,No,,Los Pollos Year 3 expansion
+ch_spacely_2026_001,pi_spacely_2026_001,in_spacely_2026_001,cus_Spacely00000012,Spacely Tech,88000,USD,succeeded,2026-03-12,card,visa,9933,No,No,,Spacely Year 1
+ch_spacely_addon_001,pi_spacely_addon_001,in_spacely_2026_002,cus_Spacely00000012,Spacely Tech,24000,USD,succeeded,2026-04-14,card,visa,9933,No,No,,Spacely reporting add-on
+ch_wayne_2026_001,pi_wayne_2026_001,in_wayne_2026_001,cus_WayneEnt000013,Wayne Enterprises,95000,USD,succeeded,2026-02-10,customer_balance,,,No,No,,Wayne Phase 1 pilot - wire transfer
+ch_vandelay_2024_001,pi_vandelay_2024_001,in_vandelay_2024_001,cus_Vandelay000014,Vandelay Industries,28000,USD,succeeded,2024-08-25,card,visa,1180,No,No,,Vandelay Year 1
+ch_vandelay_2025_001,pi_vandelay_2025_001,in_vandelay_2025_001,cus_Vandelay000014,Vandelay Industries,28000,USD,succeeded,2025-08-22,card,visa,1180,Yes,No,,Vandelay Year 2 - partially refunded after cancellation
+ch_hudsucker_2023_001,pi_hudsucker_2023_001,in_hudsucker_2023_001,cus_Hudsucker00015,Hudsucker Industries,72000,USD,succeeded,2023-06-30,card,visa,4488,No,No,,Hudsucker Year 1
+ch_hudsucker_2024_001,pi_hudsucker_2024_001,in_hudsucker_2024_001,cus_Hudsucker00015,Hudsucker Industries,72000,USD,succeeded,2024-06-28,card,visa,4488,No,No,,Hudsucker Year 2
+ch_hudsucker_2025_001,pi_hudsucker_2025_001,in_hudsucker_2025_001,cus_Hudsucker00015,Hudsucker Industries,72000,USD,succeeded,2025-06-30,card,visa,4488,Yes,No,,Hudsucker Year 3 - prorated refund issued after cancel
+ch_sirius_2025_001,pi_sirius_2025_001,in_sirius_2025_001,cus_Sirius0000016,Sirius Cybernetics,42000,GBP,succeeded,2025-03-28,card,visa,0042,No,No,,Sirius Year 1
+ch_bluth_2026_001,pi_bluth_2026_001,in_bluth_2026_001,cus_Bluth00000017,Bluth Company,1850,USD,succeeded,2026-01-10,card,mastercard,7702,No,No,,Bluth Jan 2026
+ch_bluth_2026_002,pi_bluth_2026_002,in_bluth_2026_002,cus_Bluth00000017,Bluth Company,1850,USD,succeeded,2026-02-09,card,mastercard,7702,No,No,,Bluth Feb 2026
+ch_bluth_2026_003,pi_bluth_2026_003,in_bluth_2026_003,cus_Bluth00000017,Bluth Company,1850,USD,succeeded,2026-03-11,card,mastercard,7702,No,No,,Bluth Mar 2026
+ch_bluth_2026_004a,pi_bluth_2026_004,in_bluth_2026_004,cus_Bluth00000017,Bluth Company,1850,USD,failed,2026-04-03,card,mastercard,7702,No,No,card_declined,Bluth April - 1st attempt failed (declined)
+ch_bluth_2026_004b,pi_bluth_2026_004,in_bluth_2026_004,cus_Bluth00000017,Bluth Company,1850,USD,failed,2026-04-10,card,mastercard,7702,No,No,insufficient_funds,Bluth April - 2nd attempt failed (insufficient funds)
+ch_bluth_2026_004c,pi_bluth_2026_004,in_bluth_2026_004,cus_Bluth00000017,Bluth Company,1850,USD,failed,2026-04-17,card,mastercard,7702,No,No,card_declined,Bluth April - 3rd attempt failed. Dunning escalated.
+ch_globex_pilot_001,pi_globex_pilot_001,,cus_AcmeCorp00001,Acme Corporation,5000,USD,succeeded,2025-11-15,card,visa,4242,No,Yes,,One-time pilot fee - DISPUTED (later resolved in our favor)

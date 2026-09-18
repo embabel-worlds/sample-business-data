@@ -1,0 +1,18 @@
+Customer ID,Name,Email,Phone,Created Date,Currency,Country,Default Payment Method,Delinquent,Account Balance,HubSpot Company ID,Description
+cus_AcmeCorp00001,Acme Corporation,billing@acmecorp.com,+1-415-555-0100,2024-03-20,USD,US,card_visa_4242,No,0,201,Active customer since 2024. Billed annually. Auto-renew on.
+cus_StarkInd00002,Stark Industries,ap@stark.com,+1-310-555-0100,2023-08-15,USD,US,card_amex_0005,No,0,205,Flagship customer. 3-year contract. Net-30 terms.
+cus_OscorpInd00003,Oscorp Industries,finance@oscorp.com,+1-212-555-0100,2024-06-18,USD,US,ach_bank_1234,No,0,211,Annual billing via ACH. Research lab add-on added in April.
+cus_Tyrell0000004,Tyrell Corporation,billing@tyrellcorp.com,+1-206-555-0100,2024-11-25,USD,US,card_visa_8841,No,0,216,Multi-product customer. Premium support tier added March 2026.
+cus_Cyberlife000005,Cyberlife Detroit,accounts@cyberlife.com,+1-313-555-0100,2024-02-12,USD,US,card_mc_3782,No,0,222,Long-tenured. Smooth renewal in Feb 2026.
+cus_Dharma00000006,Dharma Initiative,aaron@dharmainit.com,+1-808-555-0100,2023-12-10,USD,US,card_visa_0119,No,0,227,"Small org, founder-led billing. Renewed Dec 2025."
+cus_BlueSky00000007,Blue Sky Studios,billing@blueskystudios.com,+1-512-555-0100,2024-09-22,USD,US,card_mc_6677,No,0,230,Project management use case. Add-on purchased March 2026.
+cus_FerrariT00008,Ferrari Tech Bologna,amministrazione@ferrari-tech.it,+39-051-555-0100,2024-07-28,EUR,IT,sepa_debit_2233,No,0,239,EUR billing. SEPA Direct Debit. Renewed April 2026.
+cus_ChumBucket0009,Chum Bucket Holdings,gm@chumbucket.com,+1-941-555-0100,2025-05-05,USD,US,card_visa_4499,No,0,242,Annual sub. Renewal proposal sent April 2026.
+cus_Wernham0000010,Wernham Hogg Slough,accounts@wernham-hogg.co.uk,+44-118-555-0100,2024-10-15,GBP,GB,bacs_debit_5566,No,0,246,GBP billing via BACS Direct Debit. Small but loyal.
+cus_LosPollos00011,Los Pollos Hermanos,finance@los-pollos.com,+1-505-555-0100,2024-05-22,USD,US,card_amex_7711,No,0,250,QSR franchise group. Expanded to 12 new locations April 2026.
+cus_Spacely00000012,Spacely Tech,ap@spacelytech.com,+1-303-555-0100,2026-02-25,USD,US,card_visa_9933,No,0,228,New customer Feb 2026. Reporting module add-on March 2026.
+cus_WayneEnt000013,Wayne Enterprises,procurement-ap@wayne-ent.com,+1-312-555-0100,2026-01-25,USD,US,wire_transfer,No,0,206,Phase 1 pilot. Wire transfer terms. Larger global deal pending.
+cus_Vandelay000014,Vandelay Industries,art@vandelay.com,+1-718-555-0100,2024-08-10,USD,US,card_visa_1180,Yes,280,215,CHURNED. Subscription canceled March 2026 due to budget freeze. Outstanding balance: prorated charge in dispute.
+cus_Hudsucker00015,Hudsucker Industries,billing@hudsucker.com,+1-212-555-0100,2023-06-15,USD,US,,No,0,,CHURNED. Canceled Sept 2025 after 2 years. Cited acquisition by competitor. Refunded prorated portion.
+cus_Sirius0000016,Sirius Cybernetics,finance@sirius-cyber.com,+44-20-7946-0100,2025-03-12,GBP,GB,card_visa_0042,Yes,4250,,DELINQUENT. 2 unpaid invoices. Last payment Feb 2026. Collections engaged.
+cus_Bluth00000017,Bluth Company,gob@bluth.com,+1-949-555-0100,2025-09-03,USD,US,card_mc_7702,Yes,1850,,PAST DUE. April invoice failed card charge x3. Dunning sequence active.
