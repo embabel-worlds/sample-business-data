@@ -22,10 +22,51 @@ after (HubSpot, Stripe, GitHub Issues), or stand-ins for them (Odoo, Lago, Chatw
 | `convert.py` | Regenerates `csv/` from `source/` and checks the three datasets agree with each other |
 | `book/` | The same data with every product name taken out: `crm/`, `support/`, `billing/`, joined by `account_key`. **This is what loaders read.** |
 | `to_book.py` | Regenerates `book/` from `csv/` |
+| `gen_scale_book.py` | Generates a SYNTHETIC book of any size, in the same format. For measuring behaviour at scale — see below. |
 
 Load from `book/`. Read `csv/` when you want the data as its author shaped it, and the
 workbooks never. Pin a tag, not `main`: a data edit must not be able to
 change a demo's answers silently.
+
+## Scale, and why the filler has to be good
+
+The 50 accounts here are hand-authored so that joining the three systems finds a real
+story. They are not enough to show how anything behaves at size, so `gen_scale_book.py`
+writes a synthetic book in the same format:
+
+```sh
+python3 gen_scale_book.py --out ~/embabel/books/book-scale --count 2000
+```
+
+It is deterministic — one seed, no wall clock — because a demo whose answers move when
+nobody changed anything cannot be reconciled.
+
+**Generated does not mean meaningless, and that is the whole point of this script.** An
+earlier scale book named every company `Account 00000`, every person `First00000
+Last00000`, and gave all 2,000 the note "Generated account N for scale measurement". It
+found real bugs at scale, and it also made two headline views incapable of answering:
+a judgement that reads CRM notes to ask "does sales know about this customer's problem"
+can only ever say no against filler, and a triage that reads the customer's own words for
+impact and mood has neither to read. A third view pairs accounts by shared product area,
+and that book wrote no areas at all.
+
+So this generator plants the signal the readers look for, in known proportions, and
+asserts them:
+
+| | what it plants |
+|---|---|
+| awareness | ~30% of troubled accounts get a note that genuinely names the case's product area, so the judgement returns BOTH verdicts |
+| triage | cases spread across blocked / degraded / asking, with reply counts that track impact — so a long thread is not automatically trouble |
+| areas | a small fixed area vocabulary, so accounts genuinely SHARE issues and "is this one customer or an incident?" has pairs to find |
+| billing | ~2/3 billed, a slice unpaid, a smaller slice FAILED, all due in the past so overdue means overdue |
+
+It asserts its own invariants and refuses to write a book that breaks them: `account_key`
+is the spine key every realm joins on, so colliding domains do not fail, they silently
+MERGE accounts — the first draft produced 1,018 distinct domains for 2,000 companies.
+Dates are checked against a fixed today, after a draft dated accounts and invoices into
+2027 and nothing read as overdue.
+
+Load the two together — the hand-authored book for the story, the scale book for size.
 
 ## The book, and why it exists
 
