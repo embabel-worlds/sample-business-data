@@ -22,6 +22,7 @@ after (HubSpot, Stripe, GitHub Issues), or stand-ins for them (Odoo, Lago, Chatw
 | `convert.py` | Regenerates `csv/` from `source/` and checks the three datasets agree with each other |
 | `book/` | The same data with every product name taken out: `crm/`, `support/`, `billing/`, joined by `account_key`. **This is what loaders read.** |
 | `to_book.py` | Regenerates `book/` from `csv/` |
+| `apply_arcs.py` | Lays the demo's story arcs over `book/`; `to_book.py` runs it last |
 | `gen_scale_book.py` | Generates a SYNTHETIC book of any size, in the same format. For measuring behaviour at scale — see below. |
 
 Load from `book/`. Read `csv/` when you want the data as its author shaped it, and the
@@ -82,6 +83,9 @@ that translation once, into a vocabulary with no product in it:
 | `support/cases.csv` | customer case | `status` open or resolved; `priority` urgent to none; `filed_on_behalf` when staff wrote it up, not the customer. The two internal engineering issues are left out |
 | `billing/customers.csv` | billing customer | `known_to_crm` is `no` for the three the CRM has never heard of |
 | `billing/subscriptions.csv`, `invoices.csv`, `payments.csv`, `refunds.csv`, `disputes.csv` | | a payment is one ATTEMPT, succeeded or failed |
+| `crm/notes.csv` | note someone wrote by hand | on the company, or on a deal when `opportunity_id` is set; dated and authored |
+| `crm/meetings.csv` | call on the calendar | `booked_on` is the day it was booked, `starts_at` when it happens (UTC) |
+| `arcs.csv` | story arc | what each arc should surface as, and what it must not |
 | `book.json` | | the as-of date and the row counts |
 
 With D datasets and P products, product-shaped loaders cost D x P. With a book in the middle
@@ -128,6 +132,39 @@ Found by reading across the three, none of it stated in any single one:
 - **Stark** — many issues, all handled, always pays. The account that should NOT be flagged.
 - **The v3.3.2 regression** hit Tyrell, Stark and Acme: one incident across three accounts.
 
+## The arcs
+
+The workbooks were written as a believable company, not as a demo, and joined they do not
+tell every story the account-health demo needs: nobody withholds payment over a bug, nothing
+churns quietly, and no account is noisy but fine. `apply_arcs.py` makes each one true in the
+book, where every loader carries it, rather than in one system afterwards, where a reseed
+would lose it.
+
+| Arc | Account | Should surface as |
+|---|---|---|
+| Silent escalation | Northwind Traders | at risk (urgent case, pipeline into it); sales unaware |
+| Quiet churner | Chum Bucket | at risk on three failed payments, with a renewal forecast and no case |
+| Withholding | Contoso | an open bug saying "we will not pay the June invoice until the export is fixed" |
+| Acknowledged trouble | Initech | at risk, and NOT a blind spot: the owner's notes name both problems |
+| Failed payments | Acme | at risk on a one-off invoice two cards have bounced |
+| Good payer on the 5th | Wayfarer Travel | nothing: due on the 1st, paid on the 5th, one expired card fixed next day |
+| Stale deal | Globex | an open deal past its close date, untouched since April (already in the data) |
+| Noisy but healthy | Brightline Analytics | nothing, despite nine cases — all resolved within two days |
+| Shared incident | Northwind, Contoso, Initech | one export defect across three unrelated accounts |
+| Controls | Cyberlife, Dharma, Ferrari Tech, Wernham Hogg | nothing |
+
+**Group contagion is not seeded.** The book has no parent/subsidiary links, so there is no
+group for trouble to spread through; inventing one belongs in the book's schema.
+
+It also writes the **manual history** an agent is later asked to learn from: an AR clerk's
+note the day after every failed card (`crm/notes.csv`, 35 of them), and the calls a
+salesperson booked each Monday for every account overdue that day (`crm/meetings.csv`). The
+failed cards are added before an invoice's successful payment, so every one still ends paid.
+
+Every arc's invariant is asserted before anything is written, and `arcs.csv` records what
+each should and must not surface as, for a harness to check against. New companies use
+`.example` domains, so no real business can be joined to them.
+
 ## Known quirks
 
 Left as authored, recorded here so nobody rediscovers them:
@@ -146,7 +183,7 @@ Left as authored, recorded here so nobody rediscovers them:
 Edit in Google Sheets, never here. Then, per sheet: File → Download → Microsoft Excel, put
 the file in `source/` under the same name, and run:
 
-    python3 convert.py && python3 to_book.py
+    python3 convert.py && python3 to_book.py      # to_book.py lays the arcs over the book last
 
 The first rewrites `csv/` and exits non-zero if the datasets stopped agreeing — a billing customer
 pointing at a missing company, an issue from an unknown contact, a deals total that no

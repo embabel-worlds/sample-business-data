@@ -1,0 +1,17 @@
+arc,account_key,surfaces_as,must_not
+silent escalation,northwind-traders.example,"AtRiskAccount (urgent case, pipeline into trouble); HealthCrmAwareness unaware",
+quiet churner,chumbucket.com,AtRiskAccount (riskFailedPayments 1),any support case; any CRM note about payment
+withholding,contoso.example,POSSIBLY_WITHHELD_OVER INV-100754 -> case 1330,
+acknowledged trouble,initech.com,"AtRiskAccount; HealthCrmAwareness aware (cases 1331, 1332)",HealthCrmAwareness unaware
+failed payments,acmecorp.com,AtRiskAccount (riskFailedPayments; INV-100759),
+good payer on the 5th,wayfarer-travel.example,nothing,AtRiskAccount; any open invoice
+stale deal,globex.io,"open deal 302 past its close date 2026-06-15, untouched since 2026-04-29",
+noisy but healthy,brightline-analytics.example,nothing,AtRiskAccount; HealthCaseTriage (no open case)
+manual dunning,*,"35 notes by Dana Whitfield, each the day after a failed payment",
+monday calls,*,12 calls booked by Mike Davis across 12 Mondays,
+shared incident,"contoso.example,initech.com,northwind-traders.example",SHARES_ISSUE pairwise on area:export,
+control,cyberlife.com,nothing,AtRiskAccount; any open case; any failed payment
+control,dharmainit.com,nothing,AtRiskAccount; any open case; any failed payment
+control,ferrari-tech.it,nothing,AtRiskAccount; any open case; any failed payment
+control,wernham-hogg.co.uk,nothing,AtRiskAccount; any open case; any failed payment
+group contagion,,NOT SEEDED: the book has no parent/subsidiary links,

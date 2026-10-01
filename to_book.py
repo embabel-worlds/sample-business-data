@@ -10,6 +10,9 @@ vocabulary with no product in it:
     book/billing/    customers, subscriptions, invoices, payments, refunds, disputes
     book/book.json   the as-of date and the row counts
 
+and then lays the demo's story arcs over it (apply_arcs.py), which adds crm/notes, crm/meetings
+and arcs.csv.
+
 The arithmetic is the point. With D datasets and P products, product-shaped loaders cost
 D x P. With a book in the middle it is D + P: a new dataset writes one of these scripts and
 every loader works; a new product writes one loader and every dataset works.
@@ -23,6 +26,8 @@ identifier every product can hold and no product invented.
 import csv
 import json
 from pathlib import Path
+
+import apply_arcs
 
 ROOT = Path(__file__).parent
 
@@ -175,6 +180,7 @@ def main():
         "respond_by": d["Evidence Due By"], "description": d["Description"],
     } for d in read("stripe/disputes.csv")])
 
+    counts.update(apply_arcs.apply(ROOT / "book"))
     (ROOT / "book" / "book.json").write_text(json.dumps({"as_of": AS_OF, "rows": counts}, indent=2) + "\n")
     for name, n in counts.items():
         print(f"{name}  {n}")

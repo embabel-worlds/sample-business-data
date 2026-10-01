@@ -48,3 +48,26 @@ in_bluth_2026_001,INV-100479,cus_Bluth00000017,bluth.com,sub_Bluth0000021,paid,1
 in_bluth_2026_002,INV-100515,cus_Bluth00000017,bluth.com,sub_Bluth0000021,paid,1850,1850,USD,2026-02-03,2026-02-17,2026-02-09,Monthly - Starter (20 seats)
 in_bluth_2026_003,INV-100553,cus_Bluth00000017,bluth.com,sub_Bluth0000021,paid,1850,1850,USD,2026-03-03,2026-03-17,2026-03-11,Monthly - Starter (20 seats)
 in_bluth_2026_004,INV-100597,cus_Bluth00000017,bluth.com,sub_Bluth0000021,open,1850,0,USD,2026-04-03,2026-04-17,,PAST DUE - 3 failed card charges. Dunning.
+in_northwind_2025_001,INV-100751,cus_Northwind0018,northwind-traders.example,sub_Northwind0022,paid,48000,48000,USD,2025-03-01,2025-03-31,2025-03-12,Year 1 - Platform Business (50 seats)
+in_northwind_2026_001,INV-100752,cus_Northwind0018,northwind-traders.example,sub_Northwind0022,paid,48000,48000,USD,2026-03-01,2026-03-31,2026-03-11,Year 2 - Platform Business (50 seats)
+in_contoso_2025_001,INV-100753,cus_Contoso000019,contoso.example,sub_Contoso000023,paid,86000,86000,USD,2025-05-27,2025-06-10,2025-06-06,Year 2 - Platform Enterprise (100 seats)
+in_contoso_2026_001,INV-100754,cus_Contoso000019,contoso.example,sub_Contoso000023,open,86000,0,USD,2026-05-27,2026-06-10,,Year 3 - Platform Enterprise (100 seats)
+in_initech_2026_003,INV-100755,cus_Initech00020,initech.com,sub_Initech000024,paid,1550,1550,USD,2026-03-10,2026-03-25,2026-03-20,Platform Starter (15 seats) - 2026-03
+in_initech_2026_004,INV-100756,cus_Initech00020,initech.com,sub_Initech000024,paid,1550,1550,USD,2026-04-10,2026-04-25,2026-04-21,Platform Starter (15 seats) - 2026-04
+in_initech_2026_005,INV-100757,cus_Initech00020,initech.com,sub_Initech000024,open,1550,0,USD,2026-05-10,2026-05-25,,Platform Starter (15 seats) - 2026-05
+in_initech_2026_006,INV-100758,cus_Initech00020,initech.com,sub_Initech000024,open,1550,0,USD,2026-06-10,2026-06-25,,Platform Starter (15 seats) - 2026-06
+in_acme_2026_emea,INV-100759,cus_AcmeCorp00001,acmecorp.com,,open,18000,0,USD,2026-05-15,2026-06-14,,EMEA onboarding services (one-off)
+in_wayfarer_2025_07,INV-100760,cus_Wayfarer00021,wayfarer-travel.example,sub_Wayfarer00025,paid,2400,2400,USD,2025-06-21,2025-07-01,2025-07-05,Platform Starter (12 seats) - July 2025
+in_wayfarer_2025_08,INV-100761,cus_Wayfarer00021,wayfarer-travel.example,sub_Wayfarer00025,paid,2400,2400,USD,2025-07-22,2025-08-01,2025-08-05,Platform Starter (12 seats) - August 2025
+in_wayfarer_2025_09,INV-100762,cus_Wayfarer00021,wayfarer-travel.example,sub_Wayfarer00025,paid,2400,2400,USD,2025-08-22,2025-09-01,2025-09-05,Platform Starter (12 seats) - September 2025
+in_wayfarer_2025_10,INV-100763,cus_Wayfarer00021,wayfarer-travel.example,sub_Wayfarer00025,paid,2400,2400,USD,2025-09-21,2025-10-01,2025-10-05,Platform Starter (12 seats) - October 2025
+in_wayfarer_2025_11,INV-100764,cus_Wayfarer00021,wayfarer-travel.example,sub_Wayfarer00025,paid,2400,2400,USD,2025-10-22,2025-11-01,2025-11-05,Platform Starter (12 seats) - November 2025
+in_wayfarer_2025_12,INV-100765,cus_Wayfarer00021,wayfarer-travel.example,sub_Wayfarer00025,paid,2400,2400,USD,2025-11-21,2025-12-01,2025-12-05,Platform Starter (12 seats) - December 2025
+in_wayfarer_2026_01,INV-100766,cus_Wayfarer00021,wayfarer-travel.example,sub_Wayfarer00025,paid,2400,2400,USD,2025-12-22,2026-01-01,2026-01-05,Platform Starter (12 seats) - January 2026
+in_wayfarer_2026_02,INV-100767,cus_Wayfarer00021,wayfarer-travel.example,sub_Wayfarer00025,paid,2400,2400,USD,2026-01-22,2026-02-01,2026-02-05,Platform Starter (12 seats) - February 2026
+in_wayfarer_2026_03,INV-100768,cus_Wayfarer00021,wayfarer-travel.example,sub_Wayfarer00025,paid,2400,2400,USD,2026-02-19,2026-03-01,2026-03-06,Platform Starter (12 seats) - March 2026
+in_wayfarer_2026_04,INV-100769,cus_Wayfarer00021,wayfarer-travel.example,sub_Wayfarer00025,paid,2400,2400,USD,2026-03-22,2026-04-01,2026-04-05,Platform Starter (12 seats) - April 2026
+in_wayfarer_2026_05,INV-100770,cus_Wayfarer00021,wayfarer-travel.example,sub_Wayfarer00025,paid,2400,2400,USD,2026-04-21,2026-05-01,2026-05-05,Platform Starter (12 seats) - May 2026
+in_wayfarer_2026_06,INV-100771,cus_Wayfarer00021,wayfarer-travel.example,sub_Wayfarer00025,paid,2400,2400,USD,2026-05-22,2026-06-01,2026-06-05,Platform Starter (12 seats) - June 2026
+in_brightline_2024_001,INV-100772,cus_Brightline022,brightline-analytics.example,sub_Brightline026,paid,54000,54000,USD,2024-09-01,2024-10-01,2024-09-10,Platform Business (60 seats) - 2024
+in_brightline_2025_001,INV-100773,cus_Brightline022,brightline-analytics.example,sub_Brightline026,paid,54000,54000,USD,2025-09-01,2025-10-01,2025-09-08,Platform Business (60 seats) - 2025
