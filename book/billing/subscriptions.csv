@@ -20,3 +20,8 @@ sub_Vandelay00018,cus_Vandelay000014,vandelay.com,canceled,Platform - Starter,pr
 sub_Hudsucker00019,cus_Hudsucker00015,hudsucker.com,canceled,Platform - Business,price_biz_annual_72k,72000,USD,year,75,2023-06-15,2024-06-15,2025-06-15,2025-09-15,Canceled Sept 2025 after acquisition.
 sub_Sirius0000020,cus_Sirius0000016,sirius-cyber.com,past_due,Platform - Business,price_biz_annual_42k_gbp,42000,GBP,year,45,2025-03-12,2026-03-12,2027-03-12,,PAST DUE. Renewal invoice unpaid. Collections.
 sub_Bluth0000021,cus_Bluth00000017,bluth.com,past_due,Platform - Starter,price_starter_monthly_1850,1850,USD,month,20,2025-09-03,2026-04-03,2026-05-03,,Monthly billing. 3 failed card charges. Dunning active.
+sub_Northwind0022,cus_Northwind0018,northwind-traders.example,active,Platform - Business,price_biz_annual_48k,48000,USD,year,50,2025-03-01,2026-03-01,2027-03-01,,
+sub_Contoso000023,cus_Contoso000019,contoso.example,active,Platform - Enterprise,price_ent_annual_86k,86000,USD,year,100,2024-06-01,2026-06-01,2027-06-01,,
+sub_Initech000024,cus_Initech00020,initech.com,active,Platform - Starter,price_starter_monthly_1550,1550,USD,month,15,2026-03-10,2026-06-10,2026-07-10,,
+sub_Wayfarer00025,cus_Wayfarer00021,wayfarer-travel.example,active,Platform - Starter,price_starter_monthly_2400,2400,USD,month,12,2025-07-01,2026-06-01,2026-07-01,,
+sub_Brightline026,cus_Brightline022,brightline-analytics.example,active,Platform - Business,price_biz_annual_54k,54000,USD,year,60,2024-09-01,2025-09-01,2026-09-01,,
