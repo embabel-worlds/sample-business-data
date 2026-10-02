@@ -85,6 +85,7 @@ that translation once, into a vocabulary with no product in it:
 | `billing/subscriptions.csv`, `invoices.csv`, `payments.csv`, `refunds.csv`, `disputes.csv` | | a payment is one ATTEMPT, succeeded or failed |
 | `crm/notes.csv` | note someone wrote by hand | on the company, or on a deal when `opportunity_id` is set; dated and authored |
 | `crm/meetings.csv` | call on the calendar | `booked_on` is the day it was booked, `starts_at` when it happens (UTC) |
+| `crm/followups.csv` | follow-up an owner scheduled on an account | `due_on` is when it is due; a follow-up is what makes an at-risk account *acknowledged* |
 | `arcs.csv` | story arc | what each arc should surface as, and what it must not |
 | `book.json` | | the as-of date and the row counts |
 

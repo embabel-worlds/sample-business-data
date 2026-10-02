@@ -2,7 +2,7 @@ arc,account_key,surfaces_as,must_not
 silent escalation,northwind-traders.example,"AtRiskAccount (urgent case, pipeline into trouble); HealthCrmAwareness unaware",
 quiet churner,chumbucket.com,AtRiskAccount (riskFailedPayments 1),any support case; any CRM note about payment
 withholding,contoso.example,POSSIBLY_WITHHELD_OVER INV-100754 -> case 1330,
-acknowledged trouble,initech.com,"AtRiskAccount; HealthCrmAwareness aware (cases 1331, 1332)",HealthCrmAwareness unaware
+acknowledged trouble,initech.com,"AtRiskAccount; HealthCrmAwareness aware (cases 1331, 1332); a follow-up scheduled",HealthCrmAwareness unaware; StewardUnacknowledgedRisk
 failed payments,acmecorp.com,AtRiskAccount (riskFailedPayments; INV-100759),
 good payer on the 5th,wayfarer-travel.example,nothing,AtRiskAccount; any open invoice
 stale deal,globex.io,"open deal 302 past its close date 2026-06-15, untouched since 2026-04-29",
