@@ -22,12 +22,14 @@ it — never patched into one system afterwards, where a reseed would lose it.
 Group contagion is NOT seeded: the book has no parent/subsidiary links, so there is no group
 for trouble to spread through. Inventing one belongs in the book's schema, not in an arc.
 
-It also writes the MANUAL HISTORY an agent is later asked to learn from, as two new files:
+It also writes the MANUAL HISTORY an agent is later asked to learn from, as new files:
 
     crm/notes.csv      notes a person wrote by hand: an AR clerk after every failed card,
                        the account owners on the arcs above
     crm/meetings.csv   every Monday, a salesperson ran the overdue list and booked a call
                        with each account on it
+    crm/followups.csv  follow-ups an owner scheduled on an account — work somebody has
+                       picked up, which is what an at-risk account being ACKNOWLEDGED means
 
 and `arcs.csv`, one row per arc with what should and must not surface, for the harness.
 
@@ -87,7 +89,7 @@ class Book:
     def __init__(self, root):
         self.root = root
         self.t = {name: read(root, name + ".csv") for name in self.TABLES}
-        self.notes, self.meetings, self.arcs = [], [], []
+        self.notes, self.meetings, self.arcs, self.followups = [], [], [], []
         self.number = max(int(i["number"].split("-")[1]) for i in self.t["billing/invoices"])
 
     def add(self, table, **values):
@@ -104,6 +106,11 @@ class Book:
     def invoice_number(self):
         self.number += 1
         return f"INV-{self.number}"
+
+    def followup(self, account_key, owner, scheduled_on, due_on, summary, note=""):
+        self.followups.append({"source_id": f"followup-{len(self.followups) + 1:04d}", "account_key": account_key,
+                               "owner": owner, "scheduled_on": scheduled_on, "due_on": due_on,
+                               "summary": summary, "note": note})
 
     def note(self, account_key, author, written_on, body, opportunity=""):
         self.notes.append({"source_id": f"note-{len(self.notes) + 1:04d}", "account_key": account_key,
@@ -283,9 +290,14 @@ def acknowledged_trouble(b):
            "Follow-up with Emily. The export timeout is still open, and now dashboard filters reset when "
            "they refresh the page. Patient, but wants a date. Holding off chasing the overdue invoices "
            "until we have a fix date for the export.")
+    # Picked up, not just noted: the owner scheduled the work, which is what a duty that keeps every
+    # at-risk account acknowledged looks for. A note says somebody knew; a follow-up says somebody
+    # will do something by a date.
+    b.followup(key, "Mike Davis", "2026-06-09", "2026-06-16", "Get a fix date for Initech's export timeout",
+               "Emily is waiting on a date before May and June are paid; chase engineering for it.")
     b.arc("acknowledged trouble", key,
-          f"AtRiskAccount; HealthCrmAwareness aware (cases {export['source_id']}, {ui['source_id']})",
-          "HealthCrmAwareness unaware")
+          f"AtRiskAccount; HealthCrmAwareness aware (cases {export['source_id']}, {ui['source_id']}); a follow-up scheduled",
+          "HealthCrmAwareness unaware; StewardUnacknowledgedRisk")
 
 
 def failed_payments(b):
@@ -478,5 +490,6 @@ def apply(root):
     counts = {name: write(root, name + ".csv", rows) for name, rows in b.t.items()}
     counts["crm/notes"] = write(root, "crm/notes.csv", b.notes)
     counts["crm/meetings"] = write(root, "crm/meetings.csv", b.meetings)
+    counts["crm/followups"] = write(root, "crm/followups.csv", b.followups)
     counts["arcs"] = write(root, "arcs.csv", b.arcs)
     return counts
