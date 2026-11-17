@@ -86,9 +86,9 @@ TEXT_DATE = re.compile(rf"(?:\b(?P<wd>{'|'.join(calendar.day_name)}),? )?(?:\b(?
                        rf"|\b(?P<d2>\d{{1,2}})(?:st|nd|rd|th)? (?P<m2>{MONTH})\b)")
 # Only free text carries dates a loader moves; a name, an email or an id is never read as one ("June" Kowal).
 TEXT_COLUMNS = {"note", "body", "subject", "title", "summary", "description"}
-# A loader reads a month-day without a year in the book's year and writes it back without one, so a moved date
-# must stay in that year. shortcut: holds for loads up to 20 weeks after as-of (as-of 2026-06-27 lands on
-# 2026-11-14); a later load needs more dates in ISO, or a loader that writes the year.
+# A loader reads a month-day without a year in the book's year. The HubSpot loader adds the year when a move
+# leaves it; a loader that writes the date back without one needs the moved date to stay in that year.
+# shortcut: that holds for loads up to 20 weeks after as-of (2026-06-27 lands on 2026-11-14); beyond, use ISO.
 SHIFT_HORIZON = timedelta(weeks=20)
 # The gate is strict, not a reader of English: every word below that could name a time is rejected unless it is
 # part of a date the loader moves, or sits inside an ALLOWED phrase.
@@ -106,14 +106,16 @@ PERIOD = re.compile(
     r"|\b(?:next|last|this|coming|past)(?:\s+[\w'-]+){0,2}?\s+(?:months?|years?|quarters?|halves"
     r"|half(?!\s+(?:an\s+)?hours?)|weeks?\s+of\s+the\s+year|calendar\s+weeks?)\b"
     r"|\bquarters\b|\b(?:month|quarter|year)[- ]end\b|\bmid[- ]?(?:month|year)\b"
-    r"|\b(?:end|start|beginning|middle|rest) of (?:the|this|next|last) (?:month|year|quarter)\b"
-    r"|\b(?:earlier|later) (?:this|that|in the) (?:month|year)\b)")
+    r"|\b(?:end|start|beginning|middle|rest) of (?:(?:the|this|next|last) )?(?:month|year|quarter)\b"
+    r"|\b(?:earlier|later) (?:this|that|in the) (?:month|year)\b"
+    r"|\b(?:previous|following|current|prior|upcoming) (?:months?|years?|quarters?)\b"
+    r"|\b(?:first|second|third|fourth|last|final) (?:quarter|half(?!\s+(?:an\s+)?hours?))\b|\bhalf of the (?:month|year)\b)")
 # What it cannot move: a day without its month, or a numeric month/day.
-DAY_ONLY = re.compile(r"\bthe \d{1,2}(?:st|nd|rd|th)\b|(?<![\d/])\d{1,2}/\d{1,2}(?![\d/])")
+DAY_ONLY = re.compile(r"\bthe \d{1,2}(?:st|nd|rd|th)\b|\b\d{1,2}(?:st|nd|rd|th)(?=\s*(?:[.,;:!?)]|$|at\b|of\b))|(?<![\d/])\d{1,2}/\d{1,2}(?![\d/])")
 # A day that borrows its month from a date beside it: "June 10 &11", "June 10, 11", "June 10 - 12", "10-12 June".
 # The loader moves the date, not the day.
 ORD = r"\d{1,2}(?:st|nd|rd|th)?"
-JOIN = r"\s*(?:[,/;&–—-]|(?<!\w)(?:and|or|to|through|till|until)(?!\w))\s*(?:(?:and|or)\s+)?"
+JOIN = r"\s*(?:[,/;:&(–—-]|(?<!\w)(?:and|or|to|through|till|until)(?!\w))\s*(?:(?:and|or)\s+)?"
 ELIDED = re.compile(rf"{JOIN}{ORD}\b(?!\s*(?:{MONTH})\b)")
 ELIDED_BEFORE = re.compile(rf"\b{ORD}{JOIN}$")
 # The only exceptions: exact phrases from the Book's own texts, each a deliberate decision. A new text that trips
@@ -121,6 +123,8 @@ ELIDED_BEFORE = re.compile(rf"\b{ORD}{JOIN}$")
 ALLOWED = {
     "May not be a real prospect": "the verb 'may' (contact 144's note)",
     "she may be slow to respond": "the verb 'may' (email-0014)",
+    "I'd join the second half": "the second half of a meeting (email-0076)",
+    "Rachel joined the second half": "the second half of a call (call-0013)",
     "when their new fiscal year starts": "an event of theirs, dated by the ISO window before it (contact 115's note)",
 }
 # Each probe: (column, text, the gate accepts it). to_book.py runs these before the book.
@@ -132,7 +136,10 @@ PROBES = [
         "Meet June 10/11.", "Meet June 10; 11 if not.", "Meet June 10 or 11.", "Meet 10-12 June.",
         "Deliver in july.", "Deliver JUNE 10.", "Mid-June works.", "Before Christmas.", "Before Mother's Day.",
         "Upsell in the next two quarters.", "Close this quarter.", "Over the summer.", "Signed in 2027.",
-        "Rollout next year.", "Due the 11th.", "Sent 4/22.", "Meet June 31.", "Tuesday, June 10.",
+        "Rollout next year.", "Due the 11th.", "Due 11th.", "Due on 11th.", "Meet June 10: 12.",
+        "Would June 10 (or 11) work?", "First quarter.", "In the first half.", "First half of the year.",
+        "End of quarter.", "For the second half of the year.", "The previous month.", "The following month.",
+        "The current year.", "Sent 4/22.", "Meet June 31.", "Tuesday, June 10.",
         "Wednesday, June 10, 3 seats.", "Semester review.", "Academic year starts soon.", "Mid-year review.", "By the end of the year.",
         # A month or season word that names no time is rejected too, unless its exact phrase is ALLOWED.
         "May the team proceed?", "The rollout may slip.", "Ask June from finance.", "The fall in revenue.")],

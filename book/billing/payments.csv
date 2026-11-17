@@ -43,9 +43,9 @@ ch_sirius_2025_001,in_sirius_2025_001,cus_Sirius0000016,sirius-cyber.example.com
 ch_bluth_2026_001,in_bluth_2026_001,cus_Bluth00000017,bluth.example.com,1850,USD,succeeded,2026-01-10,card,,no,no,"Bluth, invoice of January 3"
 ch_bluth_2026_002,in_bluth_2026_002,cus_Bluth00000017,bluth.example.com,1850,USD,succeeded,2026-02-09,card,,no,no,"Bluth, invoice of February 3"
 ch_bluth_2026_003,in_bluth_2026_003,cus_Bluth00000017,bluth.example.com,1850,USD,succeeded,2026-03-11,card,,no,no,"Bluth, invoice of March 3"
-ch_bluth_2026_004a,in_bluth_2026_004,cus_Bluth00000017,bluth.example.com,1850,USD,failed,2026-04-03,card,card_declined,no,no,"Bluth, invoice of April 3: 1st attempt failed (declined)"
-ch_bluth_2026_004b,in_bluth_2026_004,cus_Bluth00000017,bluth.example.com,1850,USD,failed,2026-04-10,card,insufficient_funds,no,no,"Bluth, invoice of April 3: 2nd attempt failed (insufficient funds)"
-ch_bluth_2026_004c,in_bluth_2026_004,cus_Bluth00000017,bluth.example.com,1850,USD,failed,2026-04-17,card,card_declined,no,no,"Bluth, invoice of April 3: 3rd attempt failed. Dunning escalated."
+ch_bluth_2026_004a,in_bluth_2026_004,cus_Bluth00000017,bluth.example.com,1850,USD,failed,2026-04-03,card,card_declined,no,no,"Bluth, invoice of April 3. 1st attempt failed (declined)"
+ch_bluth_2026_004b,in_bluth_2026_004,cus_Bluth00000017,bluth.example.com,1850,USD,failed,2026-04-10,card,insufficient_funds,no,no,"Bluth, invoice of April 3. 2nd attempt failed (insufficient funds)"
+ch_bluth_2026_004c,in_bluth_2026_004,cus_Bluth00000017,bluth.example.com,1850,USD,failed,2026-04-17,card,card_declined,no,no,"Bluth, invoice of April 3. 3rd attempt failed. Dunning escalated."
 ch_globex_pilot_001,,cus_AcmeCorp00001,acmecorp.example.com,5000,USD,succeeded,2025-11-15,card,,no,yes,One-time pilot fee - DISPUTED (later resolved in our favor)
 ch_northwind_2025_001,in_northwind_2025_001,cus_Northwind0018,northwind-traders.example.com,48000,USD,succeeded,2025-03-12,card,,no,no,"Northwind, invoice of 2025-03-01"
 ch_northwind_2026_001,in_northwind_2026_001,cus_Northwind0018,northwind-traders.example.com,48000,USD,succeeded,2026-03-11,card,,no,no,"Northwind, invoice of 2026-03-01"
