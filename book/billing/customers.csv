@@ -5,7 +5,7 @@ cus_OscorpInd00003,oscorp.example.com,Oscorp Industries,finance@oscorp.example.c
 cus_Tyrell0000004,tyrellcorp.example.com,Tyrell Corporation,billing@tyrellcorp.example.com,+1-206-555-0100,USD,US,card_visa_8841,no,0,2024-11-25,yes,Multi-product customer. Premium support tier added March 2026.
 cus_Cyberlife000005,cyberlife.example.com,Cyberlife Detroit,accounts@cyberlife.example.com,+1-313-555-0100,USD,US,card_mc_3782,no,0,2024-02-12,yes,Long-tenured. Smooth renewal in Feb 2026.
 cus_Dharma00000006,dharmainit.example.com,Dharma Initiative,aaron@dharmainit.example.com,+1-808-555-0100,USD,US,card_visa_0119,no,0,2023-12-10,yes,"Small org, founder-led billing. Renewed Dec 2025."
-cus_BlueSky00000007,blueskystudios.example.com,Blue Sky Studios,billing@blueskystudios.example.com,+1-512-555-0100,USD,US,card_mc_6677,no,0,2024-09-22,yes,Project management use case. Add-on purchased March 2026.
+cus_Glimmerford00000007,glimmerfordstudios.example.com,Glimmerford Studios,billing@glimmerfordstudios.example.com,+1-512-555-0100,USD,US,card_mc_6677,no,0,2024-09-22,yes,Project management use case. Add-on purchased March 2026.
 cus_FerrariT00008,ferrari-tech.example.com,Ferrari Tech Bologna,amministrazione@ferrari-tech.example.com,+39-051-555-0100,EUR,IT,sepa_debit_2233,no,0,2024-07-28,yes,EUR billing. SEPA Direct Debit. Renewed April 2026.
 cus_ChumBucket0009,chumbucket.example.com,Chum Bucket Holdings,gm@chumbucket.example.com,+1-941-555-0100,USD,US,card_visa_4499,yes,12000,2025-05-05,yes,Annual sub. Renewal proposal sent April 2026.
 cus_Wernham0000010,wernham-hogg.example.com,Wernham Hogg Slough,accounts@wernham-hogg.example.com,+44-118-555-0100,GBP,GB,bacs_debit_5566,no,0,2024-10-15,yes,GBP billing via BACS Direct Debit. Small but loyal.

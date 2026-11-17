@@ -1,6 +1,6 @@
 Refund ID,Charge ID,Customer ID,Customer Name,Amount,Currency,Status,Reason,Created Date,Description
 re_vandelay_001,ch_vandelay_2025_001,cus_Vandelay000014,Vandelay Industries,16333,USD,succeeded,requested_by_customer,2026-03-22,"Prorated refund for unused 7 months of Year 2. Customer canceled due to budget freeze. Total: $16,333."
 re_hudsucker_001,ch_hudsucker_2025_001,cus_Hudsucker00015,Hudsucker Industries,54000,USD,succeeded,requested_by_customer,2025-09-18,"Prorated refund for unused 9 months of Year 3. Customer canceled due to acquisition by competitor. Total: $54,000."
-re_bluesky_001,ch_bluesky_prod_001,cus_BlueSky00000007,Blue Sky Studios,5000,USD,succeeded,requested_by_customer,2026-04-08,Partial refund - one-time onboarding fee waiver as goodwill credit. Approved by CS.
+re_glimmerford_001,ch_glimmerford_prod_001,cus_Glimmerford00000007,Glimmerford Studios,5000,USD,succeeded,requested_by_customer,2026-04-08,Partial refund - one-time onboarding fee waiver as goodwill credit. Approved by CS.
 re_acme_dispute_001,ch_globex_pilot_001,cus_AcmeCorp00001,Acme Corporation,2500,USD,succeeded,duplicate,2025-12-02,Partial refund issued during dispute investigation. Goodwill while dispute resolved.
 re_oscorp_001,ch_oscorp_2025_001,cus_OscorpInd00003,Oscorp Industries,1200,USD,succeeded,requested_by_customer,2025-09-15,Refund for accidental double-billing on seat upgrade. Credit issued promptly.

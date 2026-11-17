@@ -34,7 +34,7 @@ Edge cases included:
   • Customer with prorated refund after mid-term cancellation (Vandelay, Hudsucker)
   • Multi-currency: USD, EUR (SEPA), GBP (BACS)
   • Non-card payment methods: ACH, SEPA Direct Debit, BACS, wire transfer
-  • Multi-subscription customers (Oscorp, Tyrell, Blue Sky, Spacely with base + add-ons)
+  • Multi-subscription customers (Oscorp, Tyrell, Glimmerford, Spacely with base + add-ons)
   • Uncollectible invoice written off (Vandelay prorated cancellation fee)
   • Open/unpaid invoices currently in dunning (Bluth April invoice)
 

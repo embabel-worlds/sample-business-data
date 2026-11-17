@@ -18,9 +18,9 @@ ch_cyberlife_2026_001,pi_cyberlife_2026_001,in_cyberlife_2026_001,cus_Cyberlife0
 ch_dharma_2023_001,pi_dharma_2023_001,in_dharma_2023_001,cus_Dharma00000006,Dharma Initiative,28000,USD,succeeded,2023-12-22,card,visa,0119,No,No,,Dharma Year 1
 ch_dharma_2024_001,pi_dharma_2024_001,in_dharma_2024_001,cus_Dharma00000006,Dharma Initiative,28000,USD,succeeded,2024-12-18,card,visa,0119,No,No,,Dharma Year 2
 ch_dharma_2025_001,pi_dharma_2025_001,in_dharma_2025_001,cus_Dharma00000006,Dharma Initiative,28000,USD,succeeded,2025-12-15,card,visa,0119,No,No,,Dharma Year 3
-ch_bluesky_2024_001,pi_bluesky_2024_001,in_bluesky_2024_001,cus_BlueSky00000007,Blue Sky Studios,60000,USD,succeeded,2024-10-08,card,mastercard,6677,No,No,,Blue Sky Year 1
-ch_bluesky_2025_001,pi_bluesky_2025_001,in_bluesky_2025_001,cus_BlueSky00000007,Blue Sky Studios,60000,USD,succeeded,2025-10-04,card,mastercard,6677,No,No,,Blue Sky Year 2
-ch_bluesky_prod_001,pi_bluesky_prod_001,in_bluesky_2026_002,cus_BlueSky00000007,Blue Sky Studios,42000,USD,succeeded,2026-03-30,card,mastercard,6677,No,No,,Blue Sky production add-on
+ch_glimmerford_2024_001,pi_glimmerford_2024_001,in_glimmerford_2024_001,cus_Glimmerford00000007,Glimmerford Studios,60000,USD,succeeded,2024-10-08,card,mastercard,6677,No,No,,Glimmerford Year 1
+ch_glimmerford_2025_001,pi_glimmerford_2025_001,in_glimmerford_2025_001,cus_Glimmerford00000007,Glimmerford Studios,60000,USD,succeeded,2025-10-04,card,mastercard,6677,No,No,,Glimmerford Year 2
+ch_glimmerford_prod_001,pi_glimmerford_prod_001,in_glimmerford_2026_002,cus_Glimmerford00000007,Glimmerford Studios,42000,USD,succeeded,2026-03-30,card,mastercard,6677,No,No,,Glimmerford production add-on
 ch_ferrari_2024_001,pi_ferrari_2024_001,in_ferrari_2024_001,cus_FerrariT00008,Ferrari Tech Bologna,58000,EUR,succeeded,2024-08-12,sepa_debit,,2233,No,No,,Ferrari Year 1 SEPA
 ch_ferrari_2025_001,pi_ferrari_2025_001,in_ferrari_2025_001,cus_FerrariT00008,Ferrari Tech Bologna,58000,EUR,succeeded,2025-05-07,sepa_debit,,2233,No,No,,Ferrari Year 2 SEPA
 ch_ferrari_2026_001,pi_ferrari_2026_001,in_ferrari_2026_001,cus_FerrariT00008,Ferrari Tech Bologna,58000,EUR,succeeded,2026-05-05,sepa_debit,,2233,No,No,,Ferrari Year 3 SEPA

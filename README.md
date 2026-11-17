@@ -33,9 +33,12 @@ change a demo's answers silently.
 
 ## Scale, and why the filler has to be good
 
-The 50 accounts here are hand-authored so that joining the three systems finds a real
-story. They are not enough to show how anything behaves at size, so `gen_scale_book.py`
-writes a synthetic book in the same format:
+The 55 accounts in `book/` (the workbooks' 50 plus five the arcs add) are hand-authored so
+that joining the three systems finds a real story. They are not enough to show how anything
+behaves at size, so `gen_scale_book.py` writes a synthetic book in the same format: domains
+on `<slug>.example.com`, a `book.json` with its as-of date (2026-09-21), and the CRM history
+files (`emails`, `calls`, `notes`, `meetings`, `followups`) with `book/`'s headers and no rows,
+so every loader reads it as it reads `book/`:
 
 ```sh
 python3 gen_scale_book.py --out ~/embabel/books/book-scale --count 2000
@@ -112,9 +115,10 @@ each in its realm under `seed/load_book.py`.
 
 - **Money is in major units** (dollars, euros, pounds), not cents. Currency is per row.
 - **`Probability` is a fraction**, 0 to 1, not a percentage.
-- **Dates are ISO `YYYY-MM-DD`.** Treat **2026-06-27** as "today" for the billing and
-  support data; the CRM data was written a few weeks earlier, in early May 2026. A demo
-  that wants the story to stay current should turn dates into an age relative to that day.
+- **Dates are ISO `YYYY-MM-DD`.** Treat **2026-06-27**, `as_of` in `book.json`, as "today".
+  The workbooks' CRM records were written in early May 2026; the logged emails and calls run
+  from March to 2026-06-25, and open follow-ups fall due between early June and mid-July. A
+  demo that wants the story to stay current should turn dates into an age relative to that day.
 - **Issue state is only `open` or `closed`.** In-progress is implied by assignees and a
   recent `Updated At`. Priority and type live inside the comma-separated `Labels`.
 - **An issue has one `Body` and a `Comments` count**, not a thread. A product that needs
@@ -153,19 +157,34 @@ would lose it.
 | Acknowledged trouble | Initech | at risk, and NOT a blind spot: the owner's notes name both problems |
 | Failed payments | Acme | at risk on a one-off invoice two cards have bounced |
 | Good payer on the 5th | Wayfarer Travel | nothing: due on the 1st, paid on the 5th, one expired card fixed next day |
-| Stale deal | Globex | an open deal past its close date, untouched since April (already in the data) |
+| Stale deal | Globex | an open deal untouched since April (already in the data) |
 | Noisy but healthy | Brightline Analytics | nothing, despite nine cases — all resolved within two days |
 | Shared incident | Northwind, Contoso, Initech | one export defect across three unrelated accounts |
 | Controls | Cyberlife, Dharma, Ferrari Tech, Wernham Hogg | nothing |
-| Writes sandbox | Writes Sandbox Inc | the only account a harness may write to |
-| Gone quiet | 6 contacts per salesperson | newest email, call or meeting 30+ days old |
-| Stalled deals | 6 open deals, Globex 302 among them | no email or call on the deal for 45+ days |
-| Slipping but active | open deals past their close date | engaged within 45 days, so NOT stalled |
-| Open follow-ups | each of the four owners | 5 open, 2 of them past due |
+| Writes sandbox | the account named in `arcs.csv` | the only account a harness may write to; nothing in its data says so |
+| Gone quiet | 6 contacts per salesperson | no email, call or meeting in the 30 days before as-of |
+| Not emailed | the same 6, plus one control per salesperson | no email in the 30 days before as-of |
+| Stalled deals | 302, 305, 311, 326, 335, 339 | open, with no email or call on the deal in the 45 days before as-of |
+| Slipping deals | 308, 322, 328, 346 | open, close date before as-of |
+| Open follow-ups | each of the four owners | 5 open, 2 of them past due, none on an arc account |
 
-The last four are counted by `apply_engagements.py` from `additions/`. An *engagement* is an
-email, a call or a meeting, which is what a CRM counts as contact; a note is not. No count sits
-within four days of its cut-off, so shifting the dates or a time zone cannot change it. A
+The last five are counted by `apply_engagements.py` from `additions/`, which asserts each one
+exactly:
+
+- **Gone quiet** counts never-contacted people too, and finds nobody extra: every other contact
+  had an outbound email between 2026-06-02 and 2026-06-26.
+- **Not emailed** adds one control per salesperson: newest email 45+ days old, but a connected
+  call within 25 days. A reader that counts only email finds the control; one that counts any
+  contact does not.
+- **Stalled and slipping** do not overlap: every stalled deal's close date lies after as-of,
+  and every slipping deal had an outbound email or call on it within 45 days.
+- HubSpot's "last contacted" leaves out inbound email, so each set is asserted both with and
+  without inbound email, and comes out the same.
+
+An *engagement* is an email, a call or a meeting, which is what a CRM counts as contact; a
+note is not. A contact's `last_activity_on` is their newest engagement, and a deal's
+`modified_on` is at least its newest email or call. No engagement, close date or due date sits
+within four days of its cut-off, so shifting the dates or a time zone cannot change a count. A
 harness that asks days after seeding must count from its own today.
 
 **Group contagion is not seeded.** The book has no parent/subsidiary links, so there is no
@@ -173,7 +192,8 @@ group for trouble to spread through; inventing one belongs in the book's schema.
 
 It also writes the **manual history** an agent is later asked to learn from: an AR clerk's
 note the day after every failed card (`crm/notes.csv`, 35 of them), and the calls a
-salesperson booked each Monday for every account overdue that day (`crm/meetings.csv`). The
+salesperson booked each Monday for every account overdue that day (`crm/meetings.csv`: 12
+calls, on the 5 of 12 Mondays when the list was not empty). The
 failed cards are added before an invoice's successful payment, so every one still ends paid.
 
 Every arc's invariant is asserted before anything is written, and `arcs.csv` records what

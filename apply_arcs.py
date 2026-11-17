@@ -14,7 +14,7 @@ it — never patched into one system afterwards, where a reseed would lose it.
     acknowledged trouble initech.com           at risk, and NOT a blind spot
     failed payments      acmecorp.com          at risk (failed payments)
     good payer, the 5th  wayfarer-travel       nothing: one failed card, retried next day
-    stale deal           globex.io             a deal past its close date, untouched since April
+    stale deal           globex.io             an open deal untouched since April
     noisy but healthy    brightline-analytics  nothing, despite nine cases
     shared incident      the three export cases  SHARES_ISSUE between them
     controls             four quiet customers  nothing
@@ -27,7 +27,7 @@ It also writes the MANUAL HISTORY an agent is later asked to learn from, as new 
     crm/notes.csv      notes a person wrote by hand: an AR clerk after every failed card,
                        the account owners on the arcs above
     crm/meetings.csv   every Monday, a salesperson ran the overdue list and booked a call
-                       with each account on it
+                       with each account on it, on the Mondays it was not empty
     crm/followups.csv  follow-ups an owner scheduled on an account — work somebody has
                        picked up, which is what an at-risk account being ACKNOWLEDGED means
 
@@ -42,6 +42,8 @@ import csv
 from datetime import date, timedelta
 
 AR_CLERK = "Dana Whitfield"
+# The writes sandbox looks like any small customer; only arcs.csv says what it is for.
+SANDBOX = "fernhollow.example"
 CONTROLS = ["cyberlife.com", "dharmainit.com", "ferrari-tech.it", "wernham-hogg.co.uk"]
 FAILURES = {"card": ["card_declined", "insufficient_funds", "expired_card"],
             "sepa_debit": ["insufficient_funds"], "bacs_debit": ["insufficient_funds"],
@@ -293,7 +295,8 @@ def acknowledged_trouble(b):
     # Picked up, not just noted: the owner scheduled the work, which is what a duty that keeps every
     # at-risk account acknowledged looks for. A note says somebody knew; a follow-up says somebody
     # will do something by a date.
-    b.followup(key, "Mike Davis", "2026-06-09", "2026-06-16", "Get a fix date for Initech's export timeout",
+    # Due after the as-of date, so it reads as work in hand rather than as one of Mike's past-due tasks.
+    b.followup(key, "Mike Davis", "2026-06-09", "2026-07-03", "Get a fix date for Initech's export timeout",
                "Emily is waiting on a date before May and June are paid; chase engineering for it.")
     b.arc("acknowledged trouble", key,
           f"AtRiskAccount; HealthCrmAwareness aware (cases {export['source_id']}, {ui['source_id']}); a follow-up scheduled",
@@ -342,9 +345,8 @@ def good_payer_on_the_fifth(b):
 
 def stale_deal(b):
     deal = one(b.t["crm/opportunities"], title="Globex - Enterprise Implementation")
-    assert deal["status"] == "open" and deal["close_on"] < "2026-06-27" and deal["modified_on"] <= "2026-04-30"
-    b.arc("stale deal", "globex.io", f"open deal {deal['source_id']} past its close date {deal['close_on']}, "
-          f"untouched since {deal['modified_on']}")
+    assert deal["status"] == "open" and deal["modified_on"] <= "2026-04-30"
+    b.arc("stale deal", "globex.io", f"open deal {deal['source_id']}, untouched since {deal['modified_on']}")
 
 
 def noisy_but_healthy(b):
@@ -385,12 +387,14 @@ def noisy_but_healthy(b):
 def writes_sandbox(b):
     """The one account a harness may write to: add notes and tasks, move its deal. It carries no
     story, so a write there cannot change any other arc's answer."""
-    key = "writes-sandbox.example"
-    email = b.company(key, "Writes Sandbox Inc", "Mike Davis", "Professional Services", "Austin", "TX",
+    key = SANDBOX
+    email = b.company(key, "Fernhollow Supply Co", "Mike Davis", "Professional Services", "Austin", "TX",
                       "United States", "+1-512-555-0150", "2026-05-04",
-                      "Test account for automated writes. Not a real customer.", "Sam Tester", "Operations Manager")
-    deal = b.deal(key, email, "Writes Sandbox - Pilot", "Qualified to Buy", "open", 10000, 0.4, "2026-09-30",
-                  "Mike Davis", "2026-05-04", "2026-05-04", "Sandbox deal for write tests.", kind="New Business")
+                      "Regional office-supply distributor. Small purchasing team, new to us this spring.",
+                      "Sam Ortega", "Operations Manager")
+    deal = b.deal(key, email, "Fernhollow - Pilot", "Qualified to Buy", "open", 10000, 0.4, "2026-09-30",
+                  "Mike Davis", "2026-05-04", "2026-05-04", "Pilot for the purchasing team. Budget set aside for a "
+                  "small first phase.", kind="New Business")
     b.arc("writes sandbox", key, f"the only account a harness writes to (deal {deal['source_id']})",
           "any write to another account")
 
@@ -438,9 +442,10 @@ def manual_dunning(b, exclude):
 
 
 def monday_calls(b):
-    """Every Monday for twelve weeks, Mike Davis ran the overdue list and booked a call that week
-    with each account on it — the second habit an agent is later asked to learn. The list is
-    computed from the invoices as they stood THAT Monday, not as they stand now."""
+    """Every Monday for twelve weeks, Mike Davis ran the overdue list and, on the Mondays it was not
+    empty, booked a call that week with each account on it — the second habit an agent is later
+    asked to learn. The list is computed from the invoices as they stood THAT Monday, not as they
+    stand now."""
     crm = {a["account_key"]: a for a in b.t["crm/accounts"]}
     people = {}
     for c in b.t["crm/contacts"]:
@@ -458,7 +463,9 @@ def monday_calls(b):
                                "title": f"Overdue invoice check-in: {crm[key]['name']}",
                                "organizer": "Mike Davis", "attendee_email": people.get(key, ""),
                                "booked_on": m.isoformat(), "starts_at": start, "minutes": "30"})
-    b.arc("monday calls", "*", f"{len(b.meetings)} calls booked by Mike Davis across {len(weeks)} Mondays")
+    booked = len({m["booked_on"] for m in b.meetings})
+    b.arc("monday calls", "*", f"{len(b.meetings)} calls booked by Mike Davis on {booked} distinct Mondays, "
+          f"out of {len(weeks)} Mondays checked")
 
 
 def assert_controls(b):

@@ -7,8 +7,8 @@ sub_TyrellBase0005,cus_Tyrell0000004,tyrellcorp.example.com,active,Platform - En
 sub_TyrellSupport06,cus_Tyrell0000004,tyrellcorp.example.com,active,Premium Support,price_support_premium_48k,48000,USD,year,1,2026-03-22,2026-03-22,2027-03-22,,Premium support tier add-on. Closed March 2026.
 sub_Cyberlife00007,cus_Cyberlife000005,cyberlife.example.com,active,Platform - Business,price_biz_annual_96k,96000,USD,year,100,2024-02-12,2026-02-10,2027-02-10,,Smooth renewal Feb 2026. NPS 9.
 sub_Dharma000008,cus_Dharma00000006,dharmainit.example.com,active,Platform - Starter,price_starter_annual_28k,28000,USD,year,30,2023-12-10,2025-12-04,2026-12-04,,Founder-led small org. Stable.
-sub_BlueSkyBase0009,cus_BlueSky00000007,blueskystudios.example.com,active,Platform - Business,price_biz_annual_60k,60000,USD,year,65,2024-09-22,2025-09-22,2026-09-22,,Base subscription.
-sub_BlueSkyProd0010,cus_BlueSky00000007,blueskystudios.example.com,active,Production Add-On,price_addon_prod_42k,42000,USD,year,30,2026-03-15,2026-03-15,2027-03-15,,Production module add-on. Closed March 2026.
+sub_GlimmerfordBase0009,cus_Glimmerford00000007,glimmerfordstudios.example.com,active,Platform - Business,price_biz_annual_60k,60000,USD,year,65,2024-09-22,2025-09-22,2026-09-22,,Base subscription.
+sub_GlimmerfordProd0010,cus_Glimmerford00000007,glimmerfordstudios.example.com,active,Production Add-On,price_addon_prod_42k,42000,USD,year,30,2026-03-15,2026-03-15,2027-03-15,,Production module add-on. Closed March 2026.
 sub_FerrariT000011,cus_FerrariT00008,ferrari-tech.example.com,active,Platform - Business,price_biz_annual_64k_eur,58000,EUR,year,60,2024-07-28,2026-04-22,2027-04-22,,EUR billing. Renewed April 2026.
 sub_ChumBucket0012,cus_ChumBucket0009,chumbucket.example.com,active,Platform - Starter,price_starter_annual_12k,12000,USD,year,15,2025-05-05,2025-05-05,2026-05-05,,Renewal proposal sent April 2026 - now active for next term.
 sub_Wernham000013,cus_Wernham0000010,wernham-hogg.example.com,active,Platform - Starter,price_starter_annual_14k_gbp,14000,GBP,year,18,2024-10-15,2026-04-08,2027-04-08,,GBP billing. Renewed April 2026.

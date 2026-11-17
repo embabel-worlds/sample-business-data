@@ -37,7 +37,7 @@ because a demo whose answers move when nobody changed anything cannot be reconci
 
   python3 gen_scale_book.py --out ~/embabel/books/book-scale --count 2000
 """
-import argparse, csv, os, random, unicodedata
+import argparse, csv, json, os, random, unicodedata
 from datetime import date, timedelta
 
 SEED = 20260921
@@ -134,6 +134,11 @@ AWARE_NOTES = [
 DEAL_KINDS = [("New Business","Platform Licence"),("Upsell","Additional Seats"),("Renewal","Annual Renewal"),("New Business","Enterprise Tier"),("Upsell","Premium Support")]
 STAGES = [("Qualification",1,0.2),("Discovery",2,0.35),("Proposal",3,0.55),("Negotiation",4,0.75),("Closed Won",5,1.0),("Closed Lost",5,0.0)]
 
+def book_header(name):
+    """The hand-authored book's header for `name`, so both books share one format."""
+    with open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "book", name), newline="") as fh:
+        return next(csv.reader(fh))
+
 def slug(s):
     s = unicodedata.normalize("NFKD", s).encode("ascii","ignore").decode()
     return "".join(c for c in s.lower() if c.isalnum())
@@ -143,7 +148,7 @@ def main():
     ap.add_argument("--out", required=True)
     ap.add_argument("--count", type=int, default=2000)
     ap.add_argument("--start-id", type=int, default=200000,
-                    help="Base for source ids; keep clear of the hand-authored book's (200-800).")
+                    help="Base for source ids; keep clear of the hand-authored book's (101-1400).")
     args = ap.parse_args()
     rng = random.Random(SEED)
     N = args.count
@@ -167,7 +172,8 @@ def main():
     bcust, binv, bsub, bpay = [], [], [], []
 
     for i, name in enumerate(names):
-        key = f"{slug(name)}.example"
+        # `.example.com`, like the hand-authored book: CRMs reject contact emails on the `.example` TLD.
+        key = f"{slug(name)}.example.com"
         city, region, country, phfmt = CITIES[i % len(CITIES)]
         industry = INDUSTRY[i % len(INDUSTRY)]
         owner = OWNERS[i % len(OWNERS)]
@@ -298,13 +304,21 @@ def main():
     write("crm","accounts.csv",accounts,list(accounts[0]))
     write("crm","contacts.csv",contacts,list(contacts[0]))
     write("crm","opportunities.csv",opps,list(opps[0]))
-    write("support","cases.csv",cases,list(cases[0]))
+    write("support","cases.csv",cases,book_header("support/cases.csv"))
     write("billing","customers.csv",bcust,list(bcust[0]))
     write("billing","invoices.csv",binv,list(binv[0]))
     write("billing","subscriptions.csv",bsub,list(bsub[0]))
     write("billing","payments.csv",bpay,list(bpay[0]))
     write("billing","refunds.csv",[],["source_id","invoice_id","account_key","amount","currency","refunded_on","reason"])
     write("billing","disputes.csv",[],["source_id","invoice_id","account_key","amount","currency","opened_on","status","reason"])
+    # The loaders read these files too; a scale book carries no history, so they are header-only.
+    for name in ("emails", "calls", "notes", "meetings", "followups"):
+        write("crm", f"{name}.csv", [], book_header(f"crm/{name}.csv"))
+    rows = {"crm/accounts": len(accounts), "crm/contacts": len(contacts), "crm/opportunities": len(opps),
+            "support/cases": len(cases), "billing/customers": len(bcust), "billing/subscriptions": len(bsub),
+            "billing/invoices": len(binv), "billing/payments": len(bpay)}
+    with open(os.path.join(out, "book.json"), "w") as fh:
+        fh.write(json.dumps({"as_of": TODAY.isoformat(), "rows": rows}, indent=2) + "\n")
 
     aware_n = sum(1 for a in accounts if any(k in a["note"] for k in ("frustration","escalated","Known issue","Champion raised")))
     print(f"wrote {out}")

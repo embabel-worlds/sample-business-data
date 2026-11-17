@@ -18,9 +18,9 @@ ch_cyberlife_2026_001,in_cyberlife_2026_001,cus_Cyberlife000005,cyberlife.exampl
 ch_dharma_2023_001,in_dharma_2023_001,cus_Dharma00000006,dharmainit.example.com,28000,USD,succeeded,2023-12-22,card,,no,no,Dharma Year 1
 ch_dharma_2024_001,in_dharma_2024_001,cus_Dharma00000006,dharmainit.example.com,28000,USD,succeeded,2024-12-18,card,,no,no,Dharma Year 2
 ch_dharma_2025_001,in_dharma_2025_001,cus_Dharma00000006,dharmainit.example.com,28000,USD,succeeded,2025-12-15,card,,no,no,Dharma Year 3
-ch_bluesky_2024_001,in_bluesky_2024_001,cus_BlueSky00000007,blueskystudios.example.com,60000,USD,succeeded,2024-10-08,card,,no,no,Blue Sky Year 1
-ch_bluesky_2025_001,in_bluesky_2025_001,cus_BlueSky00000007,blueskystudios.example.com,60000,USD,succeeded,2025-10-04,card,,no,no,Blue Sky Year 2
-ch_bluesky_prod_001,in_bluesky_2026_002,cus_BlueSky00000007,blueskystudios.example.com,42000,USD,succeeded,2026-03-30,card,,no,no,Blue Sky production add-on
+ch_glimmerford_2024_001,in_glimmerford_2024_001,cus_Glimmerford00000007,glimmerfordstudios.example.com,60000,USD,succeeded,2024-10-08,card,,no,no,Glimmerford Year 1
+ch_glimmerford_2025_001,in_glimmerford_2025_001,cus_Glimmerford00000007,glimmerfordstudios.example.com,60000,USD,succeeded,2025-10-04,card,,no,no,Glimmerford Year 2
+ch_glimmerford_prod_001,in_glimmerford_2026_002,cus_Glimmerford00000007,glimmerfordstudios.example.com,42000,USD,succeeded,2026-03-30,card,,no,no,Glimmerford production add-on
 ch_ferrari_2024_001,in_ferrari_2024_001,cus_FerrariT00008,ferrari-tech.example.com,58000,EUR,succeeded,2024-08-12,sepa_debit,,no,no,Ferrari Year 1 SEPA
 ch_ferrari_2025_001,in_ferrari_2025_001,cus_FerrariT00008,ferrari-tech.example.com,58000,EUR,succeeded,2025-05-07,sepa_debit,,no,no,Ferrari Year 2 SEPA
 ch_ferrari_2026_001,in_ferrari_2026_001,cus_FerrariT00008,ferrari-tech.example.com,58000,EUR,succeeded,2026-05-05,sepa_debit,,no,no,Ferrari Year 3 SEPA
@@ -72,10 +72,10 @@ ch_wayfarer_2026_05,in_wayfarer_2026_05,cus_Wayfarer00021,wayfarer-travel.exampl
 ch_wayfarer_2026_06,in_wayfarer_2026_06,cus_Wayfarer00021,wayfarer-travel.example.com,2400,USD,succeeded,2026-06-05,card,,no,no,Wayfarer June 2026
 ch_brightline_2024_001,in_brightline_2024_001,cus_Brightline022,brightline-analytics.example.com,54000,USD,succeeded,2024-09-10,card,,no,no,Brightline 2024
 ch_brightline_2025_001,in_brightline_2025_001,cus_Brightline022,brightline-analytics.example.com,54000,USD,succeeded,2025-09-08,card,,no,no,Brightline 2025
-ch_bluesky_2024_001_f1,in_bluesky_2024_001,cus_BlueSky00000007,blueskystudios.example.com,60000,USD,failed,2024-10-02,card,card_declined,no,no,INV-100044 - attempt failed (card declined)
-ch_bluesky_2024_001_f2,in_bluesky_2024_001,cus_BlueSky00000007,blueskystudios.example.com,60000,USD,failed,2024-10-05,card,insufficient_funds,no,no,INV-100044 - attempt failed (insufficient funds)
-ch_bluesky_2025_001_f1,in_bluesky_2025_001,cus_BlueSky00000007,blueskystudios.example.com,60000,USD,failed,2025-09-28,card,insufficient_funds,no,no,INV-100378 - attempt failed (insufficient funds)
-ch_bluesky_2025_001_f2,in_bluesky_2025_001,cus_BlueSky00000007,blueskystudios.example.com,60000,USD,failed,2025-10-01,card,expired_card,no,no,INV-100378 - attempt failed (expired card)
+ch_glimmerford_2024_001_f1,in_glimmerford_2024_001,cus_Glimmerford00000007,glimmerfordstudios.example.com,60000,USD,failed,2024-10-02,card,card_declined,no,no,INV-100044 - attempt failed (card declined)
+ch_glimmerford_2024_001_f2,in_glimmerford_2024_001,cus_Glimmerford00000007,glimmerfordstudios.example.com,60000,USD,failed,2024-10-05,card,insufficient_funds,no,no,INV-100044 - attempt failed (insufficient funds)
+ch_glimmerford_2025_001_f1,in_glimmerford_2025_001,cus_Glimmerford00000007,glimmerfordstudios.example.com,60000,USD,failed,2025-09-28,card,insufficient_funds,no,no,INV-100378 - attempt failed (insufficient funds)
+ch_glimmerford_2025_001_f2,in_glimmerford_2025_001,cus_Glimmerford00000007,glimmerfordstudios.example.com,60000,USD,failed,2025-10-01,card,expired_card,no,no,INV-100378 - attempt failed (expired card)
 ch_lospollos_2024_001_f1,in_lospollos_2024_001,cus_LosPollos00011,los-pollos.example.com,84000,USD,failed,2024-05-30,card,expired_card,no,no,INV-100022 - attempt failed (expired card)
 ch_lospollos_2024_001_f2,in_lospollos_2024_001,cus_LosPollos00011,los-pollos.example.com,84000,USD,failed,2024-06-02,card,card_declined,no,no,INV-100022 - attempt failed (card declined)
 ch_lospollos_2025_001_f1,in_lospollos_2025_001,cus_LosPollos00011,los-pollos.example.com,84000,USD,failed,2025-05-29,card,card_declined,no,no,INV-100289 - attempt failed (card declined)
