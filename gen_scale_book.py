@@ -40,6 +40,8 @@ because a demo whose answers move when nobody changed anything cannot be reconci
 import argparse, csv, json, os, random, unicodedata
 from datetime import date, timedelta
 
+from apply_engagements import check_text_dates
+
 SEED = 20260921
 # `account_key` IS THE SPINE KEY every realm joins on, so the domain must be unique per
 # account. The first cut of this generator derived the slug from the name WITHOUT its
@@ -78,7 +80,7 @@ CASE_SHAPES = {
   ("Can we enforce MFA per group?","We would like MFA required for the finance group only. Is that configurable today, or on the roadmap?","asking","neutral","question"),
  ],
  "billing": [
-  ("Invoice shows the wrong currency","Our March invoice came through in USD but our contract is in GBP. Finance cannot process it until it is reissued.","blocked","neutral","problem"),
+  ("Invoice shows the wrong currency","Our latest invoice came through in USD but our contract is in GBP. Finance cannot process it until it is reissued.","blocked","neutral","problem"),
   ("Card charged twice for the same period","We were billed twice for this month. Please refund the duplicate — it has already cleared.","degraded","frustrated","problem"),
   ("Purchase order number on invoices","Can you add our PO number to the invoice header? Our AP system rejects invoices without it.","asking","neutral","question"),
  ],
@@ -95,7 +97,7 @@ CASE_SHAPES = {
  "perf": [
   ("Dashboard takes over 40 seconds to load","The main dashboard has gone from instant to 40+ seconds since last week. Our floor staff have stopped using it.","degraded","frustrated","problem"),
   ("Timeouts during the 9am peak","Every morning between 9 and 10 we see timeouts. It clears by mid-morning.","degraded","neutral","problem"),
-  ("Guidance on sizing for 500 concurrent users","We are scaling to about 500 concurrent users next quarter. Any sizing guidance?","asking","positive","question"),
+  ("Guidance on sizing for 500 concurrent users","We are scaling to about 500 concurrent users within three months. Any sizing guidance?","asking","positive","question"),
  ],
  "data": [
   ("Nightly sync silently dropping records","About 2% of records vanish in the nightly sync with no error logged. We only found it by reconciling by hand.","blocked","frustrated","bug"),
@@ -115,11 +117,11 @@ CASE_SHAPES = {
 }
 # CRM notes that say nothing about support — what most real notes look like.
 NEUTRAL_NOTES = [
- "{industry} firm in {city}. Renewal due next quarter; no blockers flagged by the account team.",
+ "{industry} firm in {city}. Renewal due in about three months; no blockers flagged by the account team.",
  "Expanding headcount in {city} this year. Watching seat count against the current plan.",
  "Multi-stakeholder evaluation. Procurement is the long pole, not the product.",
- "Steady account since {year}. Low touch, pays on time, no escalations to date.",
- "Moved from annual to monthly billing at their request in {year}.",
+ "Steady account since {since}. Low touch, pays on time, no escalations to date.",
+ "Moved from annual to monthly billing at their request soon after signing.",
  "Strategic account for the {industry} vertical. Exec sponsor engaged.",
  "Growing fast post-funding. Likely upsell conversation in the next two quarters.",
  "Consolidating vendors this year; we are the incumbent in this category.",
@@ -194,7 +196,7 @@ def main():
         if aware:
             note = rng.choice(AWARE_NOTES).format(area_h=area_h)
         else:
-            note = rng.choice(NEUTRAL_NOTES).format(industry=industry, city=city, year=created.year)
+            note = rng.choice(NEUTRAL_NOTES).format(industry=industry, city=city, since=created.isoformat())
 
         accounts.append(dict(account_key=key, name=name, website=f"https://www.{key}",
             phone=phfmt % (i % 10000), industry=industry, city=city, region=region, country=country,
@@ -212,6 +214,7 @@ def main():
             note=f"{TITLES[i % len(TITLES)]}; main point of contact." if i % 3 else
                  "Technical buyer. Ran the evaluation and stayed involved after go-live.",
             source_id=args.start_id + 100000 + i))
+        contacts[-1]["note_on"] = contacts[-1]["last_activity_on"]  # the note speaks of the evaluation as done
 
         (pipeline, stage, order, status), prob = STAGES[i % len(STAGES)]
         kind, product = DEAL_KINDS[i % len(DEAL_KINDS)]
@@ -227,7 +230,7 @@ def main():
                   if aware else rng.choice([
                     "Procurement has the paperwork; no product blockers.",
                     "Champion is engaged. Competing against an incumbent.",
-                    "Budget confirmed for this quarter.",
+                    "Budget confirmed for the next three months.",
                     "Expansion driven by headcount growth."]))))
 
         if has_case:
@@ -318,6 +321,9 @@ def main():
         late = [(r["source_id"], c, r[c]) for r in rows_ for c in cols if r[c] > t]
         assert not late, f"{what} dated after {t}: {late[:3]}"
     assert all(o["close_on"] <= t for o in opps if o["status"] != "open"), "a deal closed in the future"
+    check_text_dates({"crm/accounts.csv": accounts, "crm/contacts.csv": contacts, "crm/opportunities.csv": opps,
+                      "support/cases.csv": cases, "billing/customers.csv": bcust, "billing/invoices.csv": binv,
+                      "billing/subscriptions.csv": bsub, "billing/payments.csv": bpay}, TODAY.year)
     assert {(o["pipeline"], o["stage"]) for o in opps} <= {(o["pipeline"], o["stage"]) for o in book_rows("crm/opportunities.csv")}
     assert {x["status"] for x in binv} <= {x["status"] for x in book_rows("billing/invoices.csv")}, "an invoice word the book lacks"
     terms = {}

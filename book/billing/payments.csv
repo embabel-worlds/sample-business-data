@@ -40,38 +40,38 @@ ch_hudsucker_2023_001,in_hudsucker_2023_001,cus_Hudsucker00015,hudsucker.example
 ch_hudsucker_2024_001,in_hudsucker_2024_001,cus_Hudsucker00015,hudsucker.example.com,72000,USD,succeeded,2024-06-28,card,,no,no,Hudsucker Year 2
 ch_hudsucker_2025_001,in_hudsucker_2025_001,cus_Hudsucker00015,hudsucker.example.com,72000,USD,succeeded,2025-06-30,card,,yes,no,Hudsucker Year 3 - prorated refund issued after cancel
 ch_sirius_2025_001,in_sirius_2025_001,cus_Sirius0000016,sirius-cyber.example.com,42000,GBP,succeeded,2025-03-28,card,,no,no,Sirius Year 1
-ch_bluth_2026_001,in_bluth_2026_001,cus_Bluth00000017,bluth.example.com,1850,USD,succeeded,2026-01-10,card,,no,no,Bluth Jan 2026
-ch_bluth_2026_002,in_bluth_2026_002,cus_Bluth00000017,bluth.example.com,1850,USD,succeeded,2026-02-09,card,,no,no,Bluth Feb 2026
-ch_bluth_2026_003,in_bluth_2026_003,cus_Bluth00000017,bluth.example.com,1850,USD,succeeded,2026-03-11,card,,no,no,Bluth Mar 2026
-ch_bluth_2026_004a,in_bluth_2026_004,cus_Bluth00000017,bluth.example.com,1850,USD,failed,2026-04-03,card,card_declined,no,no,Bluth April - 1st attempt failed (declined)
-ch_bluth_2026_004b,in_bluth_2026_004,cus_Bluth00000017,bluth.example.com,1850,USD,failed,2026-04-10,card,insufficient_funds,no,no,Bluth April - 2nd attempt failed (insufficient funds)
-ch_bluth_2026_004c,in_bluth_2026_004,cus_Bluth00000017,bluth.example.com,1850,USD,failed,2026-04-17,card,card_declined,no,no,Bluth April - 3rd attempt failed. Dunning escalated.
+ch_bluth_2026_001,in_bluth_2026_001,cus_Bluth00000017,bluth.example.com,1850,USD,succeeded,2026-01-10,card,,no,no,"Bluth, invoice of January 3"
+ch_bluth_2026_002,in_bluth_2026_002,cus_Bluth00000017,bluth.example.com,1850,USD,succeeded,2026-02-09,card,,no,no,"Bluth, invoice of February 3"
+ch_bluth_2026_003,in_bluth_2026_003,cus_Bluth00000017,bluth.example.com,1850,USD,succeeded,2026-03-11,card,,no,no,"Bluth, invoice of March 3"
+ch_bluth_2026_004a,in_bluth_2026_004,cus_Bluth00000017,bluth.example.com,1850,USD,failed,2026-04-03,card,card_declined,no,no,"Bluth, invoice of April 3 - 1st attempt failed (declined)"
+ch_bluth_2026_004b,in_bluth_2026_004,cus_Bluth00000017,bluth.example.com,1850,USD,failed,2026-04-10,card,insufficient_funds,no,no,"Bluth, invoice of April 3 - 2nd attempt failed (insufficient funds)"
+ch_bluth_2026_004c,in_bluth_2026_004,cus_Bluth00000017,bluth.example.com,1850,USD,failed,2026-04-17,card,card_declined,no,no,"Bluth, invoice of April 3 - 3rd attempt failed. Dunning escalated."
 ch_globex_pilot_001,,cus_AcmeCorp00001,acmecorp.example.com,5000,USD,succeeded,2025-11-15,card,,no,yes,One-time pilot fee - DISPUTED (later resolved in our favor)
-ch_northwind_2025_001,in_northwind_2025_001,cus_Northwind0018,northwind-traders.example.com,48000,USD,succeeded,2025-03-12,card,,no,no,Northwind 2025
-ch_northwind_2026_001,in_northwind_2026_001,cus_Northwind0018,northwind-traders.example.com,48000,USD,succeeded,2026-03-11,card,,no,no,Northwind 2026
+ch_northwind_2025_001,in_northwind_2025_001,cus_Northwind0018,northwind-traders.example.com,48000,USD,succeeded,2025-03-12,card,,no,no,"Northwind, invoice of 2025-03-01"
+ch_northwind_2026_001,in_northwind_2026_001,cus_Northwind0018,northwind-traders.example.com,48000,USD,succeeded,2026-03-11,card,,no,no,"Northwind, invoice of 2026-03-01"
 ch_chumbucket_2026_001f,in_chumbucket_2026_001,cus_ChumBucket0009,chumbucket.example.com,12000,USD,failed,2026-06-04,card,card_declined,no,no,Chum Bucket renewal - attempt 1 failed
 ch_chumbucket_2026_002f,in_chumbucket_2026_001,cus_ChumBucket0009,chumbucket.example.com,12000,USD,failed,2026-06-11,card,insufficient_funds,no,no,Chum Bucket renewal - attempt 2 failed
 ch_chumbucket_2026_003f,in_chumbucket_2026_001,cus_ChumBucket0009,chumbucket.example.com,12000,USD,failed,2026-06-18,card,card_declined,no,no,Chum Bucket renewal - attempt 3 failed
 py_contoso_2025_001,in_contoso_2025_001,cus_Contoso000019,contoso.example.com,86000,USD,succeeded,2025-06-06,ach_credit_transfer,,no,no,Contoso Year 2 wire
-py_initech_2026_003,in_initech_2026_003,cus_Initech00020,initech.example.com,1550,USD,succeeded,2026-03-20,ach_credit_transfer,,no,no,Initech 2026-03
-py_initech_2026_004,in_initech_2026_004,cus_Initech00020,initech.example.com,1550,USD,succeeded,2026-04-21,ach_credit_transfer,,no,no,Initech 2026-04
+py_initech_2026_003,in_initech_2026_003,cus_Initech00020,initech.example.com,1550,USD,succeeded,2026-03-20,ach_credit_transfer,,no,no,"Initech, invoice of 2026-03-10"
+py_initech_2026_004,in_initech_2026_004,cus_Initech00020,initech.example.com,1550,USD,succeeded,2026-04-21,ach_credit_transfer,,no,no,"Initech, invoice of 2026-04-10"
 ch_acme_2026_emea_a,in_acme_2026_emea,cus_AcmeCorp00001,acmecorp.example.com,18000,USD,failed,2026-06-14,card,card_declined,no,no,EMEA onboarding - 1st attempt failed (declined)
 ch_acme_2026_emea_b,in_acme_2026_emea,cus_AcmeCorp00001,acmecorp.example.com,18000,USD,failed,2026-06-21,card,insufficient_funds,no,no,EMEA onboarding - 2nd attempt failed (insufficient funds)
-ch_wayfarer_2025_07,in_wayfarer_2025_07,cus_Wayfarer00021,wayfarer-travel.example.com,2400,USD,succeeded,2025-07-05,card,,no,no,Wayfarer July 2025
-ch_wayfarer_2025_08,in_wayfarer_2025_08,cus_Wayfarer00021,wayfarer-travel.example.com,2400,USD,succeeded,2025-08-05,card,,no,no,Wayfarer August 2025
-ch_wayfarer_2025_09,in_wayfarer_2025_09,cus_Wayfarer00021,wayfarer-travel.example.com,2400,USD,succeeded,2025-09-05,card,,no,no,Wayfarer September 2025
-ch_wayfarer_2025_10,in_wayfarer_2025_10,cus_Wayfarer00021,wayfarer-travel.example.com,2400,USD,succeeded,2025-10-05,card,,no,no,Wayfarer October 2025
-ch_wayfarer_2025_11,in_wayfarer_2025_11,cus_Wayfarer00021,wayfarer-travel.example.com,2400,USD,succeeded,2025-11-05,card,,no,no,Wayfarer November 2025
-ch_wayfarer_2025_12,in_wayfarer_2025_12,cus_Wayfarer00021,wayfarer-travel.example.com,2400,USD,succeeded,2025-12-05,card,,no,no,Wayfarer December 2025
-ch_wayfarer_2026_01,in_wayfarer_2026_01,cus_Wayfarer00021,wayfarer-travel.example.com,2400,USD,succeeded,2026-01-05,card,,no,no,Wayfarer January 2026
-ch_wayfarer_2026_02,in_wayfarer_2026_02,cus_Wayfarer00021,wayfarer-travel.example.com,2400,USD,succeeded,2026-02-05,card,,no,no,Wayfarer February 2026
+ch_wayfarer_2025_07,in_wayfarer_2025_07,cus_Wayfarer00021,wayfarer-travel.example.com,2400,USD,succeeded,2025-07-05,card,,no,no,"Wayfarer, invoice due 2025-07-01"
+ch_wayfarer_2025_08,in_wayfarer_2025_08,cus_Wayfarer00021,wayfarer-travel.example.com,2400,USD,succeeded,2025-08-05,card,,no,no,"Wayfarer, invoice due 2025-08-01"
+ch_wayfarer_2025_09,in_wayfarer_2025_09,cus_Wayfarer00021,wayfarer-travel.example.com,2400,USD,succeeded,2025-09-05,card,,no,no,"Wayfarer, invoice due 2025-09-01"
+ch_wayfarer_2025_10,in_wayfarer_2025_10,cus_Wayfarer00021,wayfarer-travel.example.com,2400,USD,succeeded,2025-10-05,card,,no,no,"Wayfarer, invoice due 2025-10-01"
+ch_wayfarer_2025_11,in_wayfarer_2025_11,cus_Wayfarer00021,wayfarer-travel.example.com,2400,USD,succeeded,2025-11-05,card,,no,no,"Wayfarer, invoice due 2025-11-01"
+ch_wayfarer_2025_12,in_wayfarer_2025_12,cus_Wayfarer00021,wayfarer-travel.example.com,2400,USD,succeeded,2025-12-05,card,,no,no,"Wayfarer, invoice due 2025-12-01"
+ch_wayfarer_2026_01,in_wayfarer_2026_01,cus_Wayfarer00021,wayfarer-travel.example.com,2400,USD,succeeded,2026-01-05,card,,no,no,"Wayfarer, invoice due 2026-01-01"
+ch_wayfarer_2026_02,in_wayfarer_2026_02,cus_Wayfarer00021,wayfarer-travel.example.com,2400,USD,succeeded,2026-02-05,card,,no,no,"Wayfarer, invoice due 2026-02-01"
 ch_wayfarer_2026_03_f,in_wayfarer_2026_03,cus_Wayfarer00021,wayfarer-travel.example.com,2400,USD,failed,2026-03-05,card,expired_card,no,no,Card on file expired; customer updated it the next day
-ch_wayfarer_2026_03,in_wayfarer_2026_03,cus_Wayfarer00021,wayfarer-travel.example.com,2400,USD,succeeded,2026-03-06,card,,no,no,Wayfarer March 2026
-ch_wayfarer_2026_04,in_wayfarer_2026_04,cus_Wayfarer00021,wayfarer-travel.example.com,2400,USD,succeeded,2026-04-05,card,,no,no,Wayfarer April 2026
-ch_wayfarer_2026_05,in_wayfarer_2026_05,cus_Wayfarer00021,wayfarer-travel.example.com,2400,USD,succeeded,2026-05-05,card,,no,no,Wayfarer May 2026
-ch_wayfarer_2026_06,in_wayfarer_2026_06,cus_Wayfarer00021,wayfarer-travel.example.com,2400,USD,succeeded,2026-06-05,card,,no,no,Wayfarer June 2026
-ch_brightline_2024_001,in_brightline_2024_001,cus_Brightline022,brightline-analytics.example.com,54000,USD,succeeded,2024-09-10,card,,no,no,Brightline 2024
-ch_brightline_2025_001,in_brightline_2025_001,cus_Brightline022,brightline-analytics.example.com,54000,USD,succeeded,2025-09-08,card,,no,no,Brightline 2025
+ch_wayfarer_2026_03,in_wayfarer_2026_03,cus_Wayfarer00021,wayfarer-travel.example.com,2400,USD,succeeded,2026-03-06,card,,no,no,"Wayfarer, invoice due 2026-03-01"
+ch_wayfarer_2026_04,in_wayfarer_2026_04,cus_Wayfarer00021,wayfarer-travel.example.com,2400,USD,succeeded,2026-04-05,card,,no,no,"Wayfarer, invoice due 2026-04-01"
+ch_wayfarer_2026_05,in_wayfarer_2026_05,cus_Wayfarer00021,wayfarer-travel.example.com,2400,USD,succeeded,2026-05-05,card,,no,no,"Wayfarer, invoice due 2026-05-01"
+ch_wayfarer_2026_06,in_wayfarer_2026_06,cus_Wayfarer00021,wayfarer-travel.example.com,2400,USD,succeeded,2026-06-05,card,,no,no,"Wayfarer, invoice due 2026-06-01"
+ch_brightline_2024_001,in_brightline_2024_001,cus_Brightline022,brightline-analytics.example.com,54000,USD,succeeded,2024-09-10,card,,no,no,"Brightline, invoice of 2024-09-01"
+ch_brightline_2025_001,in_brightline_2025_001,cus_Brightline022,brightline-analytics.example.com,54000,USD,succeeded,2025-09-08,card,,no,no,"Brightline, invoice of 2025-09-01"
 ch_glimmerford_2024_001_f1,in_glimmerford_2024_001,cus_Glimmerford00000007,glimmerfordstudios.example.com,60000,USD,failed,2024-10-02,card,card_declined,no,no,INV-100044 - attempt failed (card declined)
 ch_glimmerford_2024_001_f2,in_glimmerford_2024_001,cus_Glimmerford00000007,glimmerfordstudios.example.com,60000,USD,failed,2024-10-05,card,insufficient_funds,no,no,INV-100044 - attempt failed (insufficient funds)
 ch_glimmerford_2025_001_f1,in_glimmerford_2025_001,cus_Glimmerford00000007,glimmerfordstudios.example.com,60000,USD,failed,2025-09-28,card,insufficient_funds,no,no,INV-100378 - attempt failed (insufficient funds)

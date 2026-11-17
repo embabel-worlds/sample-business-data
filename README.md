@@ -86,7 +86,7 @@ that translation once, into a vocabulary with no product in it:
 | File | One row per | Notes |
 |---|---|---|
 | `crm/accounts.csv` | customer company | `account_key` is its domain |
-| `crm/contacts.csv` | person | |
+| `crm/contacts.csv` | person | `note_on` is the day their `note` was written: 2026-05-01 for the workbooks' people (or the day they were added, if later), the newest logged email or call for the added ones; blank when there is no note |
 | `crm/opportunities.csv` | deal | `stage` as authored, `stage_order`, and `status`: open, won or lost |
 | `support/cases.csv` | customer case | `status` open or resolved; `priority` urgent to none; `filed_on_behalf` when staff wrote it up, not the customer. The two internal engineering issues are left out |
 | `billing/customers.csv` | billing customer | `known_to_crm` is `no` for the three the CRM has never heard of |
@@ -122,9 +122,15 @@ each in its realm under `seed/load_book.py`.
   The workbooks' CRM records were written in early May 2026; the logged emails and calls run
   from March to 2026-06-25, and open follow-ups fall due between early June and mid-July. A
   demo that wants the story to stay current should turn dates into an age relative to that day.
-- **Dates inside texts** are ISO or a month and day ("June 16", "16 June", read in 2026), never
-  "the 11th" or "4/22", so a loader that moves the dates can move them too. `to_book.py` spells
-  the workbooks' "4/22" as "April 22". Each is a real day, and a weekday beside one is its weekday.
+- **Dates inside texts** are ISO or a month and day ("June 16", "16 June", read in 2026), so a
+  loader that moves the dates can move them too. Each is a real day, and a weekday beside one is its
+  weekday. A month and day must still fall in 2026 when moved 20 weeks; a later one is ISO
+  ("2026-11-25"). A text never names a time a loader cannot move: no day without its month ("the
+  11th", "4/22", "June 10 or 11" - write "June 10 or June 11"), no month without its day ("in July",
+  "mid-June"), no quarter, season or holiday ("Q3", "this quarter", "summer"), no year end and no bare
+  year ("2027"). Those become a day, or wording relative to the text's own date ("next month", "in
+  about two months"). `to_book.py` rewrites the workbooks' texts so (`REWORD`, and "4/22" becomes
+  "April 22"), and `apply_engagements.py` fails on any that slips through.
 - **Issue state is only `open` or `closed`.** In-progress is implied by assignees and a
   recent `Updated At`. Priority and type live inside the comma-separated `Labels`.
 - **An issue has one `Body` and a `Comments` count**, not a thread. A product that needs
@@ -159,7 +165,7 @@ would lose it.
 |---|---|---|
 | Silent escalation | Northwind Traders | at risk (urgent case, pipeline into it); sales unaware |
 | Quiet churner | Chum Bucket | at risk on three failed payments, with a renewal forecast and no case |
-| Withholding | Contoso | an open bug saying "we will not pay the June invoice until the export is fixed" |
+| Withholding | Contoso | an open bug saying "we will not pay the invoice due June 10 until the export is fixed" |
 | Acknowledged trouble | Initech | at risk, and NOT a blind spot: the owner's notes name both problems |
 | Failed payments | Acme | at risk on a one-off invoice two cards have bounced |
 | Good payer on the 5th | Wayfarer Travel | nothing: due on the 1st, paid on the 5th, one expired card fixed next day |

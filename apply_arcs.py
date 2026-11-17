@@ -192,7 +192,7 @@ def silent_escalation(b):
                   "2026-07-31", "Jenna Lopez", "2026-05-04", "2026-06-12",
                   "Champion confirmed budget. Expansion looks very likely - paperwork goes out this week.",
                   kind="New Business", priority="high")
-    b.note(key, "Jenna Lopez", "2026-06-12", "Great call with Laura. They want Portland live before Q4 "
+    b.note(key, "Jenna Lopez", "2026-06-12", "Great call with Laura. They want Portland live before "
            "peak season and see us as the obvious choice. Expansion is all but done.", deal["source_id"])
     b.case(key, "Northwind Traders", email, "Laura Callahan",
            "Nightly export failing - we cannot close the month", "open", "urgent", "bug", "area:export",
@@ -208,7 +208,7 @@ def silent_escalation(b):
     for year, paid in [("2025", "2025-03-12"), ("2026", "2026-03-11")]:
         i = b.invoice(key, cid, f"in_northwind_{year}_001", sid, 48000, f"{year}-03-01", f"{year}-03-31", paid,
                       f"Year {int(year) - 2024} - Platform Business (50 seats)")
-        b.payment(i, f"ch_northwind_{year}_001", "succeeded", paid, "card", description=f"Northwind {year}")
+        b.payment(i, f"ch_northwind_{year}_001", "succeeded", paid, "card", description=f"Northwind, invoice of {year}-03-01")
     b.arc("silent escalation", key, "AtRiskAccount (urgent case, pipeline into trouble); HealthCrmAwareness unaware")
 
 
@@ -216,7 +216,7 @@ def quiet_churner(b):
     key = "chumbucket.com"
     deal = one(b.t["crm/opportunities"], account_key=key, title="Chum Bucket - Renewal")
     deal.update(probability="0.9", close_on="2026-07-10", modified_on="2026-06-20",
-                note="Renewal on track. Ariana says sign-off is a formality. Forecast to close in July.")
+                note="Renewal on track. Ariana says sign-off is a formality. Forecast to close by July 10.")
     invoice = one(b.t["billing/invoices"], source_id="in_chumbucket_2026_001")
     assert invoice["status"] == "open" and invoice["due_on"] == "2026-06-04"
     for n, (day, code) in enumerate([("2026-06-04", "card_declined"), ("2026-06-11", "insufficient_funds"),
@@ -233,7 +233,7 @@ def withholding(b):
     key = "contoso.example"
     email = b.company(key, "Contoso Ltd", "Sophie Turner", "Professional Services", "Chicago", "IL",
                       "United States", "+1-312-555-0175", "2024-05-20",
-                      "Steady account. Annual renewal each June; finance runs procurement.",
+                      "Steady account. Annual renewal each June 1; finance runs procurement.",
                       "Marcus Webb", "Finance Director")
     b.deal(key, email, "Contoso - Annual Renewal", "Closed Won", "won", 86000, 1, "2026-05-20",
            "Sophie Turner", "2026-04-01", "2026-05-20", "Renewed on the same terms.")
@@ -251,7 +251,7 @@ def withholding(b):
                   "open", "high", "bug", "area:export", "2026-06-02", "2026-06-24", 4,
                   "Our month-end CSV export stops at 10,000 rows without any warning, so every report we send "
                   "the board has been wrong. We need a fix, not a workaround. To be clear: we will not pay "
-                  "the June invoice until the export is fixed.")
+                  "the invoice due June 10 until the export is fixed.")
     assert case["opened_on"] <= unpaid["due_on"]
     b.arc("withholding", key, f"POSSIBLY_WITHHELD_OVER {unpaid['number']} -> case {case['source_id']}")
 
@@ -260,7 +260,7 @@ def acknowledged_trouble(b):
     key = "initech.com"
     account = one(b.t["crm/accounts"], account_key=key)
     account.update(relationship="customer",
-                   note="SMB software shop, switched from a competitor in March. Price-sensitive; Emily is the champion.")
+                   note="SMB software shop, switched from a competitor on March 10. Price-sensitive; Emily is the champion.")
     deal = one(b.t["crm/opportunities"], account_key=key, title="Initech - Starter Package")
     deal.update(stage="Closed Won", stage_order="", status="won", probability="1", close_on="2026-03-10",
                 modified_on="2026-03-10", note="Signed monthly to start; annual once they are settled.")
@@ -272,10 +272,10 @@ def acknowledged_trouble(b):
     for month in ["03", "04", "05", "06"]:
         paid_on = {"03": "2026-03-20", "04": "2026-04-21"}.get(month, "")
         i = b.invoice(key, cid, f"in_initech_2026_0{month}", sid, 1550, f"2026-{month}-10", f"2026-{month}-25",
-                      paid_on, f"Platform Starter (15 seats) - 2026-{month}")
+                      paid_on, f"Platform Starter (15 seats) - month from 2026-{month}-10")
         if paid_on:
             b.payment(i, f"py_initech_2026_0{month}", "succeeded", paid_on, "ach_credit_transfer",
-                      description=f"Initech 2026-{month}")
+                      description=f"Initech, invoice of 2026-{month}-10")
     export = b.case(key, "Initech LLC", email, person, "Scheduled export times out for large workspaces",
                     "open", "high", "bug", "area:export", "2026-05-18", "2026-06-23", 6,
                     "Our scheduled export times out on our largest workspace, so the weekly report to our "
@@ -286,7 +286,7 @@ def acknowledged_trouble(b):
                 "anything, but the team keeps getting caught by it.")
     deal_id = deal["source_id"]
     b.note(key, "Mike Davis", "2026-05-20",
-           "Emily called: their scheduled export times out on the big workspace, which is why May's invoice "
+           "Emily called: their scheduled export times out on the big workspace, which is why the May 10 invoice "
            "is late. Told her engineering has the export timeout; she will pay once the export runs.", deal_id)
     b.note(key, "Mike Davis", "2026-06-09",
            "Follow-up with Emily. The export timeout is still open, and now dashboard filters reset when "
@@ -297,7 +297,7 @@ def acknowledged_trouble(b):
     # will do something by a date.
     # Due after the as-of date, so it reads as work in hand rather than as one of Mike's past-due tasks.
     b.followup(key, "Mike Davis", "2026-06-09", "2026-07-03", "Get a fix date for Initech's export timeout",
-               "Emily is waiting on a date before May and June are paid; chase engineering for it.")
+               "Emily is waiting on a date before the May 10 and June 10 invoices are paid; chase engineering for it.")
     b.arc("acknowledged trouble", key,
           f"AtRiskAccount; HealthCrmAwareness aware (cases {export['source_id']}, {ui['source_id']}); a follow-up scheduled",
           "HealthCrmAwareness unaware; StewardUnacknowledgedRisk")
@@ -331,13 +331,13 @@ def good_payer_on_the_fifth(b):
         tag = month.strftime("%Y_%m")
         paid_on = month.replace(day=5)
         i = b.invoice(key, cid, f"in_wayfarer_{tag}", sid, 2400, (month - timedelta(days=10)).isoformat(),
-                      month.isoformat(), "", f"Platform Starter (12 seats) - {month:%B %Y}")
+                      month.isoformat(), "", f"Platform Starter (12 seats) - month from {month.isoformat()}")
         if month == date(2026, 3, 1):
             b.payment(i, f"ch_wayfarer_{tag}_f", "failed", paid_on.isoformat(), "card", "expired_card",
                       "Card on file expired; customer updated it the next day")
             paid_on += timedelta(days=1)
         b.payment(i, f"ch_wayfarer_{tag}", "succeeded", paid_on.isoformat(), "card",
-                  description=f"Wayfarer {month:%B %Y}")
+                  description=f"Wayfarer, invoice due {month.isoformat()}")
         i.update(status="paid", amount_paid=i["amount_due"], paid_on=paid_on.isoformat())
         month = (month + timedelta(days=32)).replace(day=1)
     b.arc("good payer on the 5th", key, "nothing", "AtRiskAccount; any open invoice")
@@ -379,8 +379,8 @@ def noisy_but_healthy(b):
                    "2024-09-01", "2025-09-01", "2026-09-01")
     for year, paid in [("2024", "2024-09-10"), ("2025", "2025-09-08")]:
         i = b.invoice(key, cid, f"in_brightline_{year}_001", sid, 54000, f"{year}-09-01", f"{year}-10-01", paid,
-                      f"Platform Business (60 seats) - {year}")
-        b.payment(i, f"ch_brightline_{year}_001", "succeeded", paid, "card", description=f"Brightline {year}")
+                      f"Platform Business (60 seats) - year from {year}-09-01")
+        b.payment(i, f"ch_brightline_{year}_001", "succeeded", paid, "card", description=f"Brightline, invoice of {year}-09-01")
     b.arc("noisy but healthy", key, "nothing", "AtRiskAccount; HealthCaseTriage (no open case)")
 
 
@@ -390,7 +390,7 @@ def writes_sandbox(b):
     key = SANDBOX
     email = b.company(key, "Fernhollow Supply Co", "Mike Davis", "Professional Services", "Austin", "TX",
                       "United States", "+1-512-555-0150", "2026-05-04",
-                      "Regional office-supply distributor. Small purchasing team, new to us this spring.",
+                      "Regional office-supply distributor. Small purchasing team, new to us since May 4.",
                       "Sam Ortega", "Operations Manager")
     deal = b.deal(key, email, "Fernhollow - Pilot", "Qualified to Buy", "open", 10000, 0.4, "2026-09-30",
                   "Mike Davis", "2026-05-04", "2026-05-04", "Pilot for the purchasing team. Budget set aside for a "
@@ -435,7 +435,7 @@ def manual_dunning(b, exclude):
                    f"check the {paid['method'].replace('_', ' ')} details; {retry}.")
     # Wayfarer's one expired card was handled the same way.
     b.note("wayfarer-travel.example", AR_CLERK, "2026-03-06",
-           "Card for Wayfarer's March invoice expired. Tom updated it within the hour and the retry went "
+           "Card for Wayfarer's invoice due March 1 expired. Tom updated it within the hour and the retry went "
            "through today. Nothing to chase - they always pay four days after the due date.")
     b.arc("manual dunning", "*", f"{sum(1 for x in b.notes if x['author'] == AR_CLERK)} notes by {AR_CLERK}, "
           "each the day after a failed payment")

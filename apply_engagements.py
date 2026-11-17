@@ -7,7 +7,8 @@ what is overdue on my list. The rows are in `additions/`, drafted once and commi
 stays deterministic; this script checks them against the book and writes
 
     crm/contacts.csv       the drafted people appended, ids from 501; owner and location come from
-                           their account, `last_activity_on` is their newest email, call or meeting
+                           their account, `last_activity_on` is their newest email, call or meeting,
+                           `note_on` the day their note was written
     crm/emails.csv         one row per logged email, `direction` outbound or inbound, `sent_at` UTC
     crm/calls.csv          one row per logged call, `outcome` connected, voicemail or no_answer
     crm/followups.csv      the drafted follow-ups appended; `status` open or done
@@ -81,8 +82,25 @@ MONTH = "|".join(sorted({n for m in calendar.month_name[1:] for n in (m, m[:3])}
 TEXT_DATE = re.compile(rf"(?:\b(?P<wd>{'|'.join(calendar.day_name)}),? )?(?:\b(?P<iso>\d{{4}}-\d\d-\d\d)\b"
                        rf"|\b(?P<m>{MONTH})\.? (?P<d>\d{{1,2}})(?:st|nd|rd|th)?\b"
                        rf"|\b(?P<d2>\d{{1,2}})(?:st|nd|rd|th)? (?P<m2>{MONTH})\b)")
+# A loader reads a month-day without a year in the book's year and writes it back without one, so a moved date
+# must stay in that year. shortcut: holds for loads up to 20 weeks after as-of (as-of 2026-06-27 lands on
+# 2026-11-14); a later load needs more dates in ISO, or a loader that writes the year.
+SHIFT_HORIZON = timedelta(weeks=20)
 # What it cannot move: a day without its month, or a numeric month/day.
 DAY_ONLY = re.compile(r"\bthe \d{1,2}(?:st|nd|rd|th)\b|(?<![\d/])\d{1,2}/\d{1,2}(?![\d/])")
+# A day that borrows its month from a date beside it: "June 10 or 11", "10-12 June". The loader moves the date, not the day.
+ORD = r"\d{1,2}(?:st|nd|rd|th)?"
+JOIN = r"(?: (?:or|and|to|through|till|until|&) | ?[–—] ?|-)"  # a spaced hyphen is a dash between clauses
+ELIDED = re.compile(rf"{JOIN}{ORD}\b(?! ?(?:{MONTH})\b)")
+ELIDED_BEFORE = re.compile(rf"\b{ORD}{JOIN}$")
+# What it cannot move and that stops being true once the dates move: a month without its day, a quarter, a
+# season, a holiday, the end of a calendar year or quarter, a year.
+PERIOD = re.compile(rf"\b(?:{MONTH})\b"
+                    r"|\b[QH][1-4]\b|(?i:\b(?:spring|summer|autumn|winter|holidays?)\b|\b(?:the|this|next|last|in|by) fall\b"
+                    r"|\b(?:this|next|last|the|current|coming|that) quarter\b|\bquarter[- ]end\b|\bend of (?:the|this) (?:year|quarter)\b"
+                    r"|\byear[- ]end\b|\bhalf of (?:the|this) year\b)|(?<![\w.+-])(?:19|20)\d\d(?!\w|\.\d)")
+# "May" opening a sentence and followed by its subject or "not" asks or hedges; it names no month.
+VERB_MAY = re.compile(r"(?:(?<=^)|(?<=[.!?] )|(?<=\n))May(?= (?:I|we|you|he|she|it|they|not)\b)")
 
 
 def day(text):
@@ -95,21 +113,33 @@ def check_far(when, cut, what):
 
 def check_text_dates(tables, year):
     """Every date a text names is a real day, a weekday beside it is that day's, and none is a form a loader
-    cannot move. A month-day without a year is read in `year`."""
+    cannot move: a day without its month, a month without its day, a quarter, a season or a year. A month-day
+    without a year is read in `year`, and stays in it when moved by up to SHIFT_HORIZON; a later one is ISO."""
     n = 0
     for name, rows in tables.items():
         for r in rows:
             for k, v in r.items():
+                if not isinstance(v, str) or re.fullmatch(r"\d{4}-\d\d-\d\d(?:[ T][\d:.+Z-]+)?", v):
+                    continue
                 where = f"{name} {r.get('source_id') or r.get('email')} {k}"
-                bad = isinstance(v, str) and DAY_ONLY.search(v)
+                bad = DAY_ONLY.search(v)
                 assert not bad, f"{where}: '{bad and bad[0]}' names a day a loader cannot move"
-                for m in TEXT_DATE.finditer(v if isinstance(v, str) else ""):
+                dates = list(TEXT_DATE.finditer(v))
+                bad = next((p for p in PERIOD.finditer(v) if not VERB_MAY.match(v, p.start())
+                            and not any(m.start() <= p.start() < m.end() for m in dates)), None)
+                assert not bad, f"{where}: '{bad and bad[0]}' names a time a loader cannot move"
+                bad = next((m for m in dates if ELIDED.match(v, m.end()) or any(
+                    not any(o.start() <= e.start() < o.end() for o in dates) for e in [ELIDED_BEFORE.search(v, 0, m.start())] if e)), None)
+                assert not bad, f"{where}: a day beside '{bad and bad[0]}' borrows its month, so a loader cannot move it"
+                for m in dates:
                     month, d = (m["m"], m["d"]) if m["m"] else (m["m2"], m["d2"])
                     try:
                         when = date.fromisoformat(m["iso"]) if m["iso"] else \
                             date(year, next(i for i, f in enumerate(calendar.month_name) if i and f.startswith(month[:3])), int(d))
                     except ValueError:
                         raise AssertionError(f"{where}: '{m[0]}' is not a real date")
+                    assert m["iso"] or (when + SHIFT_HORIZON).year == year, \
+                        f"{where}: '{m[0]}' moved by {SHIFT_HORIZON.days} days lands in the next year; write it ISO"
                     assert not m["wd"] or m["wd"] == calendar.day_name[when.weekday()], \
                         f"{where}: '{m[0]}' but {when} is a {calendar.day_name[when.weekday()]}"
                     n += 1
@@ -141,6 +171,10 @@ def apply(root, as_of):
     assert len(person) == len(contacts), "duplicate contact email"
     assert 120 <= len(contacts) <= 140, f"{len(contacts)} contacts"
     assert {c["owner"] for c in contacts} <= set(SALES), "a contact owned by someone outside sales"
+    for c in contacts:  # a note is written once its person is known, and not after as-of
+        assert (c["note_on"] == "") if not c["note"] else c["created_on"] <= c["note_on"] <= as_of.isoformat(), \
+            f"{c['email']} note_on {c['note_on']!r}, created {c['created_on']}"
+    print("assert ok: every contact note is dated between its contact's creation and as-of")
     families = {"accounts": accounts.values(), "contacts": contacts, "deals": opportunities, "cases": cases}
     ids = {name: {r["source_id"] for r in rows} for name, rows in families.items()}
     for x in ids:
@@ -287,7 +321,7 @@ def apply(root, as_of):
     tables.update({"crm/contacts.csv": contacts, "crm/opportunities.csv": opportunities, "crm/emails.csv": emails,
                    "crm/calls.csv": calls, "crm/followups.csv": followups})
     n = check_text_dates(tables, as_of.year)
-    print(f"assert ok: {n} dates in the book are real days, each weekday beside one is right, none day-only")
+    print(f"assert ok: {n} dates in the book are real days, each weekday beside one is right, and no text names a time a loader cannot move")
 
     return {"crm/contacts": write(root, "crm/contacts.csv", contacts),
             "crm/opportunities": write(root, "crm/opportunities.csv", opportunities),
