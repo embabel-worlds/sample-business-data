@@ -108,19 +108,23 @@ PERIOD = re.compile(
     r"|\bquarters\b|\b(?:month|quarter|year)[- ]end\b|\bmid[- ]?(?:month|year)\b"
     r"|\b(?:end|start|beginning|middle|rest) of (?:(?:the|this|next|last) )?(?:month|year|quarter)\b"
     r"|\b(?:earlier|later) (?:this|that|in the) (?:month|year)\b"
-    r"|\b(?:previous|following|current|prior|upcoming) (?:months?|years?|quarters?)\b"
-    r"|\b(?:first|second|third|fourth|last|final) (?:quarter|half(?!\s+(?:an\s+)?hours?))\b|\bhalf of the (?:month|year)\b)")
+    r"|\b(?:previous|following|current|prior|upcoming) (?:months?|years?|quarters?|halves|half(?!\s+(?:an\s+)?hours?))\b"
+    r"|\b(?:first|second|third|fourth|last|final|\d(?:st|nd|rd|th)) (?:quarter|half(?!\s+(?:an\s+)?hours?))(?: of (?:the |this |next |last )?(?:month|year|quarter))?\b|\bhalf of the (?:month|year)\b)")
 # What it cannot move: a day without its month, or a numeric month/day.
-DAY_ONLY = re.compile(r"\bthe \d{1,2}(?:st|nd|rd|th)\b|\b\d{1,2}(?:st|nd|rd|th)(?=\s*(?:[.,;:!?)]|$|at\b|of\b))|(?<![\d/])\d{1,2}/\d{1,2}(?![\d/])")
+DAY_ONLY = re.compile(r"\b\d{1,2}(?:st|nd|rd|th)\b|(?<![\d/])\d{1,2}/\d{1,2}(?![\d/])")
 # A day that borrows its month from a date beside it: "June 10 &11", "June 10, 11", "June 10 - 12", "10-12 June".
 # The loader moves the date, not the day.
 ORD = r"\d{1,2}(?:st|nd|rd|th)?"
-JOIN = r"\s*(?:[,/;:&(–—-]|(?<!\w)(?:and|or|to|through|till|until)(?!\w))\s*(?:(?:and|or)\s+)?"
+JOIN = r"(?:[^\w.]|_|\b(?:and|or|to|on|through|till|until)\b)*?"  # not across a full stop: "April 19. 2-3 weeks"
 ELIDED = re.compile(rf"{JOIN}{ORD}\b(?!\s*(?:{MONTH})\b)")
-ELIDED_BEFORE = re.compile(rf"\b{ORD}{JOIN}$")
+ELIDED_BEFORE = re.compile(rf"\b{ORD}\b{JOIN}$")
 # The only exceptions: exact phrases from the Book's own texts, each a deliberate decision. A new text that trips
 # the gate is rewritten, or its exact phrase is added here with the reason it names no time.
 ALLOWED = {
+    **{f"{n} attempt": "a count of payment attempts" for n in ("1st", "2nd", "3rd")},
+    "3rd email": "a count of emails (contact note)",
+    "3rd consecutive": "a count of renewals",
+    "3rd year": "a count of years as a customer",
     "May not be a real prospect": "the verb 'may' (contact 144's note)",
     "she may be slow to respond": "the verb 'may' (email-0014)",
     "I'd join the second half": "the second half of a meeting (email-0076)",
@@ -137,7 +141,9 @@ PROBES = [
         "Deliver in july.", "Deliver JUNE 10.", "Mid-June works.", "Before Christmas.", "Before Mother's Day.",
         "Upsell in the next two quarters.", "Close this quarter.", "Over the summer.", "Signed in 2027.",
         "Rollout next year.", "Due the 11th.", "Due 11th.", "Due on 11th.", "Meet June 10: 12.",
-        "Would June 10 (or 11) work?", "First quarter.", "In the first half.", "First half of the year.",
+        "Would June 10 (or 11) work?", "Meet June 10 [or 11].", "Meet June 10 (or on 11).", "Due 11th (noon).",
+        "Due 11th — noon.", "Due on 11th by noon.", "11th was the deadline.", "1st quarter.", "The 2nd half.",
+        "The previous half.", "I'd join the second half of the year.", "Rachel joined the second half of the year.", "First quarter.", "In the first half.", "First half of the year.",
         "End of quarter.", "For the second half of the year.", "The previous month.", "The following month.",
         "The current year.", "Sent 4/22.", "Meet June 31.", "Tuesday, June 10.",
         "Wednesday, June 10, 3 seats.", "Semester review.", "Academic year starts soon.", "Mid-year review.", "By the end of the year.",
@@ -159,6 +165,10 @@ def check_far(when, cut, what):
     assert abs((when - cut).days) > MARGIN, f"{what} on {when} is within {MARGIN} days of the cut-off {cut}"
 
 
+def dates_spans(dates):
+    return [m.span() for m in dates]
+
+
 def check_text_dates(tables, year):
     """Every free text names times only as dates a loader moves - ISO, or a capitalised month with its day and no
     day beside it that borrows its month - each a real day, with a weekday beside it that is its own. Any other
@@ -174,9 +184,10 @@ def check_text_dates(tables, year):
                 where = f"{name} {r.get('source_id') or r.get('email')} {k}"
                 allowed = [m.span() for p in ALLOWED for m in re.finditer(re.escape(p), v)]
                 dates = list(TEXT_DATE.finditer(v))
-                spans = allowed + [m.span() for m in dates]
                 for hit in (*DAY_ONLY.finditer(v), *MONTH_WORD.finditer(v), *PERIOD.finditer(v)):
-                    assert any(a <= hit.start() < b for a, b in spans), \
+                    # a date covers a hit that starts in it; an ALLOWED phrase only one that ends in it too
+                    assert any(a <= hit.start() < b for a, b in dates_spans(dates)) or \
+                        any(a <= hit.start() and hit.end() <= b for a, b in allowed), \
                         f"{where}: '{hit[0]}' names a time a loader cannot move; write a date, or ALLOW the phrase"
                 bad = next((m for m in dates if ELIDED.match(v, m.end()) or any(
                     not any(o.start() <= e.start() < o.end() for o in dates) for e in [ELIDED_BEFORE.search(v, 0, m.start())] if e)), None)

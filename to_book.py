@@ -131,7 +131,7 @@ REWORD = {
     "stripe/charges.csv": {
         **{f"ch_bluth_2026_00{n}": [(f"Bluth {m} 2026", f"Bluth, invoice of {calendar.month_name[n]} 3")]
            for n, m in ((1, "Jan"), (2, "Feb"), (3, "Mar"))},
-        **{f"ch_bluth_2026_004{x}": [(f"Bluth April - {n}", f"Bluth, invoice of April 3. {n}")] for x, n in zip("abc", ("1st", "2nd", "3rd"))},
+        **{f"ch_bluth_2026_004{x}": [(f"Bluth April - {n} attempt failed", f"Bluth, {n} attempt failed on the invoice of April 3")] for x, n in zip("abc", ("1st", "2nd", "3rd"))},
     },
 }
 
