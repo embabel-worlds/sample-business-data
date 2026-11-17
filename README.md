@@ -22,7 +22,9 @@ after (HubSpot, Stripe, GitHub Issues), or stand-ins for them (Odoo, Lago, Chatw
 | `convert.py` | Regenerates `csv/` from `source/` and checks the three datasets agree with each other |
 | `book/` | The same data with every product name taken out: `crm/`, `support/`, `billing/`, joined by `account_key`. **This is what loaders read.** |
 | `to_book.py` | Regenerates `book/` from `csv/` |
-| `apply_arcs.py` | Lays the demo's story arcs over `book/`; `to_book.py` runs it last |
+| `apply_arcs.py` | Lays the demo's story arcs over `book/`; `to_book.py` runs it after translating |
+| `additions/` | CRM history the workbooks lack: more contacts, logged emails and calls, follow-ups. Drafted once, committed |
+| `apply_engagements.py` | Checks `additions/` against the book, adds it, and plants the CRM signals below |
 | `gen_scale_book.py` | Generates a SYNTHETIC book of any size, in the same format. For measuring behaviour at scale — see below. |
 
 Load from `book/`. Read `csv/` when you want the data as its author shaped it, and the
@@ -85,7 +87,9 @@ that translation once, into a vocabulary with no product in it:
 | `billing/subscriptions.csv`, `invoices.csv`, `payments.csv`, `refunds.csv`, `disputes.csv` | | a payment is one ATTEMPT, succeeded or failed |
 | `crm/notes.csv` | note someone wrote by hand | on the company, or on a deal when `opportunity_id` is set; dated and authored |
 | `crm/meetings.csv` | call on the calendar | `booked_on` is the day it was booked, `starts_at` when it happens (UTC) |
-| `crm/followups.csv` | follow-up an owner scheduled on an account | `due_on` is when it is due; a follow-up is what makes an at-risk account *acknowledged* |
+| `crm/followups.csv` | follow-up an owner scheduled on an account | `due_on` is when it is due; `status` open or done, with `completed_on`; an open follow-up is what makes an at-risk account *acknowledged* |
+| `crm/emails.csv` | email sales logged with a contact | `direction` outbound or inbound, `sent_at` UTC; on a deal when `opportunity_id` is set |
+| `crm/calls.csv` | call sales logged with a contact | `outcome` connected, voicemail or no_answer; `minutes`; the owner's notes in `body` |
 | `arcs.csv` | story arc | what each arc should surface as, and what it must not |
 | `book.json` | | the as-of date and the row counts |
 
@@ -153,6 +157,16 @@ would lose it.
 | Noisy but healthy | Brightline Analytics | nothing, despite nine cases — all resolved within two days |
 | Shared incident | Northwind, Contoso, Initech | one export defect across three unrelated accounts |
 | Controls | Cyberlife, Dharma, Ferrari Tech, Wernham Hogg | nothing |
+| Writes sandbox | Writes Sandbox Inc | the only account a harness may write to |
+| Gone quiet | 6 contacts per salesperson | newest email, call or meeting 30+ days old |
+| Stalled deals | 6 open deals, Globex 302 among them | no email or call on the deal for 45+ days |
+| Slipping but active | open deals past their close date | engaged within 45 days, so NOT stalled |
+| Open follow-ups | each of the four owners | 5 open, 2 of them past due |
+
+The last four are counted by `apply_engagements.py` from `additions/`. An *engagement* is an
+email, a call or a meeting, which is what a CRM counts as contact; a note is not. No count sits
+within four days of its cut-off, so shifting the dates or a time zone cannot change it. A
+harness that asks days after seeding must count from its own today.
 
 **Group contagion is not seeded.** The book has no parent/subsidiary links, so there is no
 group for trouble to spread through; inventing one belongs in the book's schema.
@@ -163,8 +177,16 @@ salesperson booked each Monday for every account overdue that day (`crm/meetings
 failed cards are added before an invoice's successful payment, so every one still ends paid.
 
 Every arc's invariant is asserted before anything is written, and `arcs.csv` records what
-each should and must not surface as, for a harness to check against. New companies use
-`.example` domains, so no real business can be joined to them.
+each should and must not surface as, for a harness to check against.
+
+## Domains
+
+Every company in `book/` sits on `<name>.example.com`, its emails and websites with it:
+`stark.com` becomes `stark.example.com`. `to_book.py` rewrites the whole book last. Several
+workbook domains belong to real businesses, and a fictional customer joined to live enrichment
+or news by domain would attract a real company's headlines; `example.com` is reserved, so
+nothing here can reach anyone. It is not the reserved `.example` top level because CRMs
+validate contact emails, and HubSpot rejects it. `csv/` keeps the domains as authored.
 
 ## Known quirks
 
@@ -173,10 +195,8 @@ Left as authored, recorded here so nobody rediscovers them:
 - The workbook README tabs state 47 charges and 40 issues; the tabs hold 48 and 39.
 - Charge `ch_globex_pilot_001` belongs to Acme, despite its name.
 - Soylent Green Foods' domain is spelled `solyent.com`, consistently, in both contact and company.
-- **Several domains belong to real businesses** (`stark.com`, `hyperion.com`, `oceanic.com`
-  and others). Do not join this data to live company enrichment or news by domain: a
-  fictional customer would attract a real company's headlines. Do not send email to any
-  address here.
+- `csv/` keeps the workbooks' domains, several of which belong to real businesses
+  (`stark.com`, `hyperion.com`, `oceanic.com`). Load `book/`, which does not.
 - Company names are borrowed from film and television. Weigh that before making this public.
 
 ## Updating

@@ -1,108 +1,108 @@
 source_id,invoice_id,customer_id,account_key,amount,currency,status,attempted_on,method,failure_code,refunded,disputed,description
-ch_acme_2024_001,in_acme_2024_001,cus_AcmeCorp00001,acmecorp.com,125000,USD,succeeded,2024-04-15,card,,no,no,Acme Year 1 renewal
-ch_acme_2025_001,in_acme_2025_001,cus_AcmeCorp00001,acmecorp.com,125000,USD,succeeded,2025-04-10,card,,no,no,Acme Year 2 renewal
-ch_acme_2026_001,in_acme_2026_001,cus_AcmeCorp00001,acmecorp.com,125000,USD,succeeded,2026-04-12,card,,no,no,Acme Year 3 renewal
-ch_stark_2023_001,in_stark_2024_001,cus_StarkInd00002,stark.com,180000,USD,succeeded,2023-09-05,card,,no,no,Stark Year 1
-ch_stark_2024_001,in_stark_2025_001,cus_StarkInd00002,stark.com,180000,USD,succeeded,2024-09-02,card,,no,no,Stark Year 2
-ch_stark_2025_001,in_stark_2026_001,cus_StarkInd00002,stark.com,180000,USD,succeeded,2025-09-04,card,,no,no,Stark Year 3
-ch_stark_train_001,in_stark_training_2026,cus_StarkInd00002,stark.com,35000,USD,succeeded,2026-03-12,card,,no,no,Stark training services one-time
-ch_oscorp_2024_001,in_oscorp_2024_001,cus_OscorpInd00003,oscorp.com,85000,USD,succeeded,2024-07-05,ach_credit_transfer,,no,no,Oscorp Year 1 ACH
-ch_oscorp_2025_001,in_oscorp_2025_001,cus_OscorpInd00003,oscorp.com,85000,USD,succeeded,2025-07-07,ach_credit_transfer,,no,no,Oscorp Year 2 ACH
-ch_oscorp_addon_001,in_oscorp_2026_002,cus_OscorpInd00003,oscorp.com,78000,USD,succeeded,2026-04-30,ach_credit_transfer,,no,no,Oscorp Research Lab add-on
-ch_tyrell_2024_001,in_tyrell_2024_001,cus_Tyrell0000004,tyrellcorp.com,272000,USD,succeeded,2024-12-10,card,,no,no,Tyrell Year 1
-ch_tyrell_2025_001,in_tyrell_2025_001,cus_Tyrell0000004,tyrellcorp.com,272000,USD,succeeded,2025-12-08,card,,no,no,Tyrell Year 2
-ch_tyrell_support_001,in_tyrell_2026_002,cus_Tyrell0000004,tyrellcorp.com,48000,USD,succeeded,2026-04-05,card,,no,no,Tyrell premium support add-on
-ch_cyberlife_2024_001,in_cyberlife_2024_001,cus_Cyberlife000005,cyberlife.com,96000,USD,succeeded,2024-02-28,card,,no,no,Cyberlife Year 1
-ch_cyberlife_2025_001,in_cyberlife_2025_001,cus_Cyberlife000005,cyberlife.com,96000,USD,succeeded,2025-02-25,card,,no,no,Cyberlife Year 2
-ch_cyberlife_2026_001,in_cyberlife_2026_001,cus_Cyberlife000005,cyberlife.com,96000,USD,succeeded,2026-02-20,card,,no,no,Cyberlife Year 3
-ch_dharma_2023_001,in_dharma_2023_001,cus_Dharma00000006,dharmainit.com,28000,USD,succeeded,2023-12-22,card,,no,no,Dharma Year 1
-ch_dharma_2024_001,in_dharma_2024_001,cus_Dharma00000006,dharmainit.com,28000,USD,succeeded,2024-12-18,card,,no,no,Dharma Year 2
-ch_dharma_2025_001,in_dharma_2025_001,cus_Dharma00000006,dharmainit.com,28000,USD,succeeded,2025-12-15,card,,no,no,Dharma Year 3
-ch_bluesky_2024_001,in_bluesky_2024_001,cus_BlueSky00000007,blueskystudios.com,60000,USD,succeeded,2024-10-08,card,,no,no,Blue Sky Year 1
-ch_bluesky_2025_001,in_bluesky_2025_001,cus_BlueSky00000007,blueskystudios.com,60000,USD,succeeded,2025-10-04,card,,no,no,Blue Sky Year 2
-ch_bluesky_prod_001,in_bluesky_2026_002,cus_BlueSky00000007,blueskystudios.com,42000,USD,succeeded,2026-03-30,card,,no,no,Blue Sky production add-on
-ch_ferrari_2024_001,in_ferrari_2024_001,cus_FerrariT00008,ferrari-tech.it,58000,EUR,succeeded,2024-08-12,sepa_debit,,no,no,Ferrari Year 1 SEPA
-ch_ferrari_2025_001,in_ferrari_2025_001,cus_FerrariT00008,ferrari-tech.it,58000,EUR,succeeded,2025-05-07,sepa_debit,,no,no,Ferrari Year 2 SEPA
-ch_ferrari_2026_001,in_ferrari_2026_001,cus_FerrariT00008,ferrari-tech.it,58000,EUR,succeeded,2026-05-05,sepa_debit,,no,no,Ferrari Year 3 SEPA
-ch_chumbucket_2025_001,in_chumbucket_2025_001,cus_ChumBucket0009,chumbucket.com,12000,USD,succeeded,2025-05-22,card,,no,no,Chum Bucket Year 1
-ch_wernham_2024_001,in_wernham_2024_001,cus_Wernham0000010,wernham-hogg.co.uk,14000,GBP,succeeded,2024-10-30,bacs_debit,,no,no,Wernham Year 1 BACS
-ch_wernham_2025_001,in_wernham_2025_001,cus_Wernham0000010,wernham-hogg.co.uk,14000,GBP,succeeded,2025-10-28,bacs_debit,,no,no,Wernham Year 2 BACS
-ch_wernham_2026_001,in_wernham_2026_001,cus_Wernham0000010,wernham-hogg.co.uk,14000,GBP,succeeded,2026-04-22,bacs_debit,,no,no,Wernham Year 3 BACS
-ch_lospollos_2024_001,in_lospollos_2024_001,cus_LosPollos00011,los-pollos.com,84000,USD,succeeded,2024-06-05,card,,no,no,Los Pollos Year 1
-ch_lospollos_2025_001,in_lospollos_2025_001,cus_LosPollos00011,los-pollos.com,84000,USD,succeeded,2025-06-04,card,,no,no,Los Pollos Year 2
-ch_lospollos_2026_001,in_lospollos_2026_001,cus_LosPollos00011,los-pollos.com,145000,USD,succeeded,2026-05-02,card,,no,no,Los Pollos Year 3 expansion
-ch_spacely_2026_001,in_spacely_2026_001,cus_Spacely00000012,spacelytech.com,88000,USD,succeeded,2026-03-12,card,,no,no,Spacely Year 1
-ch_spacely_addon_001,in_spacely_2026_002,cus_Spacely00000012,spacelytech.com,24000,USD,succeeded,2026-04-14,card,,no,no,Spacely reporting add-on
-ch_wayne_2026_001,in_wayne_2026_001,cus_WayneEnt000013,wayne-ent.com,95000,USD,succeeded,2026-02-10,customer_balance,,no,no,Wayne Phase 1 pilot - wire transfer
-ch_vandelay_2024_001,in_vandelay_2024_001,cus_Vandelay000014,vandelay.com,28000,USD,succeeded,2024-08-25,card,,no,no,Vandelay Year 1
-ch_vandelay_2025_001,in_vandelay_2025_001,cus_Vandelay000014,vandelay.com,28000,USD,succeeded,2025-08-22,card,,yes,no,Vandelay Year 2 - partially refunded after cancellation
-ch_hudsucker_2023_001,in_hudsucker_2023_001,cus_Hudsucker00015,hudsucker.com,72000,USD,succeeded,2023-06-30,card,,no,no,Hudsucker Year 1
-ch_hudsucker_2024_001,in_hudsucker_2024_001,cus_Hudsucker00015,hudsucker.com,72000,USD,succeeded,2024-06-28,card,,no,no,Hudsucker Year 2
-ch_hudsucker_2025_001,in_hudsucker_2025_001,cus_Hudsucker00015,hudsucker.com,72000,USD,succeeded,2025-06-30,card,,yes,no,Hudsucker Year 3 - prorated refund issued after cancel
-ch_sirius_2025_001,in_sirius_2025_001,cus_Sirius0000016,sirius-cyber.com,42000,GBP,succeeded,2025-03-28,card,,no,no,Sirius Year 1
-ch_bluth_2026_001,in_bluth_2026_001,cus_Bluth00000017,bluth.com,1850,USD,succeeded,2026-01-10,card,,no,no,Bluth Jan 2026
-ch_bluth_2026_002,in_bluth_2026_002,cus_Bluth00000017,bluth.com,1850,USD,succeeded,2026-02-09,card,,no,no,Bluth Feb 2026
-ch_bluth_2026_003,in_bluth_2026_003,cus_Bluth00000017,bluth.com,1850,USD,succeeded,2026-03-11,card,,no,no,Bluth Mar 2026
-ch_bluth_2026_004a,in_bluth_2026_004,cus_Bluth00000017,bluth.com,1850,USD,failed,2026-04-03,card,card_declined,no,no,Bluth April - 1st attempt failed (declined)
-ch_bluth_2026_004b,in_bluth_2026_004,cus_Bluth00000017,bluth.com,1850,USD,failed,2026-04-10,card,insufficient_funds,no,no,Bluth April - 2nd attempt failed (insufficient funds)
-ch_bluth_2026_004c,in_bluth_2026_004,cus_Bluth00000017,bluth.com,1850,USD,failed,2026-04-17,card,card_declined,no,no,Bluth April - 3rd attempt failed. Dunning escalated.
-ch_globex_pilot_001,,cus_AcmeCorp00001,acmecorp.com,5000,USD,succeeded,2025-11-15,card,,no,yes,One-time pilot fee - DISPUTED (later resolved in our favor)
-ch_northwind_2025_001,in_northwind_2025_001,cus_Northwind0018,northwind-traders.example,48000,USD,succeeded,2025-03-12,card,,no,no,Northwind 2025
-ch_northwind_2026_001,in_northwind_2026_001,cus_Northwind0018,northwind-traders.example,48000,USD,succeeded,2026-03-11,card,,no,no,Northwind 2026
-ch_chumbucket_2026_001f,in_chumbucket_2026_001,cus_ChumBucket0009,chumbucket.com,12000,USD,failed,2026-06-04,card,card_declined,no,no,Chum Bucket renewal - attempt 1 failed
-ch_chumbucket_2026_002f,in_chumbucket_2026_001,cus_ChumBucket0009,chumbucket.com,12000,USD,failed,2026-06-11,card,insufficient_funds,no,no,Chum Bucket renewal - attempt 2 failed
-ch_chumbucket_2026_003f,in_chumbucket_2026_001,cus_ChumBucket0009,chumbucket.com,12000,USD,failed,2026-06-18,card,card_declined,no,no,Chum Bucket renewal - attempt 3 failed
-py_contoso_2025_001,in_contoso_2025_001,cus_Contoso000019,contoso.example,86000,USD,succeeded,2025-06-06,ach_credit_transfer,,no,no,Contoso Year 2 wire
-py_initech_2026_003,in_initech_2026_003,cus_Initech00020,initech.com,1550,USD,succeeded,2026-03-20,ach_credit_transfer,,no,no,Initech 2026-03
-py_initech_2026_004,in_initech_2026_004,cus_Initech00020,initech.com,1550,USD,succeeded,2026-04-21,ach_credit_transfer,,no,no,Initech 2026-04
-ch_acme_2026_emea_a,in_acme_2026_emea,cus_AcmeCorp00001,acmecorp.com,18000,USD,failed,2026-06-14,card,card_declined,no,no,EMEA onboarding - 1st attempt failed (declined)
-ch_acme_2026_emea_b,in_acme_2026_emea,cus_AcmeCorp00001,acmecorp.com,18000,USD,failed,2026-06-21,card,insufficient_funds,no,no,EMEA onboarding - 2nd attempt failed (insufficient funds)
-ch_wayfarer_2025_07,in_wayfarer_2025_07,cus_Wayfarer00021,wayfarer-travel.example,2400,USD,succeeded,2025-07-05,card,,no,no,Wayfarer July 2025
-ch_wayfarer_2025_08,in_wayfarer_2025_08,cus_Wayfarer00021,wayfarer-travel.example,2400,USD,succeeded,2025-08-05,card,,no,no,Wayfarer August 2025
-ch_wayfarer_2025_09,in_wayfarer_2025_09,cus_Wayfarer00021,wayfarer-travel.example,2400,USD,succeeded,2025-09-05,card,,no,no,Wayfarer September 2025
-ch_wayfarer_2025_10,in_wayfarer_2025_10,cus_Wayfarer00021,wayfarer-travel.example,2400,USD,succeeded,2025-10-05,card,,no,no,Wayfarer October 2025
-ch_wayfarer_2025_11,in_wayfarer_2025_11,cus_Wayfarer00021,wayfarer-travel.example,2400,USD,succeeded,2025-11-05,card,,no,no,Wayfarer November 2025
-ch_wayfarer_2025_12,in_wayfarer_2025_12,cus_Wayfarer00021,wayfarer-travel.example,2400,USD,succeeded,2025-12-05,card,,no,no,Wayfarer December 2025
-ch_wayfarer_2026_01,in_wayfarer_2026_01,cus_Wayfarer00021,wayfarer-travel.example,2400,USD,succeeded,2026-01-05,card,,no,no,Wayfarer January 2026
-ch_wayfarer_2026_02,in_wayfarer_2026_02,cus_Wayfarer00021,wayfarer-travel.example,2400,USD,succeeded,2026-02-05,card,,no,no,Wayfarer February 2026
-ch_wayfarer_2026_03_f,in_wayfarer_2026_03,cus_Wayfarer00021,wayfarer-travel.example,2400,USD,failed,2026-03-05,card,expired_card,no,no,Card on file expired; customer updated it the next day
-ch_wayfarer_2026_03,in_wayfarer_2026_03,cus_Wayfarer00021,wayfarer-travel.example,2400,USD,succeeded,2026-03-06,card,,no,no,Wayfarer March 2026
-ch_wayfarer_2026_04,in_wayfarer_2026_04,cus_Wayfarer00021,wayfarer-travel.example,2400,USD,succeeded,2026-04-05,card,,no,no,Wayfarer April 2026
-ch_wayfarer_2026_05,in_wayfarer_2026_05,cus_Wayfarer00021,wayfarer-travel.example,2400,USD,succeeded,2026-05-05,card,,no,no,Wayfarer May 2026
-ch_wayfarer_2026_06,in_wayfarer_2026_06,cus_Wayfarer00021,wayfarer-travel.example,2400,USD,succeeded,2026-06-05,card,,no,no,Wayfarer June 2026
-ch_brightline_2024_001,in_brightline_2024_001,cus_Brightline022,brightline-analytics.example,54000,USD,succeeded,2024-09-10,card,,no,no,Brightline 2024
-ch_brightline_2025_001,in_brightline_2025_001,cus_Brightline022,brightline-analytics.example,54000,USD,succeeded,2025-09-08,card,,no,no,Brightline 2025
-ch_bluesky_2024_001_f1,in_bluesky_2024_001,cus_BlueSky00000007,blueskystudios.com,60000,USD,failed,2024-10-02,card,card_declined,no,no,INV-100044 - attempt failed (card declined)
-ch_bluesky_2024_001_f2,in_bluesky_2024_001,cus_BlueSky00000007,blueskystudios.com,60000,USD,failed,2024-10-05,card,insufficient_funds,no,no,INV-100044 - attempt failed (insufficient funds)
-ch_bluesky_2025_001_f1,in_bluesky_2025_001,cus_BlueSky00000007,blueskystudios.com,60000,USD,failed,2025-09-28,card,insufficient_funds,no,no,INV-100378 - attempt failed (insufficient funds)
-ch_bluesky_2025_001_f2,in_bluesky_2025_001,cus_BlueSky00000007,blueskystudios.com,60000,USD,failed,2025-10-01,card,expired_card,no,no,INV-100378 - attempt failed (expired card)
-ch_lospollos_2024_001_f1,in_lospollos_2024_001,cus_LosPollos00011,los-pollos.com,84000,USD,failed,2024-05-30,card,expired_card,no,no,INV-100022 - attempt failed (expired card)
-ch_lospollos_2024_001_f2,in_lospollos_2024_001,cus_LosPollos00011,los-pollos.com,84000,USD,failed,2024-06-02,card,card_declined,no,no,INV-100022 - attempt failed (card declined)
-ch_lospollos_2025_001_f1,in_lospollos_2025_001,cus_LosPollos00011,los-pollos.com,84000,USD,failed,2025-05-29,card,card_declined,no,no,INV-100289 - attempt failed (card declined)
-ch_lospollos_2025_001_f2,in_lospollos_2025_001,cus_LosPollos00011,los-pollos.com,84000,USD,failed,2025-06-01,card,insufficient_funds,no,no,INV-100289 - attempt failed (insufficient funds)
-ch_lospollos_2026_001_f1,in_lospollos_2026_001,cus_LosPollos00011,los-pollos.com,145000,USD,failed,2026-04-26,card,insufficient_funds,no,no,INV-100665 - attempt failed (insufficient funds)
-ch_lospollos_2026_001_f2,in_lospollos_2026_001,cus_LosPollos00011,los-pollos.com,145000,USD,failed,2026-04-29,card,expired_card,no,no,INV-100665 - attempt failed (expired card)
-ch_oscorp_2024_001_f1,in_oscorp_2024_001,cus_OscorpInd00003,oscorp.com,85000,USD,failed,2024-06-29,ach_credit_transfer,insufficient_funds,no,no,INV-100028 - attempt failed (insufficient funds)
-ch_oscorp_2024_001_f2,in_oscorp_2024_001,cus_OscorpInd00003,oscorp.com,85000,USD,failed,2024-07-02,ach_credit_transfer,insufficient_funds,no,no,INV-100028 - attempt failed (insufficient funds)
-ch_oscorp_addon_001_f1,in_oscorp_2026_002,cus_OscorpInd00003,oscorp.com,78000,USD,failed,2026-04-24,ach_credit_transfer,insufficient_funds,no,no,INV-100655 - attempt failed (insufficient funds)
-ch_oscorp_addon_001_f2,in_oscorp_2026_002,cus_OscorpInd00003,oscorp.com,78000,USD,failed,2026-04-27,ach_credit_transfer,insufficient_funds,no,no,INV-100655 - attempt failed (insufficient funds)
-ch_spacely_2026_001_f1,in_spacely_2026_001,cus_Spacely00000012,spacelytech.com,88000,USD,failed,2026-03-06,card,insufficient_funds,no,no,INV-100542 - attempt failed (insufficient funds)
-ch_spacely_2026_001_f2,in_spacely_2026_001,cus_Spacely00000012,spacelytech.com,88000,USD,failed,2026-03-09,card,expired_card,no,no,INV-100542 - attempt failed (expired card)
-ch_spacely_addon_001_f1,in_spacely_2026_002,cus_Spacely00000012,spacelytech.com,24000,USD,failed,2026-04-08,card,expired_card,no,no,INV-100618 - attempt failed (expired card)
-ch_spacely_addon_001_f2,in_spacely_2026_002,cus_Spacely00000012,spacelytech.com,24000,USD,failed,2026-04-11,card,card_declined,no,no,INV-100618 - attempt failed (card declined)
-ch_stark_2023_001_f1,in_stark_2024_001,cus_StarkInd00002,stark.com,180000,USD,failed,2023-08-30,card,card_declined,no,no,INV-100012 - attempt failed (card declined)
-ch_stark_2023_001_f2,in_stark_2024_001,cus_StarkInd00002,stark.com,180000,USD,failed,2023-09-02,card,insufficient_funds,no,no,INV-100012 - attempt failed (insufficient funds)
-ch_stark_2024_001_f1,in_stark_2025_001,cus_StarkInd00002,stark.com,180000,USD,failed,2024-08-27,card,insufficient_funds,no,no,INV-100156 - attempt failed (insufficient funds)
-ch_stark_2024_001_f2,in_stark_2025_001,cus_StarkInd00002,stark.com,180000,USD,failed,2024-08-30,card,expired_card,no,no,INV-100156 - attempt failed (expired card)
-ch_stark_2025_001_f1,in_stark_2026_001,cus_StarkInd00002,stark.com,180000,USD,failed,2025-08-29,card,expired_card,no,no,INV-100455 - attempt failed (expired card)
-ch_stark_2025_001_f2,in_stark_2026_001,cus_StarkInd00002,stark.com,180000,USD,failed,2025-09-01,card,card_declined,no,no,INV-100455 - attempt failed (card declined)
-ch_stark_train_001_f1,in_stark_training_2026,cus_StarkInd00002,stark.com,35000,USD,failed,2026-03-06,card,card_declined,no,no,INV-100598 - attempt failed (card declined)
-ch_stark_train_001_f2,in_stark_training_2026,cus_StarkInd00002,stark.com,35000,USD,failed,2026-03-09,card,insufficient_funds,no,no,INV-100598 - attempt failed (insufficient funds)
-ch_tyrell_2024_001_f1,in_tyrell_2024_001,cus_Tyrell0000004,tyrellcorp.com,272000,USD,failed,2024-12-04,card,insufficient_funds,no,no,INV-100089 - attempt failed (insufficient funds)
-ch_tyrell_2024_001_f2,in_tyrell_2024_001,cus_Tyrell0000004,tyrellcorp.com,272000,USD,failed,2024-12-07,card,expired_card,no,no,INV-100089 - attempt failed (expired card)
-ch_tyrell_2025_001_f1,in_tyrell_2025_001,cus_Tyrell0000004,tyrellcorp.com,272000,USD,failed,2025-12-02,card,expired_card,no,no,INV-100412 - attempt failed (expired card)
-ch_tyrell_2025_001_f2,in_tyrell_2025_001,cus_Tyrell0000004,tyrellcorp.com,272000,USD,failed,2025-12-05,card,card_declined,no,no,INV-100412 - attempt failed (card declined)
-ch_tyrell_support_001_f1,in_tyrell_2026_002,cus_Tyrell0000004,tyrellcorp.com,48000,USD,failed,2026-03-30,card,card_declined,no,no,INV-100620 - attempt failed (card declined)
-ch_tyrell_support_001_f2,in_tyrell_2026_002,cus_Tyrell0000004,tyrellcorp.com,48000,USD,failed,2026-04-02,card,insufficient_funds,no,no,INV-100620 - attempt failed (insufficient funds)
-ch_vandelay_2024_001_f1,in_vandelay_2024_001,cus_Vandelay000014,vandelay.com,28000,USD,failed,2024-08-19,card,insufficient_funds,no,no,INV-100061 - attempt failed (insufficient funds)
-ch_vandelay_2024_001_f2,in_vandelay_2024_001,cus_Vandelay000014,vandelay.com,28000,USD,failed,2024-08-22,card,expired_card,no,no,INV-100061 - attempt failed (expired card)
+ch_acme_2024_001,in_acme_2024_001,cus_AcmeCorp00001,acmecorp.example.com,125000,USD,succeeded,2024-04-15,card,,no,no,Acme Year 1 renewal
+ch_acme_2025_001,in_acme_2025_001,cus_AcmeCorp00001,acmecorp.example.com,125000,USD,succeeded,2025-04-10,card,,no,no,Acme Year 2 renewal
+ch_acme_2026_001,in_acme_2026_001,cus_AcmeCorp00001,acmecorp.example.com,125000,USD,succeeded,2026-04-12,card,,no,no,Acme Year 3 renewal
+ch_stark_2023_001,in_stark_2024_001,cus_StarkInd00002,stark.example.com,180000,USD,succeeded,2023-09-05,card,,no,no,Stark Year 1
+ch_stark_2024_001,in_stark_2025_001,cus_StarkInd00002,stark.example.com,180000,USD,succeeded,2024-09-02,card,,no,no,Stark Year 2
+ch_stark_2025_001,in_stark_2026_001,cus_StarkInd00002,stark.example.com,180000,USD,succeeded,2025-09-04,card,,no,no,Stark Year 3
+ch_stark_train_001,in_stark_training_2026,cus_StarkInd00002,stark.example.com,35000,USD,succeeded,2026-03-12,card,,no,no,Stark training services one-time
+ch_oscorp_2024_001,in_oscorp_2024_001,cus_OscorpInd00003,oscorp.example.com,85000,USD,succeeded,2024-07-05,ach_credit_transfer,,no,no,Oscorp Year 1 ACH
+ch_oscorp_2025_001,in_oscorp_2025_001,cus_OscorpInd00003,oscorp.example.com,85000,USD,succeeded,2025-07-07,ach_credit_transfer,,no,no,Oscorp Year 2 ACH
+ch_oscorp_addon_001,in_oscorp_2026_002,cus_OscorpInd00003,oscorp.example.com,78000,USD,succeeded,2026-04-30,ach_credit_transfer,,no,no,Oscorp Research Lab add-on
+ch_tyrell_2024_001,in_tyrell_2024_001,cus_Tyrell0000004,tyrellcorp.example.com,272000,USD,succeeded,2024-12-10,card,,no,no,Tyrell Year 1
+ch_tyrell_2025_001,in_tyrell_2025_001,cus_Tyrell0000004,tyrellcorp.example.com,272000,USD,succeeded,2025-12-08,card,,no,no,Tyrell Year 2
+ch_tyrell_support_001,in_tyrell_2026_002,cus_Tyrell0000004,tyrellcorp.example.com,48000,USD,succeeded,2026-04-05,card,,no,no,Tyrell premium support add-on
+ch_cyberlife_2024_001,in_cyberlife_2024_001,cus_Cyberlife000005,cyberlife.example.com,96000,USD,succeeded,2024-02-28,card,,no,no,Cyberlife Year 1
+ch_cyberlife_2025_001,in_cyberlife_2025_001,cus_Cyberlife000005,cyberlife.example.com,96000,USD,succeeded,2025-02-25,card,,no,no,Cyberlife Year 2
+ch_cyberlife_2026_001,in_cyberlife_2026_001,cus_Cyberlife000005,cyberlife.example.com,96000,USD,succeeded,2026-02-20,card,,no,no,Cyberlife Year 3
+ch_dharma_2023_001,in_dharma_2023_001,cus_Dharma00000006,dharmainit.example.com,28000,USD,succeeded,2023-12-22,card,,no,no,Dharma Year 1
+ch_dharma_2024_001,in_dharma_2024_001,cus_Dharma00000006,dharmainit.example.com,28000,USD,succeeded,2024-12-18,card,,no,no,Dharma Year 2
+ch_dharma_2025_001,in_dharma_2025_001,cus_Dharma00000006,dharmainit.example.com,28000,USD,succeeded,2025-12-15,card,,no,no,Dharma Year 3
+ch_bluesky_2024_001,in_bluesky_2024_001,cus_BlueSky00000007,blueskystudios.example.com,60000,USD,succeeded,2024-10-08,card,,no,no,Blue Sky Year 1
+ch_bluesky_2025_001,in_bluesky_2025_001,cus_BlueSky00000007,blueskystudios.example.com,60000,USD,succeeded,2025-10-04,card,,no,no,Blue Sky Year 2
+ch_bluesky_prod_001,in_bluesky_2026_002,cus_BlueSky00000007,blueskystudios.example.com,42000,USD,succeeded,2026-03-30,card,,no,no,Blue Sky production add-on
+ch_ferrari_2024_001,in_ferrari_2024_001,cus_FerrariT00008,ferrari-tech.example.com,58000,EUR,succeeded,2024-08-12,sepa_debit,,no,no,Ferrari Year 1 SEPA
+ch_ferrari_2025_001,in_ferrari_2025_001,cus_FerrariT00008,ferrari-tech.example.com,58000,EUR,succeeded,2025-05-07,sepa_debit,,no,no,Ferrari Year 2 SEPA
+ch_ferrari_2026_001,in_ferrari_2026_001,cus_FerrariT00008,ferrari-tech.example.com,58000,EUR,succeeded,2026-05-05,sepa_debit,,no,no,Ferrari Year 3 SEPA
+ch_chumbucket_2025_001,in_chumbucket_2025_001,cus_ChumBucket0009,chumbucket.example.com,12000,USD,succeeded,2025-05-22,card,,no,no,Chum Bucket Year 1
+ch_wernham_2024_001,in_wernham_2024_001,cus_Wernham0000010,wernham-hogg.example.com,14000,GBP,succeeded,2024-10-30,bacs_debit,,no,no,Wernham Year 1 BACS
+ch_wernham_2025_001,in_wernham_2025_001,cus_Wernham0000010,wernham-hogg.example.com,14000,GBP,succeeded,2025-10-28,bacs_debit,,no,no,Wernham Year 2 BACS
+ch_wernham_2026_001,in_wernham_2026_001,cus_Wernham0000010,wernham-hogg.example.com,14000,GBP,succeeded,2026-04-22,bacs_debit,,no,no,Wernham Year 3 BACS
+ch_lospollos_2024_001,in_lospollos_2024_001,cus_LosPollos00011,los-pollos.example.com,84000,USD,succeeded,2024-06-05,card,,no,no,Los Pollos Year 1
+ch_lospollos_2025_001,in_lospollos_2025_001,cus_LosPollos00011,los-pollos.example.com,84000,USD,succeeded,2025-06-04,card,,no,no,Los Pollos Year 2
+ch_lospollos_2026_001,in_lospollos_2026_001,cus_LosPollos00011,los-pollos.example.com,145000,USD,succeeded,2026-05-02,card,,no,no,Los Pollos Year 3 expansion
+ch_spacely_2026_001,in_spacely_2026_001,cus_Spacely00000012,spacelytech.example.com,88000,USD,succeeded,2026-03-12,card,,no,no,Spacely Year 1
+ch_spacely_addon_001,in_spacely_2026_002,cus_Spacely00000012,spacelytech.example.com,24000,USD,succeeded,2026-04-14,card,,no,no,Spacely reporting add-on
+ch_wayne_2026_001,in_wayne_2026_001,cus_WayneEnt000013,wayne-ent.example.com,95000,USD,succeeded,2026-02-10,customer_balance,,no,no,Wayne Phase 1 pilot - wire transfer
+ch_vandelay_2024_001,in_vandelay_2024_001,cus_Vandelay000014,vandelay.example.com,28000,USD,succeeded,2024-08-25,card,,no,no,Vandelay Year 1
+ch_vandelay_2025_001,in_vandelay_2025_001,cus_Vandelay000014,vandelay.example.com,28000,USD,succeeded,2025-08-22,card,,yes,no,Vandelay Year 2 - partially refunded after cancellation
+ch_hudsucker_2023_001,in_hudsucker_2023_001,cus_Hudsucker00015,hudsucker.example.com,72000,USD,succeeded,2023-06-30,card,,no,no,Hudsucker Year 1
+ch_hudsucker_2024_001,in_hudsucker_2024_001,cus_Hudsucker00015,hudsucker.example.com,72000,USD,succeeded,2024-06-28,card,,no,no,Hudsucker Year 2
+ch_hudsucker_2025_001,in_hudsucker_2025_001,cus_Hudsucker00015,hudsucker.example.com,72000,USD,succeeded,2025-06-30,card,,yes,no,Hudsucker Year 3 - prorated refund issued after cancel
+ch_sirius_2025_001,in_sirius_2025_001,cus_Sirius0000016,sirius-cyber.example.com,42000,GBP,succeeded,2025-03-28,card,,no,no,Sirius Year 1
+ch_bluth_2026_001,in_bluth_2026_001,cus_Bluth00000017,bluth.example.com,1850,USD,succeeded,2026-01-10,card,,no,no,Bluth Jan 2026
+ch_bluth_2026_002,in_bluth_2026_002,cus_Bluth00000017,bluth.example.com,1850,USD,succeeded,2026-02-09,card,,no,no,Bluth Feb 2026
+ch_bluth_2026_003,in_bluth_2026_003,cus_Bluth00000017,bluth.example.com,1850,USD,succeeded,2026-03-11,card,,no,no,Bluth Mar 2026
+ch_bluth_2026_004a,in_bluth_2026_004,cus_Bluth00000017,bluth.example.com,1850,USD,failed,2026-04-03,card,card_declined,no,no,Bluth April - 1st attempt failed (declined)
+ch_bluth_2026_004b,in_bluth_2026_004,cus_Bluth00000017,bluth.example.com,1850,USD,failed,2026-04-10,card,insufficient_funds,no,no,Bluth April - 2nd attempt failed (insufficient funds)
+ch_bluth_2026_004c,in_bluth_2026_004,cus_Bluth00000017,bluth.example.com,1850,USD,failed,2026-04-17,card,card_declined,no,no,Bluth April - 3rd attempt failed. Dunning escalated.
+ch_globex_pilot_001,,cus_AcmeCorp00001,acmecorp.example.com,5000,USD,succeeded,2025-11-15,card,,no,yes,One-time pilot fee - DISPUTED (later resolved in our favor)
+ch_northwind_2025_001,in_northwind_2025_001,cus_Northwind0018,northwind-traders.example.com,48000,USD,succeeded,2025-03-12,card,,no,no,Northwind 2025
+ch_northwind_2026_001,in_northwind_2026_001,cus_Northwind0018,northwind-traders.example.com,48000,USD,succeeded,2026-03-11,card,,no,no,Northwind 2026
+ch_chumbucket_2026_001f,in_chumbucket_2026_001,cus_ChumBucket0009,chumbucket.example.com,12000,USD,failed,2026-06-04,card,card_declined,no,no,Chum Bucket renewal - attempt 1 failed
+ch_chumbucket_2026_002f,in_chumbucket_2026_001,cus_ChumBucket0009,chumbucket.example.com,12000,USD,failed,2026-06-11,card,insufficient_funds,no,no,Chum Bucket renewal - attempt 2 failed
+ch_chumbucket_2026_003f,in_chumbucket_2026_001,cus_ChumBucket0009,chumbucket.example.com,12000,USD,failed,2026-06-18,card,card_declined,no,no,Chum Bucket renewal - attempt 3 failed
+py_contoso_2025_001,in_contoso_2025_001,cus_Contoso000019,contoso.example.com,86000,USD,succeeded,2025-06-06,ach_credit_transfer,,no,no,Contoso Year 2 wire
+py_initech_2026_003,in_initech_2026_003,cus_Initech00020,initech.example.com,1550,USD,succeeded,2026-03-20,ach_credit_transfer,,no,no,Initech 2026-03
+py_initech_2026_004,in_initech_2026_004,cus_Initech00020,initech.example.com,1550,USD,succeeded,2026-04-21,ach_credit_transfer,,no,no,Initech 2026-04
+ch_acme_2026_emea_a,in_acme_2026_emea,cus_AcmeCorp00001,acmecorp.example.com,18000,USD,failed,2026-06-14,card,card_declined,no,no,EMEA onboarding - 1st attempt failed (declined)
+ch_acme_2026_emea_b,in_acme_2026_emea,cus_AcmeCorp00001,acmecorp.example.com,18000,USD,failed,2026-06-21,card,insufficient_funds,no,no,EMEA onboarding - 2nd attempt failed (insufficient funds)
+ch_wayfarer_2025_07,in_wayfarer_2025_07,cus_Wayfarer00021,wayfarer-travel.example.com,2400,USD,succeeded,2025-07-05,card,,no,no,Wayfarer July 2025
+ch_wayfarer_2025_08,in_wayfarer_2025_08,cus_Wayfarer00021,wayfarer-travel.example.com,2400,USD,succeeded,2025-08-05,card,,no,no,Wayfarer August 2025
+ch_wayfarer_2025_09,in_wayfarer_2025_09,cus_Wayfarer00021,wayfarer-travel.example.com,2400,USD,succeeded,2025-09-05,card,,no,no,Wayfarer September 2025
+ch_wayfarer_2025_10,in_wayfarer_2025_10,cus_Wayfarer00021,wayfarer-travel.example.com,2400,USD,succeeded,2025-10-05,card,,no,no,Wayfarer October 2025
+ch_wayfarer_2025_11,in_wayfarer_2025_11,cus_Wayfarer00021,wayfarer-travel.example.com,2400,USD,succeeded,2025-11-05,card,,no,no,Wayfarer November 2025
+ch_wayfarer_2025_12,in_wayfarer_2025_12,cus_Wayfarer00021,wayfarer-travel.example.com,2400,USD,succeeded,2025-12-05,card,,no,no,Wayfarer December 2025
+ch_wayfarer_2026_01,in_wayfarer_2026_01,cus_Wayfarer00021,wayfarer-travel.example.com,2400,USD,succeeded,2026-01-05,card,,no,no,Wayfarer January 2026
+ch_wayfarer_2026_02,in_wayfarer_2026_02,cus_Wayfarer00021,wayfarer-travel.example.com,2400,USD,succeeded,2026-02-05,card,,no,no,Wayfarer February 2026
+ch_wayfarer_2026_03_f,in_wayfarer_2026_03,cus_Wayfarer00021,wayfarer-travel.example.com,2400,USD,failed,2026-03-05,card,expired_card,no,no,Card on file expired; customer updated it the next day
+ch_wayfarer_2026_03,in_wayfarer_2026_03,cus_Wayfarer00021,wayfarer-travel.example.com,2400,USD,succeeded,2026-03-06,card,,no,no,Wayfarer March 2026
+ch_wayfarer_2026_04,in_wayfarer_2026_04,cus_Wayfarer00021,wayfarer-travel.example.com,2400,USD,succeeded,2026-04-05,card,,no,no,Wayfarer April 2026
+ch_wayfarer_2026_05,in_wayfarer_2026_05,cus_Wayfarer00021,wayfarer-travel.example.com,2400,USD,succeeded,2026-05-05,card,,no,no,Wayfarer May 2026
+ch_wayfarer_2026_06,in_wayfarer_2026_06,cus_Wayfarer00021,wayfarer-travel.example.com,2400,USD,succeeded,2026-06-05,card,,no,no,Wayfarer June 2026
+ch_brightline_2024_001,in_brightline_2024_001,cus_Brightline022,brightline-analytics.example.com,54000,USD,succeeded,2024-09-10,card,,no,no,Brightline 2024
+ch_brightline_2025_001,in_brightline_2025_001,cus_Brightline022,brightline-analytics.example.com,54000,USD,succeeded,2025-09-08,card,,no,no,Brightline 2025
+ch_bluesky_2024_001_f1,in_bluesky_2024_001,cus_BlueSky00000007,blueskystudios.example.com,60000,USD,failed,2024-10-02,card,card_declined,no,no,INV-100044 - attempt failed (card declined)
+ch_bluesky_2024_001_f2,in_bluesky_2024_001,cus_BlueSky00000007,blueskystudios.example.com,60000,USD,failed,2024-10-05,card,insufficient_funds,no,no,INV-100044 - attempt failed (insufficient funds)
+ch_bluesky_2025_001_f1,in_bluesky_2025_001,cus_BlueSky00000007,blueskystudios.example.com,60000,USD,failed,2025-09-28,card,insufficient_funds,no,no,INV-100378 - attempt failed (insufficient funds)
+ch_bluesky_2025_001_f2,in_bluesky_2025_001,cus_BlueSky00000007,blueskystudios.example.com,60000,USD,failed,2025-10-01,card,expired_card,no,no,INV-100378 - attempt failed (expired card)
+ch_lospollos_2024_001_f1,in_lospollos_2024_001,cus_LosPollos00011,los-pollos.example.com,84000,USD,failed,2024-05-30,card,expired_card,no,no,INV-100022 - attempt failed (expired card)
+ch_lospollos_2024_001_f2,in_lospollos_2024_001,cus_LosPollos00011,los-pollos.example.com,84000,USD,failed,2024-06-02,card,card_declined,no,no,INV-100022 - attempt failed (card declined)
+ch_lospollos_2025_001_f1,in_lospollos_2025_001,cus_LosPollos00011,los-pollos.example.com,84000,USD,failed,2025-05-29,card,card_declined,no,no,INV-100289 - attempt failed (card declined)
+ch_lospollos_2025_001_f2,in_lospollos_2025_001,cus_LosPollos00011,los-pollos.example.com,84000,USD,failed,2025-06-01,card,insufficient_funds,no,no,INV-100289 - attempt failed (insufficient funds)
+ch_lospollos_2026_001_f1,in_lospollos_2026_001,cus_LosPollos00011,los-pollos.example.com,145000,USD,failed,2026-04-26,card,insufficient_funds,no,no,INV-100665 - attempt failed (insufficient funds)
+ch_lospollos_2026_001_f2,in_lospollos_2026_001,cus_LosPollos00011,los-pollos.example.com,145000,USD,failed,2026-04-29,card,expired_card,no,no,INV-100665 - attempt failed (expired card)
+ch_oscorp_2024_001_f1,in_oscorp_2024_001,cus_OscorpInd00003,oscorp.example.com,85000,USD,failed,2024-06-29,ach_credit_transfer,insufficient_funds,no,no,INV-100028 - attempt failed (insufficient funds)
+ch_oscorp_2024_001_f2,in_oscorp_2024_001,cus_OscorpInd00003,oscorp.example.com,85000,USD,failed,2024-07-02,ach_credit_transfer,insufficient_funds,no,no,INV-100028 - attempt failed (insufficient funds)
+ch_oscorp_addon_001_f1,in_oscorp_2026_002,cus_OscorpInd00003,oscorp.example.com,78000,USD,failed,2026-04-24,ach_credit_transfer,insufficient_funds,no,no,INV-100655 - attempt failed (insufficient funds)
+ch_oscorp_addon_001_f2,in_oscorp_2026_002,cus_OscorpInd00003,oscorp.example.com,78000,USD,failed,2026-04-27,ach_credit_transfer,insufficient_funds,no,no,INV-100655 - attempt failed (insufficient funds)
+ch_spacely_2026_001_f1,in_spacely_2026_001,cus_Spacely00000012,spacelytech.example.com,88000,USD,failed,2026-03-06,card,insufficient_funds,no,no,INV-100542 - attempt failed (insufficient funds)
+ch_spacely_2026_001_f2,in_spacely_2026_001,cus_Spacely00000012,spacelytech.example.com,88000,USD,failed,2026-03-09,card,expired_card,no,no,INV-100542 - attempt failed (expired card)
+ch_spacely_addon_001_f1,in_spacely_2026_002,cus_Spacely00000012,spacelytech.example.com,24000,USD,failed,2026-04-08,card,expired_card,no,no,INV-100618 - attempt failed (expired card)
+ch_spacely_addon_001_f2,in_spacely_2026_002,cus_Spacely00000012,spacelytech.example.com,24000,USD,failed,2026-04-11,card,card_declined,no,no,INV-100618 - attempt failed (card declined)
+ch_stark_2023_001_f1,in_stark_2024_001,cus_StarkInd00002,stark.example.com,180000,USD,failed,2023-08-30,card,card_declined,no,no,INV-100012 - attempt failed (card declined)
+ch_stark_2023_001_f2,in_stark_2024_001,cus_StarkInd00002,stark.example.com,180000,USD,failed,2023-09-02,card,insufficient_funds,no,no,INV-100012 - attempt failed (insufficient funds)
+ch_stark_2024_001_f1,in_stark_2025_001,cus_StarkInd00002,stark.example.com,180000,USD,failed,2024-08-27,card,insufficient_funds,no,no,INV-100156 - attempt failed (insufficient funds)
+ch_stark_2024_001_f2,in_stark_2025_001,cus_StarkInd00002,stark.example.com,180000,USD,failed,2024-08-30,card,expired_card,no,no,INV-100156 - attempt failed (expired card)
+ch_stark_2025_001_f1,in_stark_2026_001,cus_StarkInd00002,stark.example.com,180000,USD,failed,2025-08-29,card,expired_card,no,no,INV-100455 - attempt failed (expired card)
+ch_stark_2025_001_f2,in_stark_2026_001,cus_StarkInd00002,stark.example.com,180000,USD,failed,2025-09-01,card,card_declined,no,no,INV-100455 - attempt failed (card declined)
+ch_stark_train_001_f1,in_stark_training_2026,cus_StarkInd00002,stark.example.com,35000,USD,failed,2026-03-06,card,card_declined,no,no,INV-100598 - attempt failed (card declined)
+ch_stark_train_001_f2,in_stark_training_2026,cus_StarkInd00002,stark.example.com,35000,USD,failed,2026-03-09,card,insufficient_funds,no,no,INV-100598 - attempt failed (insufficient funds)
+ch_tyrell_2024_001_f1,in_tyrell_2024_001,cus_Tyrell0000004,tyrellcorp.example.com,272000,USD,failed,2024-12-04,card,insufficient_funds,no,no,INV-100089 - attempt failed (insufficient funds)
+ch_tyrell_2024_001_f2,in_tyrell_2024_001,cus_Tyrell0000004,tyrellcorp.example.com,272000,USD,failed,2024-12-07,card,expired_card,no,no,INV-100089 - attempt failed (expired card)
+ch_tyrell_2025_001_f1,in_tyrell_2025_001,cus_Tyrell0000004,tyrellcorp.example.com,272000,USD,failed,2025-12-02,card,expired_card,no,no,INV-100412 - attempt failed (expired card)
+ch_tyrell_2025_001_f2,in_tyrell_2025_001,cus_Tyrell0000004,tyrellcorp.example.com,272000,USD,failed,2025-12-05,card,card_declined,no,no,INV-100412 - attempt failed (card declined)
+ch_tyrell_support_001_f1,in_tyrell_2026_002,cus_Tyrell0000004,tyrellcorp.example.com,48000,USD,failed,2026-03-30,card,card_declined,no,no,INV-100620 - attempt failed (card declined)
+ch_tyrell_support_001_f2,in_tyrell_2026_002,cus_Tyrell0000004,tyrellcorp.example.com,48000,USD,failed,2026-04-02,card,insufficient_funds,no,no,INV-100620 - attempt failed (insufficient funds)
+ch_vandelay_2024_001_f1,in_vandelay_2024_001,cus_Vandelay000014,vandelay.example.com,28000,USD,failed,2024-08-19,card,insufficient_funds,no,no,INV-100061 - attempt failed (insufficient funds)
+ch_vandelay_2024_001_f2,in_vandelay_2024_001,cus_Vandelay000014,vandelay.example.com,28000,USD,failed,2024-08-22,card,expired_card,no,no,INV-100061 - attempt failed (expired card)

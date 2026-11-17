@@ -382,6 +382,19 @@ def noisy_but_healthy(b):
     b.arc("noisy but healthy", key, "nothing", "AtRiskAccount; HealthCaseTriage (no open case)")
 
 
+def writes_sandbox(b):
+    """The one account a harness may write to: add notes and tasks, move its deal. It carries no
+    story, so a write there cannot change any other arc's answer."""
+    key = "writes-sandbox.example"
+    email = b.company(key, "Writes Sandbox Inc", "Mike Davis", "Professional Services", "Austin", "TX",
+                      "United States", "+1-512-555-0150", "2026-05-04",
+                      "Test account for automated writes. Not a real customer.", "Sam Tester", "Operations Manager")
+    deal = b.deal(key, email, "Writes Sandbox - Pilot", "Qualified to Buy", "open", 10000, 0.4, "2026-09-30",
+                  "Mike Davis", "2026-05-04", "2026-05-04", "Sandbox deal for write tests.", kind="New Business")
+    b.arc("writes sandbox", key, f"the only account a harness writes to (deal {deal['source_id']})",
+          "any write to another account")
+
+
 def manual_dunning(b, exclude):
     """An AR clerk writes a note the day after every failed card, which is the habit a Chaser is
     later asked to take over. The failures are added BEFORE an invoice's successful payment, so
@@ -467,7 +480,7 @@ def assert_shared_incident(b):
 def apply(root):
     b = Book(root)
     for arc in (silent_escalation, quiet_churner, withholding, acknowledged_trouble, failed_payments,
-                good_payer_on_the_fifth, stale_deal, noisy_but_healthy):
+                good_payer_on_the_fifth, stale_deal, noisy_but_healthy, writes_sandbox):
         arc(b)
     story = {a["account_key"] for a in b.arcs}
     manual_dunning(b, story | set(CONTROLS) | {"bluth.com"})

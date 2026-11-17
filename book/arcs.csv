@@ -1,17 +1,27 @@
 arc,account_key,surfaces_as,must_not
-silent escalation,northwind-traders.example,"AtRiskAccount (urgent case, pipeline into trouble); HealthCrmAwareness unaware",
-quiet churner,chumbucket.com,AtRiskAccount (riskFailedPayments 1),any support case; any CRM note about payment
-withholding,contoso.example,POSSIBLY_WITHHELD_OVER INV-100754 -> case 1330,
-acknowledged trouble,initech.com,"AtRiskAccount; HealthCrmAwareness aware (cases 1331, 1332); a follow-up scheduled",HealthCrmAwareness unaware; StewardUnacknowledgedRisk
-failed payments,acmecorp.com,AtRiskAccount (riskFailedPayments; INV-100759),
-good payer on the 5th,wayfarer-travel.example,nothing,AtRiskAccount; any open invoice
-stale deal,globex.io,"open deal 302 past its close date 2026-06-15, untouched since 2026-04-29",
-noisy but healthy,brightline-analytics.example,nothing,AtRiskAccount; HealthCaseTriage (no open case)
+silent escalation,northwind-traders.example.com,"AtRiskAccount (urgent case, pipeline into trouble); HealthCrmAwareness unaware",
+quiet churner,chumbucket.example.com,AtRiskAccount (riskFailedPayments 1),any support case; any CRM note about payment
+withholding,contoso.example.com,POSSIBLY_WITHHELD_OVER INV-100754 -> case 1330,
+acknowledged trouble,initech.example.com,"AtRiskAccount; HealthCrmAwareness aware (cases 1331, 1332); a follow-up scheduled",HealthCrmAwareness unaware; StewardUnacknowledgedRisk
+failed payments,acmecorp.example.com,AtRiskAccount (riskFailedPayments; INV-100759),
+good payer on the 5th,wayfarer-travel.example.com,nothing,AtRiskAccount; any open invoice
+stale deal,globex.example.com,"open deal 302 past its close date 2026-06-15, untouched since 2026-04-29",
+noisy but healthy,brightline-analytics.example.com,nothing,AtRiskAccount; HealthCaseTriage (no open case)
+writes sandbox,writes-sandbox.example.com,the only account a harness writes to (deal 355),any write to another account
 manual dunning,*,"35 notes by Dana Whitfield, each the day after a failed payment",
 monday calls,*,12 calls booked by Mike Davis across 12 Mondays,
-shared incident,"contoso.example,initech.com,northwind-traders.example",SHARES_ISSUE pairwise on area:export,
-control,cyberlife.com,nothing,AtRiskAccount; any open case; any failed payment
-control,dharmainit.com,nothing,AtRiskAccount; any open case; any failed payment
-control,ferrari-tech.it,nothing,AtRiskAccount; any open case; any failed payment
-control,wernham-hogg.co.uk,nothing,AtRiskAccount; any open case; any failed payment
+shared incident,"contoso.example.com,initech.example.com,northwind-traders.example.com",SHARES_ISSUE pairwise on area:export,
+control,cyberlife.example.com,nothing,AtRiskAccount; any open case; any failed payment
+control,dharmainit.example.com,nothing,AtRiskAccount; any open case; any failed payment
+control,ferrari-tech.example.com,nothing,AtRiskAccount; any open case; any failed payment
+control,wernham-hogg.example.com,nothing,AtRiskAccount; any open case; any failed payment
 group contagion,,NOT SEEDED: the book has no parent/subsidiary links,
+gone quiet,*,"Mike Davis: grace.t@nakatomi.example.com, h.bailey@blue-sun.example.com, i.sorensen@blue-sun.example.com, l.oconnor@dunder.example.com, noah.s@blackmesa.example.com, r.singh@vandelay.example.com - newest email, call or meeting 30+ days before, as of 2026-06-27",any contact never emailed; any contact engaged in the window
+gone quiet,*,"Jenna Lopez: d.chen@globex.example.com, j.reed@plumbus.example.com, n.rivera@xyzcorp.example.com, n.walker@buy-n-large.example.com, priya.patel@stark.example.com, tom.harlow@wayfarer-travel.example.com - newest email, call or meeting 30+ days before, as of 2026-06-27",any contact never emailed; any contact engaged in the window
+gone quiet,*,"Sophie Turner: c.bucket@wonkachoco.example.com, h.watson@bakerstreet.example.com, joan.h@sterling-cooper.example.com, l.hassan@wonkachoco.example.com, mason.c@sterling-cooper.example.com, priya.raman@brightline-analytics.example.com - newest email, call or meeting 30+ days before, as of 2026-06-27",any contact never emailed; any contact engaged in the window
+stalled deals,*,"open deals 302, 305, 311, 326, 335, 339: no email or call on the deal for 45+ days, as of 2026-06-27",any other open deal
+slipping but active,*,"open deals 308, 322, 328, 346: past their close date, engaged within 45 days",STALLED
+open follow-ups,*,"Mike Davis: 5 open, past due followup-0001, followup-0002, as of 2026-06-27",
+open follow-ups,*,"Jenna Lopez: 5 open, past due followup-0008, followup-0009, as of 2026-06-27",
+open follow-ups,*,"Sophie Turner: 5 open, past due followup-0014, followup-0015, as of 2026-06-27",
+open follow-ups,*,"Dana Whitfield: 5 open, past due followup-0021, followup-0022, as of 2026-06-27",

@@ -1,2 +1,26 @@
-source_id,account_key,owner,scheduled_on,due_on,summary,note
-followup-0001,initech.com,Mike Davis,2026-06-09,2026-06-16,Get a fix date for Initech's export timeout,Emily is waiting on a date before May and June are paid; chase engineering for it.
+source_id,account_key,owner,scheduled_on,due_on,summary,note,status,completed_on
+followup-0001,initech.example.com,Mike Davis,2026-06-09,2026-06-16,Get a fix date for Initech's export timeout,Emily is waiting on a date before May and June are paid; chase engineering for it.,open,
+followup-0002,dunder.example.com,Mike Davis,2026-05-07,2026-06-12,Get Liam's signature on the regional licence,"He asked for time after quarter-end; try his mobile first, then Siobhán.",open,
+followup-0003,spacelytech.example.com,Mike Davis,2026-06-17,2026-07-03,Countersign the Spacely order form once Lena returns it,,open,
+followup-0004,xanatos.example.com,Mike Davis,2026-06-12,2026-07-06,Send Owen the 30-day deal-desk pilot plan,"One deal team, about 60 users; Elena runs it day to day.",open,
+followup-0005,blue-sun.example.com,Mike Davis,2026-05-04,2026-07-08,Re-approach Ingrid once audit season is over,Hudson says her team is free from July.,open,
+followup-0006,hephaestus.example.com,Mike Davis,2026-06-03,2026-06-10,Send Rosa the phased proposal with on-site training,,done,2026-06-09
+followup-0007,blackmesa.example.com,Mike Davis,2026-04-20,2026-04-27,Share the lab-inventory template with Noah,,done,2026-04-24
+followup-0008,piedpiper.example.com,Jenna Lopez,2026-06-09,2026-06-19,"Send Jared a ten-seat, six-month startup option",Same per-seat rate; true up in the autumn.,open,
+followup-0009,plumbus.example.com,Jenna Lopez,2026-04-13,2026-06-05,Decide whether to disqualify Plumbus,No reply after three attempts; try LinkedIn once before closing.,open,
+followup-0010,buy-n-large.example.com,Jenna Lopez,2026-04-06,2026-07-06,Reconnect with Nathan for Q3 planning,,open,
+followup-0011,yoyodyne.example.com,Jenna Lopez,2026-06-04,2026-07-07,Get ITAR hosting details to Raymond and Tyler,Gating requirement for the evaluation.,open,
+followup-0012,los-pollos.example.com,Jenna Lopez,2026-06-15,2026-07-10,Ask Jasmine to be a reference for Krusty Burger,Both multi-site franchise groups; Dale would value a peer call.,open,
+followup-0013,blueskystudios.example.com,Jenna Lopez,2026-05-04,2026-05-15,Invite Chloe to the media and entertainment roundtable,,done,2026-05-14
+followup-0014,umbrella.example.com,Sophie Turner,2026-06-08,2026-06-15,Return Umbrella's supplier quality questionnaire,Helen recommends approval once it's in.,open,
+followup-0015,sterling-cooper.example.com,Sophie Turner,2026-05-05,2026-06-19,Chase Joan for legal's redlines,"Route through Joan only, not Mason.",open,
+followup-0016,weyland.example.com,Sophie Turner,2026-06-08,2026-07-08,Prepare materials for Weyland's internal review board,Carl runs it; plan for August.,open,
+followup-0017,gringotts.example.com,Sophie Turner,2026-06-11,2026-07-03,Book the risk team session with Fernanda,Regulator access clause and Brazilian hosting.,open,
+followup-0018,hyperion.example.com,Sophie Turner,2026-06-25,2026-07-09,Send Kyle the rollout proposal,Flight operations and maintenance.,open,
+followup-0019,bakerstreet.example.com,Sophie Turner,2026-03-17,2026-03-24,Introduce Henry to Fogg & Partners,,done,2026-03-18
+followup-0020,massivedyn.example.com,Sophie Turner,2026-06-05,2026-06-12,Get Giulia our framework agreement comments,,done,2026-06-11
+followup-0021,sterling-cooper.example.com,Dana Whitfield,2026-04-21,2026-06-05,Complete Sterling Cooper's supplier onboarding form,Their portal needs our insurance certificate and W-9.,open,
+followup-0022,umbrella.example.com,Dana Whitfield,2026-06-10,2026-06-22,Register us in Umbrella's supplier portal,Procurement can't raise a PO until we're registered.,open,
+followup-0023,spacelytech.example.com,Dana Whitfield,2026-06-17,2026-07-03,Get a PO number from Lena for the order form,,open,
+followup-0024,oceanic.example.com,Dana Whitfield,2026-06-11,2026-07-10,Send W-9 and vendor setup form to Oceanic procurement,Their review cycle starts in July.,open,
+followup-0025,los-pollos.example.com,Dana Whitfield,2026-06-16,2026-07-15,Update the billing contact for the twelve new franchise locations,Jasmine is sending the new regional contacts.,open,

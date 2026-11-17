@@ -25,9 +25,11 @@ identifier every product can hold and no product invented.
 
 import csv
 import json
+import re
 from pathlib import Path
 
 import apply_arcs
+import apply_engagements
 
 ROOT = Path(__file__).parent
 
@@ -56,6 +58,32 @@ def write(path, rows):
         writer.writeheader()
         writer.writerows(rows)
     return len(rows)
+
+
+def rewrite_domains(book):
+    """Move every company onto `<name>.example.com`, last, across every file of the book.
+
+    Several workbook domains belong to real businesses, and a fictional customer joined to live
+    enrichment or news by domain would attract a real company's headlines. `example.com` is
+    reserved, so nothing here can reach anyone. It is `.example.com` and not `.example` because
+    a CRM validates contact emails, and HubSpot rejects the reserved `.example` top level."""
+    files = sorted(book.rglob("*.csv"))
+    tables = {p: list(csv.reader(open(p, newline=""))) for p in files}
+    domains = set()
+    for rows in tables.values():
+        keys = [i for i, h in enumerate(rows[0]) if h == "account_key"]
+        for row in rows[1:]:
+            domains |= {k for i in keys for k in row[i].split(",")} - {"", "*"}
+            domains |= {m.lower() for cell in row for m in re.findall(r"@([\w.-]+\w)", cell)}
+    to = {d: d.split(".")[0] + ".example.com" for d in domains}
+    assert len(set(to.values())) == len(to), "two domains would merge into one account"
+    pattern = re.compile(r"(?<![\w-])(" + "|".join(map(re.escape, sorted(to, key=len, reverse=True))) + r")(?![\w-])", re.I)
+    for path, rows in tables.items():
+        with open(path, "w", newline="") as f:
+            csv.writer(f, lineterminator="\n").writerows(
+                [[pattern.sub(lambda m: to[m.group(1).lower()], cell) for cell in row] for row in rows])
+    left = {m for p in files for m in re.findall(r"@([\w.-]+\w)", p.read_text())} - set(to.values())
+    assert not left, f"addresses outside example.com: {left}"
 
 
 def main():
@@ -181,6 +209,8 @@ def main():
     } for d in read("stripe/disputes.csv")])
 
     counts.update(apply_arcs.apply(ROOT / "book"))
+    counts.update(apply_engagements.apply(ROOT / "book", AS_OF))
+    rewrite_domains(ROOT / "book")
     (ROOT / "book" / "book.json").write_text(json.dumps({"as_of": AS_OF, "rows": counts}, indent=2) + "\n")
     for name, n in counts.items():
         print(f"{name}  {n}")
