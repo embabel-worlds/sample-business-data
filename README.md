@@ -35,10 +35,12 @@ change a demo's answers silently.
 
 The 55 accounts in `book/` (the workbooks' 50 plus five the arcs add) are hand-authored so
 that joining the three systems finds a real story. They are not enough to show how anything
-behaves at size, so `gen_scale_book.py` writes a synthetic book in the same format: domains
-on `<slug>.example.com`, a `book.json` with its as-of date (2026-09-21), and the CRM history
-files (`emails`, `calls`, `notes`, `meetings`, `followups`) with `book/`'s headers and no rows,
-so every loader reads it as it reads `book/`:
+behaves at size, so `gen_scale_book.py` writes a synthetic book in the same format: every
+file with `book/`'s exact header, domains on `<slug>.example.com`, a `book.json` with its as-of
+date (2026-09-21), the pipelines and stages of `book/crm/opportunities.csv`, `book/`'s invoice
+words (`paid`, `open`), one plan code per price, currency and interval, and the CRM history
+files (`emails`, `calls`, `notes`, `meetings`, `followups`) with no rows, so every loader
+reads it as it reads `book/`:
 
 ```sh
 python3 gen_scale_book.py --out ~/embabel/books/book-scale --count 2000
@@ -64,13 +66,14 @@ asserts them:
 | awareness | ~30% of troubled accounts get a note that genuinely names the case's product area, so the judgement returns BOTH verdicts |
 | triage | cases spread across blocked / degraded / asking, with reply counts that track impact — so a long thread is not automatically trouble |
 | areas | a small fixed area vocabulary, so accounts genuinely SHARE issues and "is this one customer or an incident?" has pairs to find |
-| billing | ~2/3 billed, a slice unpaid, a smaller slice FAILED, all due in the past so overdue means overdue |
+| billing | ~2/3 billed, a slice unpaid, a smaller slice with a FAILED card attempt in `payments.csv`, all due in the past so overdue means overdue |
 
 It asserts its own invariants and refuses to write a book that breaks them: `account_key`
 is the spine key every realm joins on, so colliding domains do not fail, they silently
 MERGE accounts — the first draft produced 1,018 distinct domains for 2,000 companies.
 Dates are checked against a fixed today, after a draft dated accounts and invoices into
-2027 and nothing read as overdue.
+2027 and nothing read as overdue: everything that happened is on or before it; only open
+deals' close dates, due dates and period ends look forward.
 
 Load the two together — the hand-authored book for the story, the scale book for size.
 
@@ -119,6 +122,9 @@ each in its realm under `seed/load_book.py`.
   The workbooks' CRM records were written in early May 2026; the logged emails and calls run
   from March to 2026-06-25, and open follow-ups fall due between early June and mid-July. A
   demo that wants the story to stay current should turn dates into an age relative to that day.
+- **Dates inside texts** are ISO or a month and day ("June 16", "16 June", read in 2026), never
+  "the 11th" or "4/22", so a loader that moves the dates can move them too. `to_book.py` spells
+  the workbooks' "4/22" as "April 22". Each is a real day, and a weekday beside one is its weekday.
 - **Issue state is only `open` or `closed`.** In-progress is implied by assignees and a
   recent `Updated At`. Priority and type live inside the comma-separated `Labels`.
 - **An issue has one `Body` and a `Comments` count**, not a thread. A product that needs
@@ -166,7 +172,7 @@ would lose it.
 | Not emailed | the same 6, plus one control per salesperson | no email in the 30 days before as-of |
 | Stalled deals | 302, 305, 311, 326, 335, 339 | open, with no email or call on the deal in the 45 days before as-of |
 | Slipping deals | 308, 322, 328, 346 | open, close date before as-of |
-| Open follow-ups | each of the four owners | 5 open, 2 of them past due, none on an arc account |
+| Open follow-ups | each of the four owners | 5 open, 2 of them past due, none past due on a story-arc account |
 
 The last five are counted by `apply_engagements.py` from `additions/`, which asserts each one
 exactly:

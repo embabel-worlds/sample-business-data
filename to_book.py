@@ -23,6 +23,7 @@ identifier every product can hold and no product invented.
     python3 to_book.py            # write book/
 """
 
+import calendar
 import csv
 import json
 import re
@@ -45,9 +46,14 @@ PRIORITY = {"p0": "urgent", "p1": "high", "p2": "medium", "p3": "low", "p4": "lo
 KINDS = {"bug", "feature-request", "enhancement", "question", "documentation", "security"}
 
 
+# The workbooks write "sent 4/22"; a loader that moves dates reads "April 22" and not 4/22.
+MONTH_DAY = re.compile(r"(?<![\d/])(1[0-2]|[1-9])/(3[01]|[12]\d|[1-9])(?![\d/])")
+
+
 def read(path):
     with open(ROOT / "csv" / path, newline="") as f:
-        return list(csv.DictReader(f))
+        return [{k: MONTH_DAY.sub(lambda m: f"{calendar.month_name[int(m[1])]} {m[2]}", v) for k, v in r.items()}
+                for r in csv.DictReader(f)]
 
 
 def write(path, rows):

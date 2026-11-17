@@ -436,7 +436,7 @@ def manual_dunning(b, exclude):
     # Wayfarer's one expired card was handled the same way.
     b.note("wayfarer-travel.example", AR_CLERK, "2026-03-06",
            "Card for Wayfarer's March invoice expired. Tom updated it within the hour and the retry went "
-           "through today. Nothing to chase - they always pay on the 5th.")
+           "through today. Nothing to chase - they always pay four days after the due date.")
     b.arc("manual dunning", "*", f"{sum(1 for x in b.notes if x['author'] == AR_CLERK)} notes by {AR_CLERK}, "
           "each the day after a failed payment")
 

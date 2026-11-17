@@ -39,6 +39,7 @@ asks days after seeding must count from its own today, not from the as-of date.
 Every check runs before anything is written.
 """
 
+import calendar
 import re
 from collections import Counter, defaultdict
 from datetime import date, timedelta
@@ -75,6 +76,13 @@ TROUBLE = r"\b(issue|problem|bug|outage|overdue|late|fail\w*|escalat\w*|complain
 FORBIDDEN = {"chumbucket.com": r"pay|invoice|card|billing", "northwind-traders.example": r"export",
              **{k: TROUBLE for k in CONTROLS}}
 ANY, EMAIL = {"email", "call", "meeting"}, {"email"}
+# A loader moves the dates inside texts as it moves the date fields: ISO, "June 16", "16 June".
+MONTH = "|".join(sorted({n for m in calendar.month_name[1:] for n in (m, m[:3])} | {"Sept"}, key=len, reverse=True))
+TEXT_DATE = re.compile(rf"(?:\b(?P<wd>{'|'.join(calendar.day_name)}),? )?(?:\b(?P<iso>\d{{4}}-\d\d-\d\d)\b"
+                       rf"|\b(?P<m>{MONTH})\.? (?P<d>\d{{1,2}})(?:st|nd|rd|th)?\b"
+                       rf"|\b(?P<d2>\d{{1,2}})(?:st|nd|rd|th)? (?P<m2>{MONTH})\b)")
+# What it cannot move: a day without its month, or a numeric month/day.
+DAY_ONLY = re.compile(r"\bthe \d{1,2}(?:st|nd|rd|th)\b|(?<![\d/])\d{1,2}/\d{1,2}(?![\d/])")
 
 
 def day(text):
@@ -83,6 +91,29 @@ def day(text):
 
 def check_far(when, cut, what):
     assert abs((when - cut).days) > MARGIN, f"{what} on {when} is within {MARGIN} days of the cut-off {cut}"
+
+
+def check_text_dates(tables, year):
+    """Every date a text names is a real day, a weekday beside it is that day's, and none is a form a loader
+    cannot move. A month-day without a year is read in `year`."""
+    n = 0
+    for name, rows in tables.items():
+        for r in rows:
+            for k, v in r.items():
+                where = f"{name} {r.get('source_id') or r.get('email')} {k}"
+                bad = isinstance(v, str) and DAY_ONLY.search(v)
+                assert not bad, f"{where}: '{bad and bad[0]}' names a day a loader cannot move"
+                for m in TEXT_DATE.finditer(v if isinstance(v, str) else ""):
+                    month, d = (m["m"], m["d"]) if m["m"] else (m["m2"], m["d2"])
+                    try:
+                        when = date.fromisoformat(m["iso"]) if m["iso"] else \
+                            date(year, next(i for i, f in enumerate(calendar.month_name) if i and f.startswith(month[:3])), int(d))
+                    except ValueError:
+                        raise AssertionError(f"{where}: '{m[0]}' is not a real date")
+                    assert not m["wd"] or m["wd"] == calendar.day_name[when.weekday()], \
+                        f"{where}: '{m[0]}' but {when} is a {calendar.day_name[when.weekday()]}"
+                    n += 1
+    return n
 
 
 def apply(root, as_of):
@@ -250,6 +281,13 @@ def apply(root, as_of):
     for o in OWNERS:
         arcs.append({"arc": "open follow-ups", "account_key": "*", "surfaces_as":
                      f"{o}: 5 open, past due {', '.join(late[o])}, {when}", "must_not": ""})
+
+    tables = {p.relative_to(root).as_posix(): read(root, p.relative_to(root).as_posix())
+              for p in sorted(root.rglob("*.csv")) if p.name != "arcs.csv"}
+    tables.update({"crm/contacts.csv": contacts, "crm/opportunities.csv": opportunities, "crm/emails.csv": emails,
+                   "crm/calls.csv": calls, "crm/followups.csv": followups})
+    n = check_text_dates(tables, as_of.year)
+    print(f"assert ok: {n} dates in the book are real days, each weekday beside one is right, none day-only")
 
     return {"crm/contacts": write(root, "crm/contacts.csv", contacts),
             "crm/opportunities": write(root, "crm/opportunities.csv", opportunities),

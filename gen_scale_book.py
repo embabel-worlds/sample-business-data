@@ -79,7 +79,7 @@ CASE_SHAPES = {
  ],
  "billing": [
   ("Invoice shows the wrong currency","Our March invoice came through in USD but our contract is in GBP. Finance cannot process it until it is reissued.","blocked","neutral","problem"),
-  ("Card charged twice for the same period","We were billed twice on the 3rd. Please refund the duplicate — it has already cleared.","degraded","frustrated","problem"),
+  ("Card charged twice for the same period","We were billed twice for this month. Please refund the duplicate — it has already cleared.","degraded","frustrated","problem"),
   ("Purchase order number on invoices","Can you add our PO number to the invoice header? Our AP system rejects invoices without it.","asking","neutral","question"),
  ],
  "api": [
@@ -88,7 +88,7 @@ CASE_SHAPES = {
   ("Is there a sandbox for the v3 API?","We would like to test the v3 migration without touching production data.","asking","positive","question"),
  ],
  "reporting": [
-  ("Scheduled report has not arrived since the 3rd","The Monday exec report stopped arriving. Nothing changed our side. The board meeting is Thursday.","blocked","frustrated","problem"),
+  ("Scheduled report has not arrived for two weeks","The Monday exec report stopped arriving. Nothing changed our side. The board meeting is Thursday.","blocked","frustrated","problem"),
   ("CSV export truncates at 10,000 rows","Exports silently stop at 10k rows — no warning, so we published a partial number last month before noticing.","degraded","frustrated","bug"),
   ("Custom report builder","Is a custom report builder on the roadmap? We are rebuilding several by hand each month.","asking","neutral","question"),
  ],
@@ -132,12 +132,19 @@ AWARE_NOTES = [
  "Known issue with {area_h} on this account; we agreed a weekly check-in until it is resolved.",
 ]
 DEAL_KINDS = [("New Business","Platform Licence"),("Upsell","Additional Seats"),("Renewal","Annual Renewal"),("New Business","Enterprise Tier"),("Upsell","Premium Support")]
-STAGES = [("Qualification",1,0.2),("Discovery",2,0.35),("Proposal",3,0.55),("Negotiation",4,0.75),("Closed Won",5,1.0),("Closed Lost",5,0.0)]
+
+def book_rows(name):
+    with open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "book", name), newline="") as fh:
+        return list(csv.DictReader(fh))
 
 def book_header(name):
     """The hand-authored book's header for `name`, so both books share one format."""
     with open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "book", name), newline="") as fh:
         return next(csv.reader(fh))
+
+# The hand-authored book's pipelines and stages, so a loader that maps them for one book maps both.
+STAGES = sorted({(o["pipeline"], o["stage"], o["stage_order"], o["status"]): o["probability"]
+                 for o in book_rows("crm/opportunities.csv")}.items())
 
 def slug(s):
     s = unicodedata.normalize("NFKD", s).encode("ascii","ignore").decode()
@@ -201,18 +208,19 @@ def main():
             job_title=TITLES[i % len(TITLES)], phone=phfmt % ((i + 1) % 10000), account_key=key,
             owner=owner, city=city, region=region, country=country,
             created_on=created.isoformat(),
-            last_activity_on=(created + timedelta(days=rng.randint(1, 300))).isoformat(),
+            last_activity_on=min(created + timedelta(days=rng.randint(1, 300)), TODAY).isoformat(),
             note=f"{TITLES[i % len(TITLES)]}; main point of contact." if i % 3 else
                  "Technical buyer. Ran the evaluation and stayed involved after go-live.",
             source_id=args.start_id + 100000 + i))
 
-        stage, order, prob = STAGES[i % len(STAGES)]
+        (pipeline, stage, order, status), prob = STAGES[i % len(STAGES)]
         kind, product = DEAL_KINDS[i % len(DEAL_KINDS)]
-        status = "won" if stage == "Closed Won" else ("lost" if stage == "Closed Lost" else "open")
+        close_on = created + timedelta(days=90)
         opps.append(dict(source_id=args.start_id + 200000 + i, title=f"{name} - {product}",
-            account_key=key, contact_email=email, pipeline="Sales Pipeline", stage=stage,
+            account_key=key, contact_email=email, pipeline=pipeline, stage=stage,
             stage_order=order, status=status, amount=5000 + (i * 1237) % 295000, currency="USD",
-            probability=prob, close_on=(created + timedelta(days=90)).isoformat(), owner=owner,
+            # A deal that is won or lost closed in the past; an open one may close later.
+            probability=prob, close_on=(close_on if status == "open" else min(close_on, TODAY)).isoformat(), owner=owner,
             priority=["low","medium","high"][i % 3], kind=kind,
             created_on=created.isoformat(), modified_on=(created + timedelta(days=30)).isoformat(),
             note=("Renewal conversation is tied to the open support issue; see the account note."
@@ -242,7 +250,7 @@ def main():
                 status="open", priority={"blocked":"urgent","degraded":"high","asking":"low"}[impact],
                 kind=ckind, labels=f"area:{area},impact:{impact}", filed_on_behalf="no",
                 filed_by=email, engineers="", milestone="", opened_on=opened.isoformat(),
-                updated_on=(opened + timedelta(days=2)).isoformat(), closed_on="",
+                updated_on=min(opened + timedelta(days=2), TODAY).isoformat(), closed_on="",
                 reply_count=replies, body=body))
 
         # ~2/3 billed; of those, a slice unpaid and a smaller slice failed, so receivables
@@ -251,16 +259,19 @@ def main():
             cid = args.start_id + 400000 + i
             amount = 100 * (1 + (i % 40))
             paystate = "failed" if i % 37 == 0 else ("pending" if i % 5 == 0 else "succeeded")
+            currency = "USD" if i % 6 else "GBP"
             bcust.append(dict(source_id=cid, account_key=key, name=name, email=email,
-                phone=phfmt % (i % 10000), currency="USD" if i % 6 else "GBP", country=country,
-                payment_method="card", delinquent=str(paystate != "succeeded").lower(),
+                phone=phfmt % (i % 10000), currency=currency, country=country,
+                payment_method="card", delinquent="no" if paystate == "succeeded" else "yes",
                 balance_owed=0 if paystate == "succeeded" else amount,
-                created_on=created.isoformat(), known_to_crm="true",
+                created_on=created.isoformat(), known_to_crm="yes",
                 note="Billed monthly on the standard plan." if i % 2 else "Annual contract, invoiced monthly."))
             sid = args.start_id + 500000 + i
             bsub.append(dict(source_id=sid, customer_id=cid, account_key=key, status="active",
-                product=product, plan_code="plan_std", amount=amount,
-                currency="USD" if i % 6 else "GBP", interval="monthly", seats=1 + (i % 60),
+                # One plan per price, currency and interval: a billing system attaches a subscription
+                # to its plan by code, so two prices under one code would bill one of them wrongly.
+                product=product, plan_code=f"price_std_monthly_{amount}_{currency.lower()}", amount=amount,
+                currency=currency, interval="month", seats=1 + (i % 60),
                 started_on=created.isoformat(),
                 period_start=(TODAY - timedelta(days=15)).isoformat(),
                 # Renewals spread over the next four months, so the at-risk rule's
@@ -268,8 +279,9 @@ def main():
                 period_end=(TODAY + timedelta(days=1 + (i % 150))).isoformat(), canceled_on="",
                 note="Renews automatically."))
             iid = args.start_id + 600000 + i
+            # The book's invoice words: paid, or open while unpaid, whether or not a card has failed.
             binv.append(dict(source_id=iid, number=f"INV-{iid}", customer_id=cid, account_key=key,
-                subscription_id=sid, status=paystate,
+                subscription_id=sid, status="paid" if paystate == "succeeded" else "open",
                 amount_due=amount, amount_paid=amount if paystate == "succeeded" else 0,
                 currency="USD" if i % 6 else "GBP",
                 issued_on=(TODAY - timedelta(days=35)).isoformat(),
@@ -278,11 +290,15 @@ def main():
                 due_on=(TODAY - timedelta(days=5)).isoformat(),
                 paid_on=(TODAY - timedelta(days=30)).isoformat() if paystate == "succeeded" else "",
                 description=f"{product} — monthly licence."))
-            if paystate == "succeeded":
+            # A payment is one ATTEMPT, as in the book: a paid invoice has one that succeeded,
+            # a failed one has one that was declined on its due date.
+            if paystate != "pending":
+                ok = paystate == "succeeded"
                 bpay.append(dict(source_id=args.start_id + 700000 + i, invoice_id=iid,
-                    customer_id=cid, account_key=key, amount=amount,
-                    currency="USD" if i % 6 else "GBP", status="succeeded",
-                    paid_on=(TODAY - timedelta(days=30)).isoformat(), method="card"))
+                    customer_id=cid, account_key=key, amount=amount, currency=currency,
+                    status=paystate, attempted_on=(TODAY - timedelta(days=30 if ok else 5)).isoformat(),
+                    method="card", failure_code="" if ok else "card_declined", refunded="no", disputed="no",
+                    description=f"{product} - monthly licence"))
 
     # ---- invariants. A generator that silently produces colliding keys is worse than none:
     # the spine MERGES the rows and every per-account figure is quietly wrong. ----
@@ -291,29 +307,49 @@ def main():
     assert len(set(c["email"] for c in contacts)) == N, "contact emails not unique"
     assert all("Account " not in a["name"] for a in accounts), "a generated placeholder name survived"
     assert any("area:" in c["labels"] for c in cases), "no product areas: HealthSharedIssues has nothing to pair"
+    # Every date of something that HAPPENED is on or before today. Close dates of open deals,
+    # due dates and period ends look forward, as in the book.
     t = TODAY.isoformat()
-    assert all(a["created_on"] <= t for a in accounts), "an account was created in the future"
-    assert all(c["opened_on"] <= t for c in cases), "a case was opened in the future"
-    assert all(x["issued_on"] <= t for x in binv), "an invoice was issued in the future"
+    happened = [("accounts", accounts, ["created_on"]), ("contacts", contacts, ["created_on", "last_activity_on"]),
+                ("deals", opps, ["created_on", "modified_on"]), ("cases", cases, ["opened_on", "updated_on"]),
+                ("customers", bcust, ["created_on"]), ("subscriptions", bsub, ["started_on", "period_start"]),
+                ("invoices", binv, ["issued_on", "paid_on"]), ("payments", bpay, ["attempted_on"])]
+    for what, rows_, cols in happened:
+        late = [(r["source_id"], c, r[c]) for r in rows_ for c in cols if r[c] > t]
+        assert not late, f"{what} dated after {t}: {late[:3]}"
+    assert all(o["close_on"] <= t for o in opps if o["status"] != "open"), "a deal closed in the future"
+    assert {(o["pipeline"], o["stage"]) for o in opps} <= {(o["pipeline"], o["stage"]) for o in book_rows("crm/opportunities.csv")}
+    assert {x["status"] for x in binv} <= {x["status"] for x in book_rows("billing/invoices.csv")}, "an invoice word the book lacks"
+    terms = {}
+    for s in bsub:
+        assert terms.setdefault(s["plan_code"], (s["amount"], s["currency"], s["interval"])) == \
+            (s["amount"], s["currency"], s["interval"]), f"plan {s['plan_code']} carries two prices"
+    failed = {x["source_id"] for x in binv if x["status"] != "paid" and x["source_id"] in {p["invoice_id"] for p in bpay}}
+    assert failed and all(p["status"] == "failed" for p in bpay if p["invoice_id"] in failed), "no failed attempts"
 
     out = os.path.expanduser(args.out)
-    def write(sub, fname, rows, header):
-        d = os.path.join(out, sub); os.makedirs(d, exist_ok=True)
-        with open(os.path.join(d, fname), "w", newline="") as fh:
-            w = csv.DictWriter(fh, fieldnames=header); w.writeheader(); w.writerows(rows)
-    write("crm","accounts.csv",accounts,list(accounts[0]))
-    write("crm","contacts.csv",contacts,list(contacts[0]))
-    write("crm","opportunities.csv",opps,list(opps[0]))
-    write("support","cases.csv",cases,book_header("support/cases.csv"))
-    write("billing","customers.csv",bcust,list(bcust[0]))
-    write("billing","invoices.csv",binv,list(binv[0]))
-    write("billing","subscriptions.csv",bsub,list(bsub[0]))
-    write("billing","payments.csv",bpay,list(bpay[0]))
-    write("billing","refunds.csv",[],["source_id","invoice_id","account_key","amount","currency","refunded_on","reason"])
-    write("billing","disputes.csv",[],["source_id","invoice_id","account_key","amount","currency","opened_on","status","reason"])
+    def write(name, rows):
+        # The book's header, exactly, so every loader reads both books alike.
+        header = book_header(name)
+        assert all(set(r) == set(header) for r in rows), f"{name}: columns differ from book/{name}"
+        os.makedirs(os.path.dirname(os.path.join(out, name)), exist_ok=True)
+        with open(os.path.join(out, name), "w", newline="") as fh:
+            w = csv.DictWriter(fh, fieldnames=header, lineterminator="\n"); w.writeheader(); w.writerows(rows)
+    write("crm/accounts.csv", accounts)
+    write("crm/contacts.csv", contacts)
+    write("crm/opportunities.csv", opps)
+    write("support/cases.csv", cases)
+    write("billing/customers.csv", bcust)
+    write("billing/invoices.csv", binv)
+    write("billing/subscriptions.csv", bsub)
+    write("billing/payments.csv", bpay)
     # The loaders read these files too; a scale book carries no history, so they are header-only.
-    for name in ("emails", "calls", "notes", "meetings", "followups"):
-        write("crm", f"{name}.csv", [], book_header(f"crm/{name}.csv"))
+    for name in ("billing/refunds", "billing/disputes", "crm/emails", "crm/calls", "crm/notes", "crm/meetings", "crm/followups"):
+        write(f"{name}.csv", [])
+    written = {os.path.relpath(os.path.join(d, f), out) for d, _, fs in os.walk(out) for f in fs if f.endswith(".csv")}
+    for name in written:
+        with open(os.path.join(out, name), newline="") as fh:
+            assert next(csv.reader(fh)) == book_header(name), f"{name}: header differs from the book's"
     rows = {"crm/accounts": len(accounts), "crm/contacts": len(contacts), "crm/opportunities": len(opps),
             "support/cases": len(cases), "billing/customers": len(bcust), "billing/subscriptions": len(bsub),
             "billing/invoices": len(binv), "billing/payments": len(bpay)}
@@ -325,8 +361,8 @@ def main():
     print(f"  accounts {len(accounts)}  contacts {len(contacts)}  opportunities {len(opps)}")
     print(f"  cases {len(cases)}  (open, across {len(set(c['labels'] for c in cases))} area/impact combinations)")
     print(f"  billing: customers {len(bcust)} invoices {len(binv)} subs {len(bsub)} payments {len(bpay)}")
-    print(f"  unpaid invoices {sum(1 for x in binv if x['status'] != 'succeeded')}"
-          f" (failed {sum(1 for x in binv if x['status'] == 'failed')})")
+    print(f"  unpaid invoices {sum(1 for x in binv if x['status'] != 'paid')}"
+          f" (a card failed on {len(failed)})")
     print(f"  accounts whose CRM note names the case area: {aware_n}")
 
 if __name__ == "__main__":
