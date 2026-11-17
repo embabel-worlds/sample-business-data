@@ -83,7 +83,7 @@ ANY, EMAIL = {"email", "call", "meeting"}, {"email"}
 MONTH = "|".join(sorted({n for m in calendar.month_name[1:] for n in (m, m[:3])} | {"Sept"}, key=len, reverse=True))
 TEXT_DATE = re.compile(rf"(?:\b(?P<wd>{'|'.join(calendar.day_name)}),? )?(?:\b(?P<iso>\d{{4}}-\d\d-\d\d)\b"
                        rf"|\b(?P<m>{MONTH})\.? (?P<d>\d{{1,2}})(?:st|nd|rd|th)?\b"
-                       rf"|\b(?P<d2>\d{{1,2}})(?:st|nd|rd|th)? (?P<m2>{MONTH})\b)")
+                       rf"|\b(?P<d2>\d{{1,2}})(?:st|nd|rd|th)? (?P<m2>{MONTH})\b(?:(?<=Jan|Feb|Mar|Apr|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\.|(?<=Sept)\.)?)")
 # Only free text carries dates a loader moves; a name, an email or an id is never read as one ("June" Kowal).
 TEXT_COLUMNS = {"note", "body", "subject", "title", "summary", "description"}
 # A loader reads a month-day without a year in the book's year. The HubSpot loader adds the year when a move
@@ -109,13 +109,13 @@ PERIOD = re.compile(
     r"|\b(?:end|start|beginning|middle|rest)[- ]of[- ](?:(?:the|this|next|last) )?(?:month|year|quarter)\b|\bhalf[- ]year\b"
     r"|\b(?:earlier|later) (?:this|that|in the) (?:month|year)\b"
     r"|\b(?:previous|following|current|prior|upcoming) (?:months?|years?|quarters?|halves|half(?!\s+(?:an\s+)?hours?))\b"
-    r"|\b(?:first|second|third|fourth|last|final|\d(?:st|nd|rd|th))[- ](?:quarter|half(?!\s+(?:an\s+)?hours?))(?: of (?:the |this |next |last )?(?:month|year|quarter))?\b|\bhalf of the (?:month|year)\b)")
+    r"|\b(?:first|second|third|fourth|last|final|\d(?:st|nd|rd|th))[- ](?:quarter|half(?!\s+(?:an\s+)?hours?))(?: of (?:the |this |that |next |last )?(?:month|year|quarter))?\b|\bhalf of the (?:month|year)\b)")
 # What it cannot move: a day without its month, or a numeric month/day.
-DAY_ONLY = re.compile(r"\b\d{1,2}(?:st|nd|rd|th)\b|(?<![\d/])\d{1,2}/\d{1,2}(?![\d/])")
+DAY_ONLY = re.compile(r"\b\d{1,2}(?i:st|nd|rd|th)\b|(?<![\d/])\d{1,2}/\d{1,2}(?![\d/])")
 # A day that borrows its month from a date beside it: "June 10 &11", "June 10, 11", "June 10 - 12", "10-12 June".
 # The loader moves the date, not the day.
-ORD = r"\d{1,2}(?:st|nd|rd|th)?"
-JOIN = r"(?:[^\w.]|_|\b(?:and|or|to|on|the|through|till|until)\b)*?"  # not across a full stop: "April 19. 2-3 weeks"
+ORD = r"\d{1,2}(?i:st|nd|rd|th)?"
+JOIN = r"(?:[^\w.]|_|\b(?i:and|or|to|on|the|through|till|until)\b)*?"  # not across a full stop: "April 19. 2-3 weeks"
 ELIDED = re.compile(rf"{JOIN}{ORD}\b(?!\s*(?:{MONTH})\b)")
 ELIDED_BEFORE = re.compile(rf"\b{ORD}\b{JOIN}$")
 # The only exceptions: exact phrases from the Book's own texts, each a deliberate decision. A new text that trips
@@ -141,7 +141,8 @@ PROBES = [
         "Deliver in july.", "Deliver JUNE 10.", "Mid-June works.", "Before Christmas.", "Before Mother's Day.",
         "Upsell in the next two quarters.", "Close this quarter.", "Over the summer.", "Signed in 2027.",
         "Rollout next year.", "Due the 11th.", "Due 11th.", "Due on 11th.", "Meet June 10: 12.",
-        "Would June 10 (or 11) work?", "Meet June 10 [or 11].", "Meet June 10 to the 12.", "June 10, on the 11.", "Review the end-of-year numbers.",
+        "Would June 10 (or 11) work?", "Meet June 10 [or 11].", "Meet 10 Jun. or 11.", "Meet 10 Jun., 11.", "Due 11TH.", "Meet June 10 OR 11.",
+        "I'd join the second half of that year.", "Rachel joined the second half of that year.", "Meet June 10 to the 12.", "June 10, on the 11.", "Review the end-of-year numbers.",
         "First-quarter results.", "Start-of-year planning.", "The second-half review.", "Half-year results.", "Meet June 10 (or on 11).", "Due 11th (noon).",
         "Due 11th — noon.", "Due on 11th by noon.", "11th was the deadline.", "1st quarter.", "The 2nd half.",
         "The previous half.", "I'd join the second half of the year.", "Rachel joined the second half of the year.", "First quarter.", "In the first half.", "First half of the year.",
