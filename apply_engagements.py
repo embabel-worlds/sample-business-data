@@ -78,7 +78,8 @@ FORBIDDEN = {"chumbucket.com": r"pay|invoice|card|billing", "northwind-traders.e
              **{k: TROUBLE for k in CONTROLS}}
 ANY, EMAIL = {"email", "call", "meeting"}, {"email"}
 # A loader moves the dates inside texts as it moves the date fields: ISO, "June 16" or "Jun. 16th", "16 June" or
-# "16th June", the month capitalised. It moves them by whole weeks, so a weekday beside a date stays true.
+# "16th June", the month capitalised (load_book.py's DATES). It moves them by whole weeks, so a weekday beside a
+# date stays true.
 MONTH = "|".join(sorted({n for m in calendar.month_name[1:] for n in (m, m[:3])} | {"Sept"}, key=len, reverse=True))
 TEXT_DATE = re.compile(rf"(?:\b(?P<wd>{'|'.join(calendar.day_name)}),? )?(?:\b(?P<iso>\d{{4}}-\d\d-\d\d)\b"
                        rf"|\b(?P<m>{MONTH})\.? (?P<d>\d{{1,2}})(?:st|nd|rd|th)?\b"
@@ -89,63 +90,57 @@ TEXT_COLUMNS = {"note", "body", "subject", "title", "summary", "description"}
 # must stay in that year. shortcut: holds for loads up to 20 weeks after as-of (as-of 2026-06-27 lands on
 # 2026-11-14); a later load needs more dates in ISO, or a loader that writes the year.
 SHIFT_HORIZON = timedelta(weeks=20)
+# The gate is strict, not a reader of English: every word below that could name a time is rejected unless it is
+# part of a date the loader moves, or sits inside an ALLOWED phrase.
+MONTH_WORD = re.compile(rf"(?i)\b(?:{MONTH})\b")
+HOLIDAY_DAY = (r"labou?r|memorial|independence|boxing|mother'?s|father'?s|valentine'?s|presidents'?|veterans'?"
+               r"|columbus|martin luther king|mlk|victoria|canada|australia|anzac|bastille|remembrance|armistice"
+               r"|groundhog|election|new year'?s|st\.? patrick'?s")
+PERIOD = re.compile(
+    r"(?<![\w.+-])(?:19|20)\d\d(?!\w|\.\d)|\b[A-Z][a-z]+(?:'s|s')? Day\b|(?i:\b(?:q[1-4]|h[12])\b"
+    r"|\b(?:spring|summer|autumn|fall|winter)s?\b"
+    r"|\b(?:christmas|xmas|thanksgiving|easter|hanukkah|diwali|ramadan|eid|passover|halloween|juneteenth"
+    r"|new year'?s?|black friday|cyber monday|good friday|holidays?)\b"
+    rf"|\b(?:{HOLIDAY_DAY}) day\b"
+    r"|\b(?:fiscal|financial|academic|school) years?\b|\bsemesters?\b|\b(?:year|month|quarter)[- ]to[- ]date\b|\b[ymq]td\b"
+    r"|\b(?:next|last|this|coming|past)(?:\s+[\w'-]+){0,2}?\s+(?:months?|years?|quarters?|halves"
+    r"|half(?!\s+(?:an\s+)?hours?)|weeks?\s+of\s+the\s+year|calendar\s+weeks?)\b"
+    r"|\bquarters\b|\b(?:month|quarter|year)[- ]end\b|\bmid[- ]?(?:month|year)\b"
+    r"|\b(?:end|start|beginning|middle|rest) of (?:the|this|next|last) (?:month|year|quarter)\b"
+    r"|\b(?:earlier|later) (?:this|that|in the) (?:month|year)\b)")
 # What it cannot move: a day without its month, or a numeric month/day.
 DAY_ONLY = re.compile(r"\bthe \d{1,2}(?:st|nd|rd|th)\b|(?<![\d/])\d{1,2}/\d{1,2}(?![\d/])")
-# A day that borrows its month from a date beside it: "June 10 or 11", "June 10, 11", "June 10 - 12", "June 10/11",
-# "10-12 June". The loader moves the date, not the day.
+# A day that borrows its month from a date beside it: "June 10 &11", "June 10, 11", "June 10 - 12", "10-12 June".
+# The loader moves the date, not the day.
 ORD = r"\d{1,2}(?:st|nd|rd|th)?"
-JOIN = r"(?: ?(?:or|and|to|through|till|until|&) | ?[-–—/] ?| ?[,;] ?(?:(?:and|or) )?)"
-ELIDED = re.compile(rf"{JOIN}{ORD}\b(?! ?(?:{MONTH})\b)")
+JOIN = r"\s*(?:[,/;&–—-]|(?<!\w)(?:and|or|to|through|till|until)(?!\w))\s*(?:(?:and|or)\s+)?"
+ELIDED = re.compile(rf"{JOIN}{ORD}\b(?!\s*(?:{MONTH})\b)")
 ELIDED_BEFORE = re.compile(rf"\b{ORD}{JOIN}$")
-# A month word is a date when a day or year sits beside it, when it is possessive, or when a word that times
-# something comes before it; "May", "March", "June", "April", "August" and "Jan" are ordinary words or names
-# otherwise ("May we?", "it may slip", "March towards"). Any other month word always is one.
-WORD_MONTH = re.compile(rf"\b(?i:{MONTH})\b")
-AMBIGUOUS = {"may", "march", "mar", "june", "jun", "april", "august", "jan"}
-DAY_OR_YEAR_AFTER = re.compile(r"\.? ?\d|'s\b")
-TIMING_BEFORE = re.compile(rf"(?i)(?:\b(?:in|by|until|till|since|before|after|from|through|during|for|of|the|this|"
-                           rf"next|last|each|every|early|mid|late)|\b{ORD})[ -]$")
-# What it cannot move and that stops being true once the dates move: a quarter, a season, a holiday, a calendar
-# month or year named relative to the text ("next month", "this year"), a period's end, a bare year.
-PERIOD = re.compile(
-    r"\b[QH][1-4]\b|(?<![\w.+-])(?:19|20)\d\d(?!\w|\.\d)|\b[A-Z][a-z]+(?:'s|s')? Day\b|(?i:"
-    r"\b(?:spring|summer|autumn|winter|holidays?|christmas|xmas|thanksgiving|new year(?:'s)?|easter|good friday"
-    r"|black friday|cyber monday|halloween|hanukkah|diwali|ramadan|passover|valentine'?s)\b"
-    r"|\b(?:this|next|last|in(?: the)?|by(?: the)?|until(?: the)?|since(?: the)?|before(?: the)?|after(?: the)?"
-    r"|early|late) fall\b"
-    r"|\b(?:this|next|last|coming|previous|following|current|that|the new) (?:(?:fiscal|financial) )?(?:month|year|quarter|half(?! hour))(?:'s)?\b"
-    r"|\b(?:earlier|later) (?:this|that|in the) (?:month|year)\b|\brest of (?:the|this) (?:month|year|quarter)\b|\b(?:mid|early|late)[- ](?:month|year)\b"
-    r"|\bquarters\b|\b(?:month|quarter|year)[- ]end\b|\b(?:end|start|beginning) of (?:the|this|next|last) "
-    r"(?:month|year|quarter)\b|\bhalf of (?:the|this) year\b)")
-# Each probe: (column, text, the loader can move every time it names). to_book.py runs these before the book.
+# The only exceptions: exact phrases from the Book's own texts, each a deliberate decision. A new text that trips
+# the gate is rewritten, or its exact phrase is added here with the reason it names no time.
+ALLOWED = {
+    "May not be a real prospect": "the verb 'may' (contact 144's note)",
+    "she may be slow to respond": "the verb 'may' (email-0014)",
+    "when their new fiscal year starts": "an event of theirs, dated by the ISO window before it (contact 115's note)",
+}
+# Each probe: (column, text, the gate accepts it). to_book.py runs these before the book.
 PROBES = [
-    ("body", "Meet June 10, 11 and 12.", False), ("body", "Meet June 10 - 12.", False),
-    ("body", "Meet June 10/11.", False), ("body", "Meet June 10; 11 if not.", False),
-    ("body", "Meet June 10 or 11.", False), ("body", "Meet 10-12 June.", False),
-    ("body", "Meet June 10 or June 11.", True), ("body", "Meet Jun. 10th or 10th June.", True),
-    ("body", "Deliver in july.", False), ("body", "Deliver JUNE 10.", False), ("body", "Deliver june 10.", False),
-    ("body", "Deliver by may.", False), ("body", "Deliver in May.", False), ("body", "The July QBR.", False),
-    ("body", "May's invoice.", False), ("body", "Mid-June works.", False),
-    ("body", "Deliver by Christmas.", False), ("body", "Before Thanksgiving.", False),
-    ("body", "After New Year.", False), ("body", "Over Easter.", False), ("body", "Ahead of Black Friday.", False),
-    ("body", "Before Labor Day.", False), ("body", "Over the holidays.", False),
-    ("body", "Upsell in the next two quarters.", False), ("body", "Close this quarter.", False),
-    ("body", "Live in Q3.", False), ("body", "Signed in 2027.", False), ("body", "Over the summer.", False),
-    ("body", "In the fall.", False), ("body", "Following up on our call last month.", False),
-    ("body", "We go live next month.", False), ("body", "Rollout next year.", False),
-    ("body", "Expanding this year.", False), ("body", "A POC earlier this year.", False),
-    ("body", "Any slot this month.", False), ("body", "Tooling this half.", False), ("body", "Join for the last half hour.", True), ("body", "Approved for this financial year.", False),
-    ("body", "Roadmap for the rest of the year.", False), ("body", "Before month-end.", False),
-    ("body", "By the end of the year.", False), ("body", "Due the 11th.", False), ("body", "Sent 4/22.", False),
-    ("body", "Meet June 31.", False), ("body", "Tuesday, June 10.", False),
-    ("first_name", "June", True), ("last_name", "May", True), ("email", "june.10@x.com", True),
-    ("body", "May the team proceed?", True), ("body", "The rollout may slip.", True),
-    ("body", "It may, or may not.", True), ("body", "March towards the target.", True),
-    ("body", "The fall in revenue is temporary.", True), ("body", "Wednesday, June 10, 3 seats.", False),
-    ("body", "Meet Wednesday, June 10.", True), ("body", "Due 2026-11-25.", True),
-    ("body", "Signature in about four weeks.", True), ("body", "A quarterly review.", True),
-    ("body", "In about six months.", True), ("note", "Renews each June 1.", True),
-    ("body", "Ask June from finance.", True), ("body", "Prepares the June renewal.", False),
+    *[("body", t, False) for t in (
+        "Expected go-live: June.", "Meet June 10 &11.", "Live in q3.", "Over labor day.", "Renewal moves to June.",
+        "Launch on June.", "June renewal paperwork is ready.", "In the next six months we grow.",
+        "Fiscal year ends soon.", "Year to date numbers.", "Meet June 10, 11 and 12.", "Meet June 10–12.",
+        "Meet June 10/11.", "Meet June 10; 11 if not.", "Meet June 10 or 11.", "Meet 10-12 June.",
+        "Deliver in july.", "Deliver JUNE 10.", "Mid-June works.", "Before Christmas.", "Before Mother's Day.",
+        "Upsell in the next two quarters.", "Close this quarter.", "Over the summer.", "Signed in 2027.",
+        "Rollout next year.", "Due the 11th.", "Sent 4/22.", "Meet June 31.", "Tuesday, June 10.",
+        "Wednesday, June 10, 3 seats.", "Semester review.", "Academic year starts soon.", "Mid-year review.", "By the end of the year.",
+        # A month or season word that names no time is rejected too, unless its exact phrase is ALLOWED.
+        "May the team proceed?", "The rollout may slip.", "Ask June from finance.", "The fall in revenue.")],
+    *[("body", t, True) for t in (
+        "Meet June 10 or June 11.", "Meet Jun. 10th or 10th June.", "Meet Wednesday, June 10.", "Due 2026-11-25.",
+        "In about six months.", "A quarterly review.", "Join for the last half hour.", "Renews each June 1.")],
+    ("first_name", "June", True), ("email", "june.10@x.com", True),
+    *[("body", f"{p}.", True) for p in ALLOWED],
 ]
 
 
@@ -158,11 +153,11 @@ def check_far(when, cut, what):
 
 
 def check_text_dates(tables, year):
-    """Every date a free text names is a form a loader moves - ISO, or a capitalised month with its day - and a
-    real day, and a weekday beside it is that day's. No free text names a time a loader cannot move: a day without
-    its month, a month without its day or in the wrong case, a quarter, a season, a holiday, a calendar period
-    relative to the text, or a year. A month-day without a year is read in `year`, and stays in it when moved by up
-    to SHIFT_HORIZON; a later one is ISO."""
+    """Every free text names times only as dates a loader moves - ISO, or a capitalised month with its day and no
+    day beside it that borrows its month - each a real day, with a weekday beside it that is its own. Any other
+    month word, quarter, half, season, holiday, fiscal period, calendar period relative to the text, period end,
+    bare year or day without its month is rejected, unless it sits inside an ALLOWED phrase. A month-day without a
+    year is read in `year`, and stays in it when moved by up to SHIFT_HORIZON; a later one is ISO."""
     n = 0
     for name, rows in tables.items():
         for r in rows:
@@ -170,17 +165,12 @@ def check_text_dates(tables, year):
                 if k not in TEXT_COLUMNS or not isinstance(v, str):
                     continue
                 where = f"{name} {r.get('source_id') or r.get('email')} {k}"
-                bad = DAY_ONLY.search(v)
-                assert not bad, f"{where}: '{bad and bad[0]}' names a day a loader cannot move"
+                allowed = [m.span() for p in ALLOWED for m in re.finditer(re.escape(p), v)]
                 dates = list(TEXT_DATE.finditer(v))
-                bad = next((p for p in PERIOD.finditer(v) if not any(m.start() <= p.start() < m.end() for m in dates)), None)
-                assert not bad, f"{where}: '{bad and bad[0]}' names a time a loader cannot move"
-                for w in WORD_MONTH.finditer(v):
-                    if any(m.start() <= w.start() < m.end() for m in dates):
-                        continue
-                    timed = w[0].lower() not in AMBIGUOUS or DAY_OR_YEAR_AFTER.match(v, w.end()) \
-                        or TIMING_BEFORE.search(v, 0, w.start())
-                    assert not timed, f"{where}: '{w[0]}' names a month without its day, or not capitalised"
+                spans = allowed + [m.span() for m in dates]
+                for hit in (*DAY_ONLY.finditer(v), *MONTH_WORD.finditer(v), *PERIOD.finditer(v)):
+                    assert any(a <= hit.start() < b for a, b in spans), \
+                        f"{where}: '{hit[0]}' names a time a loader cannot move; write a date, or ALLOW the phrase"
                 bad = next((m for m in dates if ELIDED.match(v, m.end()) or any(
                     not any(o.start() <= e.start() < o.end() for o in dates) for e in [ELIDED_BEFORE.search(v, 0, m.start())] if e)), None)
                 assert not bad, f"{where}: a day beside '{bad and bad[0]}' borrows its month, so a loader cannot move it"

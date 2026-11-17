@@ -50,17 +50,18 @@ KINDS = {"bug", "feature-request", "enhancement", "question", "documentation", "
 # The workbooks write "sent 4/22"; a loader that moves dates reads "April 22" and not 4/22.
 MONTH_DAY = re.compile(r"(?<![\d/])(1[0-2]|[1-9])/(3[01]|[12]\d|[1-9])(?![\d/])")
 # Nor can it move "in March", "Q3" or "2027", which stop being true once the dates around them move. Each
-# becomes the day its own row's fields give, or wording relative to the text's own date. Keyed by the row's id.
+# becomes the day its own row's fields give, a quarter its first and last day, or wording relative to the text's
+# own date. Keyed by the row's id.
 REWORD = {
     "hubspot/companies.csv": {
         "201": [("Expanding into EMEA in 2026.", "Expanding into EMEA.")],
         "205": [("through 2027.", "through 2027-05-15."), ("potential next year.", "potential.")],
         "213": [("expecting close in May.", "expecting close within a month.")],
-        "215": [("Closed-lost in March", "Closed-lost on March 20"), ("Re-engage Q4 2026.", "Re-engage from 2026-10-01.")],
+        "215": [("Closed-lost in March", "Closed-lost on March 20"), ("Re-engage Q4 2026.", "Re-engage between 2026-10-01 and 2026-12-31.")],
         "216": [("Renewal in November", "Renewal on 2026-11-25")],
-        "223": [("Try again Q3 2026.", "Try again from July 1.")],
+        "223": [("Try again Q3 2026.", "Try again between 2026-07-01 and 2026-09-30.")],
         "227": [("Renewed December 2025.", "Renewed 2025-12-04.")],
-        "248": [("Researching for Q3 implementation.", "Researching for an implementation by 2026-09-30.")],
+        "248": [("Researching for Q3 implementation.", "Researching for an implementation between 2026-07-01 and 2026-09-30.")],
     },
     "hubspot/contacts.csv": {
         "101": [("in EMEA next quarter.", "in EMEA in a few months.")],
@@ -70,17 +71,17 @@ REWORD = {
         "111": [("add-on in April.", "add-on on April 15."), ("to her sister team next year.", "to her sister team in a year or so."),
                 ("Schedule QBR for July.", "Schedule the next QBR in about ten weeks.")],
         "115": [("Lost deal in March", "Lost deal on March 20"),
-                ("Re-engage in Q4 2026 when new fiscal year starts.", "Re-engage from 2026-10-01, when their new fiscal year starts.")],
+                ("Re-engage in Q4 2026 when new fiscal year starts.", "Re-engage between 2026-10-01 and 2026-12-31, when their new fiscal year starts.")],
         "116": [("Renewal up in November.", "Renewal up on 2026-11-25.")],
         "122": [("Last QBR in March was positive.", "Last QBR, about six weeks ago, was positive.")],
-        "123": [("try again in Q3.", "try again from July 1.")],
+        "123": [("try again in Q3.", "try again between 2026-07-01 and 2026-09-30.")],
         "127": [("Renewed last December.", "Renewed 2025-12-04.")],
-        "148": [("Researching for Q3 implementation.", "Researching for an implementation by 2026-09-30.")],
+        "148": [("Researching for Q3 implementation.", "Researching for an implementation between 2026-07-01 and 2026-09-30.")],
     },
     "hubspot/deals.csv": {
-        "315": [("Re-engage Q4 2026.", "Re-engage from 2026-10-01.")],
+        "315": [("Re-engage Q4 2026.", "Re-engage between 2026-10-01 and 2026-12-31.")],
         "338": [("Duff Beer - Q3 Implementation", "Duff Beer - Brewery Implementation"),
-                ("Q3 implementation target.", "Implementation target 2026-09-30.")],
+                ("Q3 implementation target.", "Implementation target between 2026-07-01 and 2026-09-30.")],
         "349": [("QBR scheduled July.", "QBR scheduled.")],
         "308": [("Expansion play next year.", "Expansion play as they hire.")],
         "309": [("targeted for next year.", "targeted for about a year after this add-on.")],
@@ -89,7 +90,7 @@ REWORD = {
     },
     "github-issues/issues.csv": {
         "1238": [("needed by Q3.", "needed by July 1.")],
-        "1296": [("rolling out next quarter.", "rolling out from July 1.")],
+        "1296": [("rolling out next quarter.", "rolling out between 2026-07-01 and 2026-09-30.")],
     },
     "stripe/customers.csv": {
         "cus_AcmeCorp00001": [("since 2024.", "since 2024-03-28.")],

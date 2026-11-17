@@ -118,7 +118,7 @@ CASE_SHAPES = {
 # CRM notes that say nothing about support — what most real notes look like.
 NEUTRAL_NOTES = [
  "{industry} firm in {city}. Renewal due in about three months; no blockers flagged by the account team.",
- "Expanding headcount in {city} over the coming months. Watching seat count against the current plan.",
+ "Expanding headcount in {city}. Watching seat count against the current plan.",
  "Multi-stakeholder evaluation. Procurement is the long pole, not the product.",
  "Steady account since {since}. Low touch, pays on time, no escalations to date.",
  "Moved from annual to monthly billing at their request soon after signing.",
@@ -230,7 +230,7 @@ def main():
                   if aware else rng.choice([
                     "Procurement has the paperwork; no product blockers.",
                     "Champion is engaged. Competing against an incumbent.",
-                    "Budget confirmed for the next three months.",
+                    "Budget confirmed for about three months.",
                     "Expansion driven by headcount growth."]))))
 
         if has_case:

@@ -124,22 +124,24 @@ each in its realm under `seed/load_book.py`.
   demo that wants the story to stay current should turn dates into an age relative to that day.
 - **Dates inside texts** (the `note`, `body`, `subject`, `title`, `summary` and `description`
   columns) are ISO or a capitalised month with its day ("June 16", "Jun. 16th", "16 June", "16th
-  June", read in 2026), so a loader that moves the dates by whole weeks can move them too. Each is a
-  real day, and a weekday beside one is its weekday. A month and day must still fall in 2026 when
-  moved 20 weeks; a later one is ISO ("2026-11-25"). A text never names a time a loader cannot move:
-  no day without its month ("the 11th", "4/22", "June 10 or 11", "June 10, 11", "June 10 - 12",
-  "June 10/11" - write "June 10 or June 11"), no month without its day or in the wrong case ("in
-  July", "mid-June", "the July QBR", "in july", "JUNE 10"), no quarter, season or holiday ("Q3",
-  "next two quarters", "summer", "in the fall", "Christmas", "Labor Day"), no calendar period named
-  relative to the text ("last month", "next year", "this half", "earlier this year", "month-end"),
-  and no bare year ("2027"). A month word that is not a date stays: a name in a name column, "May
-  we?", "it may slip", "March towards", "the fall in revenue". A month word counts as a date when a
-  day or year sits beside it, when it is possessive, or when a timing word (in, by, until, since,
-  the, early, mid, end of, ...) comes before it. A day a text does not name exactly is written as an
-  elapsed time from the text's own date ("about four weeks ago", "in about six months") or taken
-  from a linked record's date field. `to_book.py` rewrites the workbooks' texts so (`REWORD`, and
-  "4/22" becomes "April 22"), and `apply_engagements.py` fails on any that slips through; its
-  `PROBES` table pins what the check accepts and rejects.
+  June", read in 2026) - exactly the forms a loader moves (`load_book.py`'s `DATES`) - so a loader
+  that moves the dates by whole weeks can move them too. Each is a real day, and a weekday beside
+  one is its weekday. A month and day must still fall in 2026 when moved 20 weeks; a later one is
+  ISO ("2026-11-25"). A day a text does not name exactly is an elapsed time from the text's own date
+  ("about four weeks ago", "in about six months"), a window of two dates ("between 2026-07-01 and
+  2026-09-30" for a quarter), or taken from a linked record's date field.
+  The gate in `apply_engagements.py` is strict and does not read English. In a free text it rejects,
+  in any case, every month name or abbreviation that is not part of such a date, and every date
+  followed by a bare day that borrows its month ("June 10 &11", "June 10, 11", "10-12 June"); every
+  quarter or half (Q1-Q4, H1, H2, "quarters"), season, holiday ("Christmas", "labor day", any
+  capitalised "... Day"), "fiscal year", "academic year", "semester", "year to date", period end ("month-end", "end
+  of the year"); "next", "last", "this", "coming" or "past" followed within two words by month, year,
+  quarter or half ("the next six months"); a bare year; and a day without its month ("the 11th",
+  "4/22"). So "May the team proceed?", "the fall in revenue" or a person named June are rejected
+  too: the only exceptions are the exact phrases in `ALLOWED`, each with the reason it names no time
+  that needs moving. A new text that trips the gate is rewritten, or its exact phrase is added to
+  `ALLOWED` on purpose. `to_book.py` rewrites the workbooks' texts so (`REWORD`, and "4/22" becomes
+  "April 22"); `PROBES` pins what the gate rejects and accepts, including every `ALLOWED` phrase.
 - **Issue state is only `open` or `closed`.** In-progress is implied by assignees and a
   recent `Updated At`. Priority and type live inside the comma-separated `Labels`.
 - **An issue has one `Body` and a `Comments` count**, not a thread. A product that needs

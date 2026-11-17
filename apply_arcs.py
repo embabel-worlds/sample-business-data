@@ -427,9 +427,10 @@ def manual_dunning(b, exclude):
             code = codes[(n + k) % len(codes)]
             b.payment(i, f"{paid['source_id']}_f{k + 1}", "failed", when.isoformat(), paid["method"], code,
                       f"{i['number']} - attempt failed ({code.replace('_', ' ')})")
-            retry = "retrying in three days" if k + 1 < len(tries) else "the retry is due on " + \
-                (when + timedelta(days=3)).isoformat()
-            b.note(i["account_key"], AR_CLERK, (when + timedelta(days=1)).isoformat(),
+            written = when + timedelta(days=1)
+            retry = f"retrying in {['no', 'one', 'two', 'three', 'four', 'five'][(tries[k + 1] - written).days]} days" \
+                if k + 1 < len(tries) else "the retry is due on " + paid["attempted_on"][:10]
+            b.note(i["account_key"], AR_CLERK, written.isoformat(),
                    f"Payment for {i['number']} ({i['currency']} {int(float(i['amount_due'])):,}) failed "
                    f"yesterday: {code.replace('_', ' ')}. Emailed {names[i['customer_id']]} to ask them to "
                    f"check the {paid['method'].replace('_', ' ')} details; {retry}.")

@@ -57,7 +57,7 @@ Proposal: rate limits per-token, with org-level cap as ceiling. Allows us to iso
 Reduces our processing load 95%+."
 1296,Native Salesforce two-way sync,acmecorp.example.com,Acme Corporation,sarah.johnson@acmecorp.example.com,Sarah Johnson,open,high,feature-request,"area:integrations,customer:enterprise",no,sarahj-acme,"eng-tomek, eng-riya",v4.0,2026-04-18,2026-05-01,,18,"Currently using Zapier to sync between us and SFDC — unreliable and lossy on custom fields. Need native bidirectional sync with field mapping UI.
 
-This is the #1 ask from our EMEA team rolling out from July 1."
+This is the #1 ask from our EMEA team rolling out between 2026-07-01 and 2026-09-30."
 1305,Dark mode for the web app,metacortex.example.com,Metacortex,tanderson@metacortex.example.com,Thomas Anderson,open,low,feature-request,"area:ui,good-first-issue",no,thomas-metacortex,eng-mei,backlog,2026-04-21,2026-04-26,,42,"Please add dark mode. My eyes thank you.
 
 (I know this isn't a priority — adding for the +1 count :)"
