@@ -22,7 +22,9 @@ after (HubSpot, Stripe, GitHub Issues), or stand-ins for them (Odoo, Lago, Chatw
 | `convert.py` | Regenerates `csv/` from `source/` and checks the three datasets agree with each other |
 | `book/` | The same data with every product name taken out: `crm/`, `support/`, `billing/`, joined by `account_key`. **This is what loaders read.** |
 | `to_book.py` | Regenerates `book/` from `csv/` |
-| `apply_arcs.py` | Lays the demo's story arcs over `book/`; `to_book.py` runs it last |
+| `apply_arcs.py` | Lays the demo's story arcs over `book/`; `to_book.py` runs it after translating |
+| `additions/` | CRM history the workbooks lack: more contacts, logged emails and calls, follow-ups. Drafted once, committed |
+| `apply_engagements.py` | Checks `additions/` against the book, adds it, and plants the CRM signals below |
 | `gen_scale_book.py` | Generates a SYNTHETIC book of any size, in the same format. For measuring behaviour at scale — see below. |
 
 Load from `book/`. Read `csv/` when you want the data as its author shaped it, and the
@@ -31,9 +33,14 @@ change a demo's answers silently.
 
 ## Scale, and why the filler has to be good
 
-The 50 accounts here are hand-authored so that joining the three systems finds a real
-story. They are not enough to show how anything behaves at size, so `gen_scale_book.py`
-writes a synthetic book in the same format:
+The 55 accounts in `book/` (the workbooks' 50 plus five the arcs add) are hand-authored so
+that joining the three systems finds a real story. They are not enough to show how anything
+behaves at size, so `gen_scale_book.py` writes a synthetic book in the same format: every
+file with `book/`'s exact header, domains on `<slug>.example.com`, a `book.json` with its as-of
+date (2026-09-21), the pipelines and stages of `book/crm/opportunities.csv`, `book/`'s invoice
+words (`paid`, `open`), one plan code per price, currency and interval, and the CRM history
+files (`emails`, `calls`, `notes`, `meetings`, `followups`) with no rows, so every loader
+reads it as it reads `book/`:
 
 ```sh
 python3 gen_scale_book.py --out ~/embabel/books/book-scale --count 2000
@@ -59,13 +66,14 @@ asserts them:
 | awareness | ~30% of troubled accounts get a note that genuinely names the case's product area, so the judgement returns BOTH verdicts |
 | triage | cases spread across blocked / degraded / asking, with reply counts that track impact — so a long thread is not automatically trouble |
 | areas | a small fixed area vocabulary, so accounts genuinely SHARE issues and "is this one customer or an incident?" has pairs to find |
-| billing | ~2/3 billed, a slice unpaid, a smaller slice FAILED, all due in the past so overdue means overdue |
+| billing | ~2/3 billed, a slice unpaid, a smaller slice with a FAILED card attempt in `payments.csv`, all due in the past so overdue means overdue |
 
 It asserts its own invariants and refuses to write a book that breaks them: `account_key`
 is the spine key every realm joins on, so colliding domains do not fail, they silently
 MERGE accounts — the first draft produced 1,018 distinct domains for 2,000 companies.
 Dates are checked against a fixed today, after a draft dated accounts and invoices into
-2027 and nothing read as overdue.
+2027 and nothing read as overdue: everything that happened is on or before it; only open
+deals' close dates, due dates and period ends look forward.
 
 Load the two together — the hand-authored book for the story, the scale book for size.
 
@@ -78,14 +86,16 @@ that translation once, into a vocabulary with no product in it:
 | File | One row per | Notes |
 |---|---|---|
 | `crm/accounts.csv` | customer company | `account_key` is its domain |
-| `crm/contacts.csv` | person | |
+| `crm/contacts.csv` | person | `note_on` is the day their `note` was written: 2026-05-01 for the workbooks' people (or the day they were added, if later), the newest logged email or call for the added ones; blank when there is no note |
 | `crm/opportunities.csv` | deal | `stage` as authored, `stage_order`, and `status`: open, won or lost |
 | `support/cases.csv` | customer case | `status` open or resolved; `priority` urgent to none; `filed_on_behalf` when staff wrote it up, not the customer. The two internal engineering issues are left out |
 | `billing/customers.csv` | billing customer | `known_to_crm` is `no` for the three the CRM has never heard of |
 | `billing/subscriptions.csv`, `invoices.csv`, `payments.csv`, `refunds.csv`, `disputes.csv` | | a payment is one ATTEMPT, succeeded or failed |
 | `crm/notes.csv` | note someone wrote by hand | on the company, or on a deal when `opportunity_id` is set; dated and authored |
 | `crm/meetings.csv` | call on the calendar | `booked_on` is the day it was booked, `starts_at` when it happens (UTC) |
-| `crm/followups.csv` | follow-up an owner scheduled on an account | `due_on` is when it is due; a follow-up is what makes an at-risk account *acknowledged* |
+| `crm/followups.csv` | follow-up an owner scheduled on an account | `due_on` is when it is due; `status` open or done, with `completed_on`; an open follow-up is what makes an at-risk account *acknowledged* |
+| `crm/emails.csv` | email sales logged with a contact | `direction` outbound or inbound, `sent_at` UTC; on a deal when `opportunity_id` is set |
+| `crm/calls.csv` | call sales logged with a contact | `outcome` connected, voicemail or no_answer; `minutes`; the owner's notes in `body` |
 | `arcs.csv` | story arc | what each arc should surface as, and what it must not |
 | `book.json` | | the as-of date and the row counts |
 
@@ -108,9 +118,30 @@ each in its realm under `seed/load_book.py`.
 
 - **Money is in major units** (dollars, euros, pounds), not cents. Currency is per row.
 - **`Probability` is a fraction**, 0 to 1, not a percentage.
-- **Dates are ISO `YYYY-MM-DD`.** Treat **2026-06-27** as "today" for the billing and
-  support data; the CRM data was written a few weeks earlier, in early May 2026. A demo
-  that wants the story to stay current should turn dates into an age relative to that day.
+- **Dates are ISO `YYYY-MM-DD`.** Treat **2026-06-27**, `as_of` in `book.json`, as "today".
+  The workbooks' CRM records were written in early May 2026; the logged emails and calls run
+  from March to 2026-06-25, and open follow-ups fall due between early June and mid-July. A
+  demo that wants the story to stay current should turn dates into an age relative to that day.
+- **Dates inside texts** (the `note`, `body`, `subject`, `title`, `summary` and `description`
+  columns) are ISO or a capitalised month with its day ("June 16", "Jun. 16th", "16 June", "16th
+  June", read in 2026) - exactly the forms a loader moves (`load_book.py`'s `DATES`) - so a loader
+  that moves the dates by whole weeks can move them too. Each is a real day, and a weekday beside
+  one is its weekday. A month and day must still fall in 2026 when moved 20 weeks; a later one is
+  ISO ("2026-11-25"). A day a text does not name exactly is an elapsed time from the text's own date
+  ("about four weeks ago", "in about six months"), a window of two dates ("between 2026-07-01 and
+  2026-09-30" for a quarter), or taken from a linked record's date field.
+  The gate in `apply_engagements.py` is strict and does not read English. In a free text it rejects,
+  in any case, every month name or abbreviation that is not part of such a date, and every date
+  followed by a bare day that borrows its month ("June 10 &11", "June 10, 11", "10-12 June"); every
+  quarter or half (Q1-Q4, H1, H2, "quarters"), season, holiday ("Christmas", "labor day", any
+  capitalised "... Day"), "fiscal year", "academic year", "semester", "year to date", period end ("month-end", "end
+  of the year"); "next", "last", "this", "coming" or "past" followed within two words by month, year,
+  quarter or half ("the next six months"); a bare year; and a day without its month ("the 11th",
+  "4/22"). So "May the team proceed?", "the fall in revenue" or a person named June are rejected
+  too: the only exceptions are the exact phrases in `ALLOWED`, each with the reason it names no time
+  that needs moving. A new text that trips the gate is rewritten, or its exact phrase is added to
+  `ALLOWED` on purpose. `to_book.py` rewrites the workbooks' texts so (`REWORD`, and "4/22" becomes
+  "April 22"); `PROBES` pins what the gate rejects and accepts, including every `ALLOWED` phrase.
 - **Issue state is only `open` or `closed`.** In-progress is implied by assignees and a
   recent `Updated At`. Priority and type live inside the comma-separated `Labels`.
 - **An issue has one `Body` and a `Comments` count**, not a thread. A product that needs
@@ -145,26 +176,60 @@ would lose it.
 |---|---|---|
 | Silent escalation | Northwind Traders | at risk (urgent case, pipeline into it); sales unaware |
 | Quiet churner | Chum Bucket | at risk on three failed payments, with a renewal forecast and no case |
-| Withholding | Contoso | an open bug saying "we will not pay the June invoice until the export is fixed" |
+| Withholding | Contoso | an open bug saying "we will not pay the invoice due June 10 until the export is fixed" |
 | Acknowledged trouble | Initech | at risk, and NOT a blind spot: the owner's notes name both problems |
 | Failed payments | Acme | at risk on a one-off invoice two cards have bounced |
 | Good payer on the 5th | Wayfarer Travel | nothing: due on the 1st, paid on the 5th, one expired card fixed next day |
-| Stale deal | Globex | an open deal past its close date, untouched since April (already in the data) |
+| Stale deal | Globex | an open deal untouched since April (already in the data) |
 | Noisy but healthy | Brightline Analytics | nothing, despite nine cases — all resolved within two days |
 | Shared incident | Northwind, Contoso, Initech | one export defect across three unrelated accounts |
 | Controls | Cyberlife, Dharma, Ferrari Tech, Wernham Hogg | nothing |
+| Writes sandbox | the account named in `arcs.csv` | the only account a harness may write to; nothing in its data says so |
+| Gone quiet | 6 contacts per salesperson | no email, call or meeting in the 30 days before as-of |
+| Not emailed | the same 6, plus one control per salesperson | no email in the 30 days before as-of |
+| Stalled deals | 302, 305, 311, 326, 335, 339 | open, with no email or call on the deal in the 45 days before as-of |
+| Slipping deals | 308, 322, 328, 346 | open, close date before as-of |
+| Open follow-ups | each of the four owners | 5 open, 2 of them past due, none past due on a story-arc account |
+
+The last five are counted by `apply_engagements.py` from `additions/`, which asserts each one
+exactly:
+
+- **Gone quiet** counts never-contacted people too, and finds nobody extra: every other contact
+  had an outbound email between 2026-06-02 and 2026-06-26.
+- **Not emailed** adds one control per salesperson: newest email 45+ days old, but a connected
+  call within 25 days. A reader that counts only email finds the control; one that counts any
+  contact does not.
+- **Stalled and slipping** do not overlap: every stalled deal's close date lies after as-of,
+  and every slipping deal had an outbound email or call on it within 45 days.
+- HubSpot's "last contacted" leaves out inbound email, so each set is asserted both with and
+  without inbound email, and comes out the same.
+
+An *engagement* is an email, a call or a meeting, which is what a CRM counts as contact; a
+note is not. A contact's `last_activity_on` is their newest engagement, and a deal's
+`modified_on` is at least its newest email or call. No engagement, close date or due date sits
+within four days of its cut-off, so shifting the dates or a time zone cannot change a count. A
+harness that asks days after seeding must count from its own today.
 
 **Group contagion is not seeded.** The book has no parent/subsidiary links, so there is no
 group for trouble to spread through; inventing one belongs in the book's schema.
 
 It also writes the **manual history** an agent is later asked to learn from: an AR clerk's
 note the day after every failed card (`crm/notes.csv`, 35 of them), and the calls a
-salesperson booked each Monday for every account overdue that day (`crm/meetings.csv`). The
+salesperson booked each Monday for every account overdue that day (`crm/meetings.csv`: 12
+calls, on the 5 of 12 Mondays when the list was not empty). The
 failed cards are added before an invoice's successful payment, so every one still ends paid.
 
 Every arc's invariant is asserted before anything is written, and `arcs.csv` records what
-each should and must not surface as, for a harness to check against. New companies use
-`.example` domains, so no real business can be joined to them.
+each should and must not surface as, for a harness to check against.
+
+## Domains
+
+Every company in `book/` sits on `<name>.example.com`, its emails and websites with it:
+`stark.com` becomes `stark.example.com`. `to_book.py` rewrites the whole book last. Several
+workbook domains belong to real businesses, and a fictional customer joined to live enrichment
+or news by domain would attract a real company's headlines; `example.com` is reserved, so
+nothing here can reach anyone. It is not the reserved `.example` top level because CRMs
+validate contact emails, and HubSpot rejects it. `csv/` keeps the domains as authored.
 
 ## Known quirks
 
@@ -173,10 +238,8 @@ Left as authored, recorded here so nobody rediscovers them:
 - The workbook README tabs state 47 charges and 40 issues; the tabs hold 48 and 39.
 - Charge `ch_globex_pilot_001` belongs to Acme, despite its name.
 - Soylent Green Foods' domain is spelled `solyent.com`, consistently, in both contact and company.
-- **Several domains belong to real businesses** (`stark.com`, `hyperion.com`, `oceanic.com`
-  and others). Do not join this data to live company enrichment or news by domain: a
-  fictional customer would attract a real company's headlines. Do not send email to any
-  address here.
+- `csv/` keeps the workbooks' domains, several of which belong to real businesses
+  (`stark.com`, `hyperion.com`, `oceanic.com`). Load `book/`, which does not.
 - Company names are borrowed from film and television. Weigh that before making this public.
 
 ## Updating

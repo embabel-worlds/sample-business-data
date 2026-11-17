@@ -1,9 +1,9 @@
 {
   "as_of": "2026-06-27",
   "rows": {
-    "crm/accounts": 54,
-    "crm/contacts": 54,
-    "crm/opportunities": 54,
+    "crm/accounts": 55,
+    "crm/contacts": 134,
+    "crm/opportunities": 55,
     "support/cases": 50,
     "support/cases_left_out_as_internal": 2,
     "billing/customers": 22,
@@ -14,7 +14,9 @@
     "billing/disputes": 3,
     "crm/notes": 38,
     "crm/meetings": 12,
-    "crm/followups": 1,
-    "arcs": 16
+    "crm/followups": 25,
+    "arcs": 29,
+    "crm/emails": 181,
+    "crm/calls": 30
   }
 }

@@ -1,0 +1,80 @@
+email,first_name,last_name,job_title,phone,account_key,created_on,note,note_on
+r.okafor@globex.io,Rachel,Okafor,VP of IT Operations,+1-212-555-0110,globex.io,2026-04-16,Sponsor for Phase 2; owns the rollout plan across the regional offices.,2026-06-05
+m.feldman@globex.io,Michael,Feldman,Director of Procurement,+1-212-555-0111,globex.io,2025-12-03,Runs the MSA process for Phase 1.,2026-06-12
+s.ibrahim@globex.io,Samir,Ibrahim,Platform Engineering Manager,+1-212-555-0112,globex.io,2026-04-20,Technical lead for Phase 2 sizing; ran part of the POC.,2026-06-15
+helen.ashworth@umbrella.co.uk,Helen,Ashworth,Head of Quality & Compliance,+44-20-555-0113,umbrella.co.uk,2026-03-02,Signs off vendor compliance before procurement can move.,2026-06-08
+oliver.bradshaw@umbrella.co.uk,Oliver,Bradshaw,"Commercial Director, R&D Operations",+44-20-555-0114,umbrella.co.uk,2026-05-11,Budget holder for the R&D operations rollout.,2026-06-19
+kevin.vasquez@stark.com,Kevin,Vasquez,Director of Engineering Enablement,+1-310-555-0115,stark.com,2024-02-12,Would onboard the 200 new seats in the expansion.,2026-06-15
+lauren.brooks@stark.com,Lauren,Brooks,Strategic Sourcing Manager,+1-310-555-0116,stark.com,2026-01-20,Handles contract paperwork for the multi-year expansion.,2026-06-15
+evance@wayne-ent.com,Elaine,Vance,Associate General Counsel,+1-312-555-0117,wayne-ent.com,2025-11-18,Runs the MSA and DPA review for the global rollout.,2026-06-05
+ghale@wayne-ent.com,Gregory,Hale,VP Global IT,+1-312-555-0118,wayne-ent.com,2025-10-20,Coordinates the five business units; owns the rollout sequence.,2026-06-15
+jellis@wayne-ent.com,Jordan,Ellis,"Regional Operations Lead, EMEA",+1-312-555-0120,wayne-ent.com,2026-03-24,Represents the EMEA business unit in rollout planning.,2026-06-15
+j.becker@hooli.de,Jonas,Becker,Data Protection Officer,+49-30-555-0121,hooli.de,2026-01-12,Reads the pilot terms for Anna.,2026-06-04
+k.schneider@hooli.de,Katrin,Schneider,Head of IT Procurement,+49-30-555-0122,hooli.de,2026-04-27,Owns purchasing for the EMEA pilot; needs about two weeks.,2026-06-11
+maya.l@piedpiper.com,Maya,Lindqvist,Head of Engineering,+1-650-555-0123,piedpiper.com,2026-03-12,Day-to-day evaluator; would run the trial workspace.,2026-06-24
+jared.o@piedpiper.com,Jared,Osei,COO,+1-650-555-0124,piedpiper.com,2026-04-02,Holds the budget; Carlos defers to him on vendor spend.,2026-06-09
+k.watanabe@nakamoto.jp,Kenji,Watanabe,"General Manager, Operations Planning",+81-3-5555-0125,nakamoto.jp,2026-01-20,Chairs the five-person decision committee.,2026-06-04
+m.sato@nakamoto.jp,Mariko,Sato,IT Governance Manager,+81-3-5555-0126,nakamoto.jp,2026-02-09,Runs vendor risk review for the committee.,2026-06-12
+s.byrne@dunder.ie,Siobhán,Byrne,Finance Manager,+353-1-555-0127,dunder.ie,2025-11-20,Reviews contract terms alongside Liam.,2026-06-10
+c.kavanagh@dunder.ie,Ciarán,Kavanagh,Sales Operations Coordinator,+353-1-555-0128,dunder.ie,2026-02-03,Would administer the licence day to day.,2026-06-10
+javier.n@solyent.com,Javier,Navarro,VP of Marketing,+34-91-555-0129,solyent.com,2026-05-12,Economic buyer; approves the marketing cloud budget.,2026-06-18
+lucia.o@solyent.com,Lucía,Ortega,Marketing Operations Specialist,+34-91-555-0130,solyent.com,2026-03-09,Built the trial workflows with Sofia.,2026-06-09
+nhargrove@cyberdyne.com,Neil,Hargrove,Director of R&D Operations,+1-619-555-0131,cyberdyne.com,2026-05-26,The real evaluator; lab tooling sits in his budget.,2026-06-09
+treid@cyberdyne.com,Tasha,Reid,Procurement Specialist,+1-619-555-0132,cyberdyne.com,2026-06-10,Will handle paperwork if Neil proceeds.,2026-06-12
+hlowe@metacortex.com,Hannah,Lowe,Engineering Manager,+1-415-555-0133,metacortex.com,2026-04-24,Her platform team would build on the API.,2026-06-10
+vmendes@metacortex.com,Victor,Mendes,Director of IT,+1-415-555-0134,metacortex.com,2026-05-19,Signs off new tools; watches cost at scale.,2026-06-12
+r.moreau@tyrellcorp.com,Rachael,Moreau,VP Research Operations,+1-206-555-0135,tyrellcorp.com,2025-03-14,Approves the 50-seat expansion.,2026-06-02
+o.price@tyrellcorp.com,Owen,Price,Senior Procurement Manager,+1-206-555-0136,tyrellcorp.com,2025-12-01,Runs renewals; prefers co-terming new seats.,2026-06-05
+areyes@weyland.com,Amanda,Reyes,Principal Engineer,+1-617-555-0137,weyland.com,2026-02-05,One of the two POC engineers.,2026-06-09
+cbishop@weyland.com,Carl,Bishop,Director of Program Controls,+1-617-555-0138,weyland.com,2026-03-03,Runs the internal review board.,2026-06-12
+m.bianchi@massivedyn.it,Marco,Bianchi,CFO,+39-02-555-0139,massivedyn.it,2025-09-15,Final budget approver; reviews liability terms himself.,2026-06-16
+f.esposito@massivedyn.it,Francesca,Esposito,Head of Digital Transformation,+39-02-555-0140,massivedyn.it,2025-10-02,Runs the programme day to day for Isabella.,2026-06-17
+g.colombo@massivedyn.it,Giulia,Colombo,Legal Counsel,+39-02-555-0141,massivedyn.it,2026-05-05,Reviewing the framework agreement.,2026-06-11
+caroline.w@aperture.com,Caroline,Ward,HRIS Manager,+1-415-555-0143,aperture.com,2026-03-26,Owns Workday; would own the integration.,2026-06-05
+doug.r@aperture.com,Doug,Rattray,IT Systems Lead,+1-415-555-0144,aperture.com,2026-04-30,Reviews SSO and provisioning security.,2026-06-11
+fernanda.o@gringotts.com.br,Fernanda,Oliveira,Head of Operational Risk,+55-11-5555-0145,gringotts.com.br,2026-02-18,Leads the risk team's vendor assessment.,2026-06-09
+rafael.s@gringotts.com.br,Rafael,Santos,IT Procurement Manager,+55-11-5555-0146,gringotts.com.br,2026-04-08,Will handle pilot paperwork once risk signs off.,2026-06-16
+derek.h@spacelytech.com,Derek,Holm,Director of Finance,+1-303-555-0147,spacelytech.com,2025-12-10,Negotiated the discount and term with Mia.,2026-06-10
+lena.f@spacelytech.com,Lena,Fischer,Procurement Lead,+1-303-555-0148,spacelytech.com,2026-02-11,Owns signature and PO process.,2026-06-17
+k.brennan@hyperion.com,Kyle,Brennan,VP Flight Operations,+1-714-555-0149,hyperion.com,2026-03-05,Business sponsor for the analytics platform.,2026-06-25
+n.petrov@hyperion.com,Nadia,Petrov,Data Engineer,+1-714-555-0150,hyperion.com,2026-04-23,Would build the data pipelines; API-focused.,2026-06-03
+o.burnett@xanatos.com,Owen,Burnett,Chief of Staff,+1-212-555-0151,xanatos.com,2026-05-26,Owns the deal-desk overhaul Ryan was vague about.,2026-06-12
+e.marsh@xanatos.com,Elena,Marsh,Director of Business Operations,+1-212-555-0152,xanatos.com,2026-06-03,Would run a pilot day to day.,2026-06-15
+c.bucket@wonkachoco.com,Charlotte,Bucket,E-commerce Manager,+1-215-555-0153,wonkachoco.com,2026-03-20,Possible user of approval workflows for seasonal ranges.,2026-04-22
+g.felton@wonkachoco.com,Grant,Felton,Head of Digital,+1-215-555-0154,wonkachoco.com,2026-04-06,Would approve any move off self-serve.,2026-06-16
+kakana@oceanic.com,Kate,Akana,Director of Compliance,+1-808-555-0155,oceanic.com,2026-02-02,Owns the aviation recordkeeping review.,2026-06-11
+jkealoha@oceanic.com,Jack,Kealoha,VP Cargo Logistics,+1-808-555-0156,oceanic.com,2026-04-14,Business sponsor for the logistics suite.,2026-06-08
+walter.b@momcorp.com,Walter,Brandt,General Counsel,+1-281-555-0157,momcorp.com,2025-11-20,Negotiated the MSA; legal has approved.,2026-06-09
+larissa.d@momcorp.com,Larissa,Doyle,Director of Plant Systems,+1-281-555-0158,momcorp.com,2026-01-15,Leads implementation planning across the plants.,2026-06-15
+t.ishida@arasaka.com,Takeshi,Ishida,Director of IT Strategy,+81-3-5555-0159,arasaka.com,2026-02-20,Sponsor; receives Caleb's report on the proposal.,2026-06-12
+a.mori@arasaka.com,Aiko,Mori,Procurement Manager,+81-3-5555-0160,arasaka.com,2026-05-15,Takes over commercials once Caleb's report is in.,2026-06-19
+dale.p@krustyburger.com,Dale,Pruitt,Director of Franchise Operations,+1-503-555-0161,krustyburger.com,2026-04-15,Coordinates the eight pilot locations.,2026-06-04
+mona.f@krustyburger.com,Mona,Ferris,Controller,+1-503-555-0162,krustyburger.com,2026-05-20,Approves spend for the multi-site pilot.,2026-06-16
+i.prescott@hephaestus.com,Ian,Prescott,Principal Engineer,+1-720-555-0163,hephaestus.com,2026-01-20,Attended all three deep-dive sessions; internal champion.,2026-06-11
+r.delgado@hephaestus.com,Rosa,Delgado,COO,+1-720-555-0164,hephaestus.com,2026-03-18,Economic buyer; takes it to the board.,2026-06-08
+s.planck@chumbucket.com,Sheldon,Planck,Owner,+1-941-555-0165,chumbucket.com,2025-05-02,Signs the renewal paperwork Ariana prepares.,2026-06-19
+k.mills@chumbucket.com,Karen,Mills,Office Manager,+1-941-555-0166,chumbucket.com,2025-06-15,Handles vendor paperwork and records.,2026-06-23
+wendy.t@aperture-systems.com,Wendy,Tran,VP Engineering,+1-617-555-0167,aperture-systems.com,2026-03-20,Eli's manager; owns the tooling budget.,2026-06-24
+hugo.l@aperture-systems.com,Hugo,Lambert,Engineering Productivity Lead,+1-617-555-0168,aperture-systems.com,2026-05-27,Runs the internal tooling review.,2026-06-11
+joan.h@sterling-cooper.com,Joan,Harlan,Head of Procurement,+1-212-555-0169,sterling-cooper.com,2026-02-02,The procurement bottleneck; owns vendor redlines.,2026-05-05
+dawn.c@sterling-cooper.com,Dawn,Chambers,Operations Director,+1-212-555-0170,sterling-cooper.com,2026-03-11,,
+raymond.c@yoyodyne.com,Raymond,Cho,Director of Propulsion Engineering,+1-408-555-0171,yoyodyne.com,2026-05-07,Ran the discovery call. Budget authority still to be confirmed.,2026-06-04
+sandra.b@yoyodyne.com,Sandra,Bigbee,Contracts Manager,+1-408-555-0172,yoyodyne.com,2026-06-08,Will review the MSA and order form.,2026-06-10
+l.kowalski@duff-beer.com,Leonard,Kowalski,Plant Manager,+1-217-555-0173,duff-beer.com,2026-04-20,Would own the implementation on the brewery floor.,2026-06-11
+c.simmons@duff-beer.com,Carla,Simmons,Finance Director,+1-217-555-0174,duff-beer.com,2026-05-28,Signs off implementation spend.,2026-06-12
+i.sorensen@blue-sun.com,Ingrid,Sorensen,CISO,+1-512-555-0175,blue-sun.com,2025-10-01,The real closer; security sign-off gates the deal.,2026-05-04
+m.reyes@blue-sun.com,Malcolm,Reyes,Procurement Director,+1-512-555-0176,blue-sun.com,2026-01-28,,
+hannah.weiss@acmecorp.com,Hannah,Weiss,Director of International Operations,+1-415-555-0177,acmecorp.com,2026-04-05,Owns the EMEA rollout plan with Sarah.,2026-06-23
+gavin.shaw@acmecorp.com,Gavin,Shaw,Procurement Manager,+1-415-555-0178,acmecorp.com,2025-09-10,Handles order forms and seat counts.,2026-06-11
+douglas.q@rekall.com,Douglas,Quinn,VP Sales,+1-702-555-0179,rekall.com,2026-01-25,Economic buyer; aligned after last week's demo.,2026-06-05
+melina.c@rekall.com,Melina,Cortez,Sales Operations Analyst,+1-702-555-0180,rekall.com,2026-04-30,Most active evaluator; keeps the list of reps who need accounts.,2026-06-10
+gholt@spectre.co.uk,Graham,Holt,Finance Director,+44-161-555-0181,spectre.co.uk,2026-04-20,Approves the purchase.,2026-06-15
+fclarke@spectre.co.uk,Fiona,Clarke,Production Systems Manager,+44-161-555-0182,spectre.co.uk,2026-05-06,Evaluating shop-floor fit.,2026-06-05
+curtis.connors@oscorp.com,Curtis,Connors,"Lead Scientist, Genomics Lab",+1-212-555-0183,oscorp.com,2026-04-15,Heads the sister research team targeted for expansion.,2026-06-08
+gwen.mallory@oscorp.com,Gwen,Mallory,Lab Operations Manager,+1-212-555-0185,oscorp.com,2026-05-21,Would decide seat allocation for the genomics lab.,2026-06-17
+peter.franken@northwind-traders.example,Peter,Franken,Portland Warehouse Manager,+1-206-555-0186,northwind-traders.example,2026-05-04,Site lead for the Portland go-live.,2026-06-16
+andrew.fuller@northwind-traders.example,Andrew,Fuller,VP Finance,+1-206-555-0187,northwind-traders.example,2025-02-20,Signs the expansion order form.,2026-06-17
+diane.kowal@contoso.example,Diane,Kowal,Procurement Specialist,+1-312-555-0188,contoso.example,2025-03-10,Prepared the June 1 renewal paperwork with Marcus.,2026-06-09
+jess.harlow@wayfarer-travel.example,Jess,Harlow,Office Manager,+1-720-555-0189,wayfarer-travel.example,2025-06-15,Manages the team's logins.,2026-06-19
+ben.okoro@brightline-analytics.example,Ben,Okoro,VP Data Platform,+1-617-555-0190,brightline-analytics.example,2025-01-15,Priya's manager; signs the renewal.,2026-06-10
+peter.g@initech.com,Peter,Gibbs,Software Engineer,+1-512-555-0191,initech.com,2026-03-12,Day-to-day admin of the workspace.,2026-06-12

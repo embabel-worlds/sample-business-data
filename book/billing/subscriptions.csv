@@ -1,27 +1,27 @@
 source_id,customer_id,account_key,status,product,plan_code,amount,currency,interval,seats,started_on,period_start,period_end,canceled_on,note
-sub_AcmePlatform001,cus_AcmeCorp00001,acmecorp.com,active,Platform - Enterprise,price_ent_annual_125k,125000,USD,year,150,2024-03-28,2026-03-28,2027-03-28,,3rd consecutive annual renewal. Auto-renew on.
-sub_StarkPlatform02,cus_StarkInd00002,stark.com,active,Platform - Enterprise,price_ent_annual_180k,180000,USD,year,200,2023-08-15,2026-05-15,2027-05-15,,3-year contract through 2027. 540K total commit.
-sub_OscorpBase0003,cus_OscorpInd00003,oscorp.com,active,Platform - Business,price_biz_annual_85k,85000,USD,year,80,2024-06-18,2026-06-18,2027-06-18,,Base subscription.
-sub_OscorpResearch4,cus_OscorpInd00003,oscorp.com,active,Research Lab Add-On,price_addon_research_78k,78000,USD,year,25,2026-04-15,2026-04-15,2027-04-15,,Research lab add-on. Closed April 2026.
-sub_TyrellBase0005,cus_Tyrell0000004,tyrellcorp.com,active,Platform - Enterprise,price_ent_annual_272k,272000,USD,year,300,2024-11-25,2025-11-25,2026-11-25,,Multi-product enterprise. Renewal Nov 2026.
-sub_TyrellSupport06,cus_Tyrell0000004,tyrellcorp.com,active,Premium Support,price_support_premium_48k,48000,USD,year,1,2026-03-22,2026-03-22,2027-03-22,,Premium support tier add-on. Closed March 2026.
-sub_Cyberlife00007,cus_Cyberlife000005,cyberlife.com,active,Platform - Business,price_biz_annual_96k,96000,USD,year,100,2024-02-12,2026-02-10,2027-02-10,,Smooth renewal Feb 2026. NPS 9.
-sub_Dharma000008,cus_Dharma00000006,dharmainit.com,active,Platform - Starter,price_starter_annual_28k,28000,USD,year,30,2023-12-10,2025-12-04,2026-12-04,,Founder-led small org. Stable.
-sub_BlueSkyBase0009,cus_BlueSky00000007,blueskystudios.com,active,Platform - Business,price_biz_annual_60k,60000,USD,year,65,2024-09-22,2025-09-22,2026-09-22,,Base subscription.
-sub_BlueSkyProd0010,cus_BlueSky00000007,blueskystudios.com,active,Production Add-On,price_addon_prod_42k,42000,USD,year,30,2026-03-15,2026-03-15,2027-03-15,,Production module add-on. Closed March 2026.
-sub_FerrariT000011,cus_FerrariT00008,ferrari-tech.it,active,Platform - Business,price_biz_annual_64k_eur,58000,EUR,year,60,2024-07-28,2026-04-22,2027-04-22,,EUR billing. Renewed April 2026.
-sub_ChumBucket0012,cus_ChumBucket0009,chumbucket.com,active,Platform - Starter,price_starter_annual_12k,12000,USD,year,15,2025-05-05,2025-05-05,2026-05-05,,Renewal proposal sent April 2026 - now active for next term.
-sub_Wernham000013,cus_Wernham0000010,wernham-hogg.co.uk,active,Platform - Starter,price_starter_annual_14k_gbp,14000,GBP,year,18,2024-10-15,2026-04-08,2027-04-08,,GBP billing. Renewed April 2026.
-sub_LosPollos00014,cus_LosPollos00011,los-pollos.com,active,Platform - Business + Multi-Site,price_biz_multisite_145k,145000,USD,year,180,2024-05-22,2026-04-20,2027-04-20,,12 new franchise locations added April 2026.
-sub_Spacely000015,cus_Spacely00000012,spacelytech.com,active,Platform - Business,price_biz_annual_88k,88000,USD,year,90,2026-02-25,2026-02-25,2027-02-25,,New customer Feb 2026.
-sub_SpacelyReport16,cus_Spacely00000012,spacelytech.com,active,Reporting Module,price_addon_reporting_24k,24000,USD,year,90,2026-03-30,2026-03-30,2027-03-30,,Reporting add-on.
-sub_WayneEnt00017,cus_WayneEnt000013,wayne-ent.com,active,Platform - Enterprise (Pilot),price_ent_annual_95k,95000,USD,year,100,2026-01-25,2026-01-25,2027-01-25,,Phase 1 pilot. Global rollout pending.
-sub_Vandelay00018,cus_Vandelay000014,vandelay.com,canceled,Platform - Starter,price_starter_annual_28k,28000,USD,year,30,2024-08-10,2025-08-10,2026-08-10,2026-03-20,Canceled mid-term. Refund issued for unused portion.
-sub_Hudsucker00019,cus_Hudsucker00015,hudsucker.com,canceled,Platform - Business,price_biz_annual_72k,72000,USD,year,75,2023-06-15,2024-06-15,2025-06-15,2025-09-15,Canceled Sept 2025 after acquisition.
-sub_Sirius0000020,cus_Sirius0000016,sirius-cyber.com,past_due,Platform - Business,price_biz_annual_42k_gbp,42000,GBP,year,45,2025-03-12,2026-03-12,2027-03-12,,PAST DUE. Renewal invoice unpaid. Collections.
-sub_Bluth0000021,cus_Bluth00000017,bluth.com,past_due,Platform - Starter,price_starter_monthly_1850,1850,USD,month,20,2025-09-03,2026-04-03,2026-05-03,,Monthly billing. 3 failed card charges. Dunning active.
-sub_Northwind0022,cus_Northwind0018,northwind-traders.example,active,Platform - Business,price_biz_annual_48k,48000,USD,year,50,2025-03-01,2026-03-01,2027-03-01,,
-sub_Contoso000023,cus_Contoso000019,contoso.example,active,Platform - Enterprise,price_ent_annual_86k,86000,USD,year,100,2024-06-01,2026-06-01,2027-06-01,,
-sub_Initech000024,cus_Initech00020,initech.com,active,Platform - Starter,price_starter_monthly_1550,1550,USD,month,15,2026-03-10,2026-06-10,2026-07-10,,
-sub_Wayfarer00025,cus_Wayfarer00021,wayfarer-travel.example,active,Platform - Starter,price_starter_monthly_2400,2400,USD,month,12,2025-07-01,2026-06-01,2026-07-01,,
-sub_Brightline026,cus_Brightline022,brightline-analytics.example,active,Platform - Business,price_biz_annual_54k,54000,USD,year,60,2024-09-01,2025-09-01,2026-09-01,,
+sub_AcmePlatform001,cus_AcmeCorp00001,acmecorp.example.com,active,Platform - Enterprise,price_ent_annual_125k,125000,USD,year,150,2024-03-28,2026-03-28,2027-03-28,,3rd consecutive annual renewal. Auto-renew on.
+sub_StarkPlatform02,cus_StarkInd00002,stark.example.com,active,Platform - Enterprise,price_ent_annual_180k,180000,USD,year,200,2023-08-15,2026-05-15,2027-05-15,,3-year contract through 2027-05-15. 540K total commit.
+sub_OscorpBase0003,cus_OscorpInd00003,oscorp.example.com,active,Platform - Business,price_biz_annual_85k,85000,USD,year,80,2024-06-18,2026-06-18,2027-06-18,,Base subscription.
+sub_OscorpResearch4,cus_OscorpInd00003,oscorp.example.com,active,Research Lab Add-On,price_addon_research_78k,78000,USD,year,25,2026-04-15,2026-04-15,2027-04-15,,Research lab add-on. Closed April 15.
+sub_TyrellBase0005,cus_Tyrell0000004,tyrellcorp.example.com,active,Platform - Enterprise,price_ent_annual_272k,272000,USD,year,300,2024-11-25,2025-11-25,2026-11-25,,Multi-product enterprise. Renewal 2026-11-25.
+sub_TyrellSupport06,cus_Tyrell0000004,tyrellcorp.example.com,active,Premium Support,price_support_premium_48k,48000,USD,year,1,2026-03-22,2026-03-22,2027-03-22,,Premium support tier add-on. Closed March 22.
+sub_Cyberlife00007,cus_Cyberlife000005,cyberlife.example.com,active,Platform - Business,price_biz_annual_96k,96000,USD,year,100,2024-02-12,2026-02-10,2027-02-10,,Smooth renewal February 10. NPS 9.
+sub_Dharma000008,cus_Dharma00000006,dharmainit.example.com,active,Platform - Starter,price_starter_annual_28k,28000,USD,year,30,2023-12-10,2025-12-04,2026-12-04,,Founder-led small org. Stable.
+sub_GlimmerfordBase0009,cus_Glimmerford00000007,glimmerfordstudios.example.com,active,Platform - Business,price_biz_annual_60k,60000,USD,year,65,2024-09-22,2025-09-22,2026-09-22,,Base subscription.
+sub_GlimmerfordProd0010,cus_Glimmerford00000007,glimmerfordstudios.example.com,active,Production Add-On,price_addon_prod_42k,42000,USD,year,30,2026-03-15,2026-03-15,2027-03-15,,Production module add-on. Closed March 15.
+sub_FerrariT000011,cus_FerrariT00008,ferrari-tech.example.com,active,Platform - Business,price_biz_annual_64k_eur,58000,EUR,year,60,2024-07-28,2026-04-22,2027-04-22,,EUR billing. Renewed April 22.
+sub_ChumBucket0012,cus_ChumBucket0009,chumbucket.example.com,active,Platform - Starter,price_starter_annual_12k,12000,USD,year,15,2025-05-05,2025-05-05,2026-05-05,,Renewal proposal sent ahead of the May 5 renewal - now active for next term.
+sub_Wernham000013,cus_Wernham0000010,wernham-hogg.example.com,active,Platform - Starter,price_starter_annual_14k_gbp,14000,GBP,year,18,2024-10-15,2026-04-08,2027-04-08,,GBP billing. Renewed April 8.
+sub_LosPollos00014,cus_LosPollos00011,los-pollos.example.com,active,Platform - Business + Multi-Site,price_biz_multisite_145k,145000,USD,year,180,2024-05-22,2026-04-20,2027-04-20,,12 new franchise locations added April 20.
+sub_Spacely000015,cus_Spacely00000012,spacelytech.example.com,active,Platform - Business,price_biz_annual_88k,88000,USD,year,90,2026-02-25,2026-02-25,2027-02-25,,New customer since February 25.
+sub_SpacelyReport16,cus_Spacely00000012,spacelytech.example.com,active,Reporting Module,price_addon_reporting_24k,24000,USD,year,90,2026-03-30,2026-03-30,2027-03-30,,Reporting add-on.
+sub_WayneEnt00017,cus_WayneEnt000013,wayne-ent.example.com,active,Platform - Enterprise (Pilot),price_ent_annual_95k,95000,USD,year,100,2026-01-25,2026-01-25,2027-01-25,,Phase 1 pilot. Global rollout pending.
+sub_Vandelay00018,cus_Vandelay000014,vandelay.example.com,canceled,Platform - Starter,price_starter_annual_28k,28000,USD,year,30,2024-08-10,2025-08-10,2026-08-10,2026-03-20,Canceled mid-term. Refund issued for unused portion.
+sub_Hudsucker00019,cus_Hudsucker00015,hudsucker.example.com,canceled,Platform - Business,price_biz_annual_72k,72000,USD,year,75,2023-06-15,2024-06-15,2025-06-15,2025-09-15,Canceled 2025-09-15 after acquisition.
+sub_Sirius0000020,cus_Sirius0000016,sirius-cyber.example.com,past_due,Platform - Business,price_biz_annual_42k_gbp,42000,GBP,year,45,2025-03-12,2026-03-12,2027-03-12,,PAST DUE. Renewal invoice unpaid. Collections.
+sub_Bluth0000021,cus_Bluth00000017,bluth.example.com,past_due,Platform - Starter,price_starter_monthly_1850,1850,USD,month,20,2025-09-03,2026-04-03,2026-05-03,,Monthly billing. 3 failed card charges. Dunning active.
+sub_Northwind0022,cus_Northwind0018,northwind-traders.example.com,active,Platform - Business,price_biz_annual_48k,48000,USD,year,50,2025-03-01,2026-03-01,2027-03-01,,
+sub_Contoso000023,cus_Contoso000019,contoso.example.com,active,Platform - Enterprise,price_ent_annual_86k,86000,USD,year,100,2024-06-01,2026-06-01,2027-06-01,,
+sub_Initech000024,cus_Initech00020,initech.example.com,active,Platform - Starter,price_starter_monthly_1550,1550,USD,month,15,2026-03-10,2026-06-10,2026-07-10,,
+sub_Wayfarer00025,cus_Wayfarer00021,wayfarer-travel.example.com,active,Platform - Starter,price_starter_monthly_2400,2400,USD,month,12,2025-07-01,2026-06-01,2026-07-01,,
+sub_Brightline026,cus_Brightline022,brightline-analytics.example.com,active,Platform - Business,price_biz_annual_54k,54000,USD,year,60,2024-09-01,2025-09-01,2026-09-01,,

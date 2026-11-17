@@ -23,17 +23,21 @@ identifier every product can hold and no product invented.
     python3 to_book.py            # write book/
 """
 
+import calendar
 import csv
 import json
+import re
 from pathlib import Path
 
 import apply_arcs
+import apply_engagements
 
 ROOT = Path(__file__).parent
 
 # The day the billing and support data treat as "today" (the workbooks' own version date).
 # Loaders that want the story to stay current turn dates into ages relative to this.
 AS_OF = "2026-06-27"
+NOTES_WRITTEN = "2026-05-01"
 
 # HubSpot's default pipeline, in order. Won and lost are outcomes, not steps, so they are
 # carried as `status` and left out of the ordering.
@@ -43,9 +47,107 @@ PRIORITY = {"p0": "urgent", "p1": "high", "p2": "medium", "p3": "low", "p4": "lo
 KINDS = {"bug", "feature-request", "enhancement", "question", "documentation", "security"}
 
 
+# The workbooks write "sent 4/22"; a loader that moves dates reads "April 22" and not 4/22.
+MONTH_DAY = re.compile(r"(?<![\d/])(1[0-2]|[1-9])/(3[01]|[12]\d|[1-9])(?![\d/])")
+# Nor can it move "in March", "Q3" or "2027", which stop being true once the dates around them move. Each
+# becomes the day its own row's fields give, a quarter its first and last day, or wording relative to the text's
+# own date. Keyed by the row's id.
+REWORD = {
+    "hubspot/companies.csv": {
+        "201": [("Expanding into EMEA in 2026.", "Expanding into EMEA.")],
+        "205": [("through 2027.", "through 2027-05-15."), ("potential next year.", "potential.")],
+        "213": [("expecting close in May.", "expecting close within a month.")],
+        "215": [("Closed-lost in March", "Closed-lost on March 20"), ("Re-engage Q4 2026.", "Re-engage between 2026-10-01 and 2026-12-31.")],
+        "216": [("Renewal in November", "Renewal on 2026-11-25")],
+        "223": [("Try again Q3 2026.", "Try again between 2026-07-01 and 2026-09-30.")],
+        "227": [("Renewed December 2025.", "Renewed 2025-12-04.")],
+        "248": [("Researching for Q3 implementation.", "Researching for an implementation between 2026-07-01 and 2026-09-30.")],
+    },
+    "hubspot/contacts.csv": {
+        "101": [("in EMEA next quarter.", "in EMEA in a few months.")],
+        "102": [("Ran POC in March,", "Ran a POC about two months ago,")],
+        "103": [("Budget cycle starts in July.", "Budget cycle starts in about two months.")],
+        "105": [("user conference in October.", "user conference in about five months.")],
+        "111": [("add-on in April.", "add-on on April 15."), ("to her sister team next year.", "to her sister team in a year or so."),
+                ("Schedule QBR for July.", "Schedule the next QBR in about ten weeks.")],
+        "115": [("Lost deal in March", "Lost deal on March 20"),
+                ("Re-engage in Q4 2026 when new fiscal year starts.", "Re-engage between 2026-10-01 and 2026-12-31, when their new fiscal year starts.")],
+        "116": [("Renewal up in November.", "Renewal up on 2026-11-25.")],
+        "122": [("Last QBR in March was positive.", "Last QBR, about six weeks ago, was positive.")],
+        "123": [("try again in Q3.", "try again between 2026-07-01 and 2026-09-30.")],
+        "127": [("Renewed last December.", "Renewed 2025-12-04.")],
+        "148": [("Researching for Q3 implementation.", "Researching for an implementation between 2026-07-01 and 2026-09-30.")],
+    },
+    "hubspot/deals.csv": {
+        "315": [("Re-engage Q4 2026.", "Re-engage between 2026-10-01 and 2026-12-31.")],
+        "338": [("Duff Beer - Q3 Implementation", "Duff Beer - Brewery Implementation"),
+                ("Q3 implementation target.", "Implementation target between 2026-07-01 and 2026-09-30.")],
+        "349": [("QBR scheduled July.", "QBR scheduled.")],
+        "308": [("Expansion play next year.", "Expansion play as they hire.")],
+        "309": [("targeted for next year.", "targeted for about a year after this add-on.")],
+        # Amsterdam about four months after the 2026-09-15 close, as the emails and calls about it say.
+        "344": [("EMEA expansion deal for next year.", "EMEA expansion deal; Amsterdam goes live about four months after it closes.")],
+    },
+    "github-issues/issues.csv": {
+        "1238": [("needed by Q3.", "needed by July 1.")],
+        "1296": [("rolling out next quarter.", "rolling out between 2026-07-01 and 2026-09-30.")],
+    },
+    "stripe/customers.csv": {
+        "cus_AcmeCorp00001": [("since 2024.", "since 2024-03-28.")],
+        "cus_OscorpInd00003": [("added in April.", "added on April 15.")],
+        "cus_Tyrell0000004": [("added March 2026.", "added March 22.")],
+        "cus_Cyberlife000005": [("renewal in Feb 2026.", "renewal on February 10.")],
+        "cus_Dharma00000006": [("Renewed Dec 2025.", "Renewed 2025-12-04.")],
+        "cus_Glimmerford00000007": [("purchased March 2026.", "purchased March 15.")],
+        "cus_FerrariT00008": [("Renewed April 2026.", "Renewed April 22.")],
+        "cus_ChumBucket0009": [("sent April 2026.", "sent ahead of the May 5 renewal.")],
+        "cus_LosPollos00011": [("locations April 2026.", "locations April 20.")],
+        "cus_Spacely00000012": [("New customer Feb 2026. Reporting module add-on March 2026.",
+                                 "New customer since February 25. Reporting module add-on March 30.")],
+        "cus_Vandelay000014": [("canceled March 2026", "canceled March 20")],
+        "cus_Hudsucker00015": [("Canceled Sept 2025", "Canceled 2025-09-15")],
+        # The workbook said February, but its last successful payment is 2025-03-28.
+        "cus_Sirius0000016": [("Last payment Feb 2026.", "Last payment 2025-03-28.")],
+        "cus_Bluth00000017": [("April invoice failed", "The invoice of April 3 failed")],
+    },
+    "stripe/subscriptions.csv": {
+        "sub_StarkPlatform02": [("through 2027.", "through 2027-05-15.")],
+        "sub_OscorpResearch4": [("Closed April 2026.", "Closed April 15.")],
+        "sub_TyrellBase0005": [("Renewal Nov 2026.", "Renewal 2026-11-25.")],
+        "sub_TyrellSupport06": [("Closed March 2026.", "Closed March 22.")],
+        "sub_Cyberlife00007": [("renewal Feb 2026.", "renewal February 10.")],
+        "sub_GlimmerfordProd0010": [("Closed March 2026.", "Closed March 15.")],
+        "sub_FerrariT000011": [("Renewed April 2026.", "Renewed April 22.")],
+        "sub_ChumBucket0012": [("sent April 2026", "sent ahead of the May 5 renewal")],
+        "sub_Wernham000013": [("Renewed April 2026.", "Renewed April 8.")],
+        "sub_LosPollos00014": [("added April 2026.", "added April 20.")],
+        "sub_Spacely000015": [("New customer Feb 2026.", "New customer since February 25.")],
+        "sub_Hudsucker00019": [("Canceled Sept 2025", "Canceled 2025-09-15")],
+    },
+    "stripe/invoices.csv": {
+        "in_oscorp_2026_001": [("Due July 2026.", "Due July 18.")],
+        "in_hudsucker_2025_001": [("canceled Sept,", "canceled 2025-09-15,")],
+    },
+    "stripe/charges.csv": {
+        **{f"ch_bluth_2026_00{n}": [(f"Bluth {m} 2026", f"Bluth, invoice of {calendar.month_name[n]} 3")]
+           for n, m in ((1, "Jan"), (2, "Feb"), (3, "Mar"))},
+        **{f"ch_bluth_2026_004{x}": [(f"Bluth April - {n} attempt failed", f"Bluth, {n} attempt failed on the invoice of April 3")] for x, n in zip("abc", ("1st", "2nd", "3rd"))},
+    },
+}
+
+
+def reword(path, r):
+    for old, new in REWORD.get(path, {}).pop(next(iter(r.values())), []):
+        k = next((k for k, v in r.items() if old in v), None)
+        assert k, f"{path}: '{old}' is no longer in its row; update REWORD"
+        r[k] = r[k].replace(old, new)
+    return r
+
+
 def read(path):
     with open(ROOT / "csv" / path, newline="") as f:
-        return list(csv.DictReader(f))
+        return [reword(path, {k: MONTH_DAY.sub(lambda m: f"{calendar.month_name[int(m[1])]} {m[2]}", v)
+                              for k, v in r.items()}) for r in csv.DictReader(f)]
 
 
 def write(path, rows):
@@ -58,7 +160,34 @@ def write(path, rows):
     return len(rows)
 
 
+def rewrite_domains(book):
+    """Move every company onto `<name>.example.com`, last, across every file of the book.
+
+    Several workbook domains belong to real businesses, and a fictional customer joined to live
+    enrichment or news by domain would attract a real company's headlines. `example.com` is
+    reserved, so nothing here can reach anyone. It is `.example.com` and not `.example` because
+    a CRM validates contact emails, and HubSpot rejects the reserved `.example` top level."""
+    files = sorted(book.rglob("*.csv"))
+    tables = {p: list(csv.reader(open(p, newline=""))) for p in files}
+    domains = set()
+    for rows in tables.values():
+        keys = [i for i, h in enumerate(rows[0]) if h == "account_key"]
+        for row in rows[1:]:
+            domains |= {k for i in keys for k in row[i].split(",")} - {"", "*"}
+            domains |= {m.lower() for cell in row for m in re.findall(r"@([\w.-]+\w)", cell)}
+    to = {d: d.split(".")[0] + ".example.com" for d in domains}
+    assert len(set(to.values())) == len(to), "two domains would merge into one account"
+    pattern = re.compile(r"(?<![\w-])(" + "|".join(map(re.escape, sorted(to, key=len, reverse=True))) + r")(?![\w-])", re.I)
+    for path, rows in tables.items():
+        with open(path, "w", newline="") as f:
+            csv.writer(f, lineterminator="\n").writerows(
+                [[pattern.sub(lambda m: to[m.group(1).lower()], cell) for cell in row] for row in rows])
+    left = {m for p in files for m in re.findall(r"@([\w.-]+\w)", p.read_text())} - set(to.values())
+    assert not left, f"addresses outside example.com: {left}"
+
+
 def main():
+    print(f"assert ok: {len(apply_engagements.self_test())} text-date probes give their expected outcome")
     companies = read("hubspot/companies.csv")
     key_by_name = {c["Company Name"]: c["Domain"] for c in companies}
     key_by_id = {c["Record ID"]: c["Domain"] for c in companies}
@@ -82,6 +211,8 @@ def main():
         "city": c["City"], "region": c["State/Region"], "country": c["Country"],
         "created_on": c["Create Date"], "last_activity_on": c["Last Activity Date"],
         "note": c["Notes"], "source_id": c["Record ID"],
+        # The workbooks' CRM notes were written on NOTES_WRITTEN, or when the contact was added if that was later.
+        "note_on": max(NOTES_WRITTEN, c["Create Date"]) if c["Notes"] else "",
     } for c in contacts])
 
     def outcome(stage):
@@ -180,7 +311,10 @@ def main():
         "respond_by": d["Evidence Due By"], "description": d["Description"],
     } for d in read("stripe/disputes.csv")])
 
+    assert not any(REWORD.values()), f"REWORD rows not in csv/: {REWORD}"
     counts.update(apply_arcs.apply(ROOT / "book"))
+    counts.update(apply_engagements.apply(ROOT / "book", AS_OF))
+    rewrite_domains(ROOT / "book")
     (ROOT / "book" / "book.json").write_text(json.dumps({"as_of": AS_OF, "rows": counts}, indent=2) + "\n")
     for name, n in counts.items():
         print(f"{name}  {n}")

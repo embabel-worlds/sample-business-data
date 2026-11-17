@@ -1,23 +1,23 @@
 source_id,account_key,name,email,phone,currency,country,payment_method,delinquent,balance_owed,created_on,known_to_crm,note
-cus_AcmeCorp00001,acmecorp.com,Acme Corporation,billing@acmecorp.com,+1-415-555-0100,USD,US,card_visa_4242,no,0,2024-03-20,yes,Active customer since 2024. Billed annually. Auto-renew on.
-cus_StarkInd00002,stark.com,Stark Industries,ap@stark.com,+1-310-555-0100,USD,US,card_amex_0005,no,0,2023-08-15,yes,Flagship customer. 3-year contract. Net-30 terms.
-cus_OscorpInd00003,oscorp.com,Oscorp Industries,finance@oscorp.com,+1-212-555-0100,USD,US,ach_bank_1234,no,0,2024-06-18,yes,Annual billing via ACH. Research lab add-on added in April.
-cus_Tyrell0000004,tyrellcorp.com,Tyrell Corporation,billing@tyrellcorp.com,+1-206-555-0100,USD,US,card_visa_8841,no,0,2024-11-25,yes,Multi-product customer. Premium support tier added March 2026.
-cus_Cyberlife000005,cyberlife.com,Cyberlife Detroit,accounts@cyberlife.com,+1-313-555-0100,USD,US,card_mc_3782,no,0,2024-02-12,yes,Long-tenured. Smooth renewal in Feb 2026.
-cus_Dharma00000006,dharmainit.com,Dharma Initiative,aaron@dharmainit.com,+1-808-555-0100,USD,US,card_visa_0119,no,0,2023-12-10,yes,"Small org, founder-led billing. Renewed Dec 2025."
-cus_BlueSky00000007,blueskystudios.com,Blue Sky Studios,billing@blueskystudios.com,+1-512-555-0100,USD,US,card_mc_6677,no,0,2024-09-22,yes,Project management use case. Add-on purchased March 2026.
-cus_FerrariT00008,ferrari-tech.it,Ferrari Tech Bologna,amministrazione@ferrari-tech.it,+39-051-555-0100,EUR,IT,sepa_debit_2233,no,0,2024-07-28,yes,EUR billing. SEPA Direct Debit. Renewed April 2026.
-cus_ChumBucket0009,chumbucket.com,Chum Bucket Holdings,gm@chumbucket.com,+1-941-555-0100,USD,US,card_visa_4499,yes,12000,2025-05-05,yes,Annual sub. Renewal proposal sent April 2026.
-cus_Wernham0000010,wernham-hogg.co.uk,Wernham Hogg Slough,accounts@wernham-hogg.co.uk,+44-118-555-0100,GBP,GB,bacs_debit_5566,no,0,2024-10-15,yes,GBP billing via BACS Direct Debit. Small but loyal.
-cus_LosPollos00011,los-pollos.com,Los Pollos Hermanos,finance@los-pollos.com,+1-505-555-0100,USD,US,card_amex_7711,no,0,2024-05-22,yes,QSR franchise group. Expanded to 12 new locations April 2026.
-cus_Spacely00000012,spacelytech.com,Spacely Tech,ap@spacelytech.com,+1-303-555-0100,USD,US,card_visa_9933,no,0,2026-02-25,yes,New customer Feb 2026. Reporting module add-on March 2026.
-cus_WayneEnt000013,wayne-ent.com,Wayne Enterprises,procurement-ap@wayne-ent.com,+1-312-555-0100,USD,US,wire_transfer,no,0,2026-01-25,yes,Phase 1 pilot. Wire transfer terms. Larger global deal pending.
-cus_Vandelay000014,vandelay.com,Vandelay Industries,art@vandelay.com,+1-718-555-0100,USD,US,card_visa_1180,yes,280,2024-08-10,yes,CHURNED. Subscription canceled March 2026 due to budget freeze. Outstanding balance: prorated charge in dispute.
-cus_Hudsucker00015,hudsucker.com,Hudsucker Industries,billing@hudsucker.com,+1-212-555-0100,USD,US,,no,0,2023-06-15,no,CHURNED. Canceled Sept 2025 after 2 years. Cited acquisition by competitor. Refunded prorated portion.
-cus_Sirius0000016,sirius-cyber.com,Sirius Cybernetics,finance@sirius-cyber.com,+44-20-7946-0100,GBP,GB,card_visa_0042,yes,4250,2025-03-12,no,DELINQUENT. 2 unpaid invoices. Last payment Feb 2026. Collections engaged.
-cus_Bluth00000017,bluth.com,Bluth Company,gob@bluth.com,+1-949-555-0100,USD,US,card_mc_7702,yes,1850,2025-09-03,no,PAST DUE. April invoice failed card charge x3. Dunning sequence active.
-cus_Northwind0018,northwind-traders.example,Northwind Traders,accounts@northwind-traders.example,,USD,US,card_visa_5521,no,0,2025-03-01,yes,
-cus_Contoso000019,contoso.example,Contoso Ltd,ap@contoso.example,,USD,US,wire_transfer,no,0,2024-06-01,yes,
-cus_Initech00020,initech.com,Initech LLC,billing@initech.com,,USD,US,ach_bank_7731,no,0,2026-03-10,yes,
-cus_Wayfarer00021,wayfarer-travel.example,Wayfarer Travel,tom.harlow@wayfarer-travel.example,,USD,US,card_visa_6610,no,0,2025-06-20,yes,
-cus_Brightline022,brightline-analytics.example,Brightline Analytics,finance@brightline-analytics.example,,USD,US,card_amex_3301,no,0,2024-09-01,yes,
+cus_AcmeCorp00001,acmecorp.example.com,Acme Corporation,billing@acmecorp.example.com,+1-415-555-0100,USD,US,card_visa_4242,no,0,2024-03-20,yes,Active customer since 2024-03-28. Billed annually. Auto-renew on.
+cus_StarkInd00002,stark.example.com,Stark Industries,ap@stark.example.com,+1-310-555-0100,USD,US,card_amex_0005,no,0,2023-08-15,yes,Flagship customer. 3-year contract. Net-30 terms.
+cus_OscorpInd00003,oscorp.example.com,Oscorp Industries,finance@oscorp.example.com,+1-212-555-0100,USD,US,ach_bank_1234,no,0,2024-06-18,yes,Annual billing via ACH. Research lab add-on added on April 15.
+cus_Tyrell0000004,tyrellcorp.example.com,Tyrell Corporation,billing@tyrellcorp.example.com,+1-206-555-0100,USD,US,card_visa_8841,no,0,2024-11-25,yes,Multi-product customer. Premium support tier added March 22.
+cus_Cyberlife000005,cyberlife.example.com,Cyberlife Detroit,accounts@cyberlife.example.com,+1-313-555-0100,USD,US,card_mc_3782,no,0,2024-02-12,yes,Long-tenured. Smooth renewal on February 10.
+cus_Dharma00000006,dharmainit.example.com,Dharma Initiative,aaron@dharmainit.example.com,+1-808-555-0100,USD,US,card_visa_0119,no,0,2023-12-10,yes,"Small org, founder-led billing. Renewed 2025-12-04."
+cus_Glimmerford00000007,glimmerfordstudios.example.com,Glimmerford Studios,billing@glimmerfordstudios.example.com,+1-512-555-0100,USD,US,card_mc_6677,no,0,2024-09-22,yes,Project management use case. Add-on purchased March 15.
+cus_FerrariT00008,ferrari-tech.example.com,Ferrari Tech Bologna,amministrazione@ferrari-tech.example.com,+39-051-555-0100,EUR,IT,sepa_debit_2233,no,0,2024-07-28,yes,EUR billing. SEPA Direct Debit. Renewed April 22.
+cus_ChumBucket0009,chumbucket.example.com,Chum Bucket Holdings,gm@chumbucket.example.com,+1-941-555-0100,USD,US,card_visa_4499,yes,12000,2025-05-05,yes,Annual sub. Renewal proposal sent ahead of the May 5 renewal.
+cus_Wernham0000010,wernham-hogg.example.com,Wernham Hogg Slough,accounts@wernham-hogg.example.com,+44-118-555-0100,GBP,GB,bacs_debit_5566,no,0,2024-10-15,yes,GBP billing via BACS Direct Debit. Small but loyal.
+cus_LosPollos00011,los-pollos.example.com,Los Pollos Hermanos,finance@los-pollos.example.com,+1-505-555-0100,USD,US,card_amex_7711,no,0,2024-05-22,yes,QSR franchise group. Expanded to 12 new locations April 20.
+cus_Spacely00000012,spacelytech.example.com,Spacely Tech,ap@spacelytech.example.com,+1-303-555-0100,USD,US,card_visa_9933,no,0,2026-02-25,yes,New customer since February 25. Reporting module add-on March 30.
+cus_WayneEnt000013,wayne-ent.example.com,Wayne Enterprises,procurement-ap@wayne-ent.example.com,+1-312-555-0100,USD,US,wire_transfer,no,0,2026-01-25,yes,Phase 1 pilot. Wire transfer terms. Larger global deal pending.
+cus_Vandelay000014,vandelay.example.com,Vandelay Industries,art@vandelay.example.com,+1-718-555-0100,USD,US,card_visa_1180,yes,280,2024-08-10,yes,CHURNED. Subscription canceled March 20 due to budget freeze. Outstanding balance: prorated charge in dispute.
+cus_Hudsucker00015,hudsucker.example.com,Hudsucker Industries,billing@hudsucker.example.com,+1-212-555-0100,USD,US,,no,0,2023-06-15,no,CHURNED. Canceled 2025-09-15 after 2 years. Cited acquisition by competitor. Refunded prorated portion.
+cus_Sirius0000016,sirius-cyber.example.com,Sirius Cybernetics,finance@sirius-cyber.example.com,+44-20-7946-0100,GBP,GB,card_visa_0042,yes,4250,2025-03-12,no,DELINQUENT. 2 unpaid invoices. Last payment 2025-03-28. Collections engaged.
+cus_Bluth00000017,bluth.example.com,Bluth Company,gob@bluth.example.com,+1-949-555-0100,USD,US,card_mc_7702,yes,1850,2025-09-03,no,PAST DUE. The invoice of April 3 failed card charge x3. Dunning sequence active.
+cus_Northwind0018,northwind-traders.example.com,Northwind Traders,accounts@northwind-traders.example.com,,USD,US,card_visa_5521,no,0,2025-03-01,yes,
+cus_Contoso000019,contoso.example.com,Contoso Ltd,ap@contoso.example.com,,USD,US,wire_transfer,no,0,2024-06-01,yes,
+cus_Initech00020,initech.example.com,Initech LLC,billing@initech.example.com,,USD,US,ach_bank_7731,no,0,2026-03-10,yes,
+cus_Wayfarer00021,wayfarer-travel.example.com,Wayfarer Travel,tom.harlow@wayfarer-travel.example.com,,USD,US,card_visa_6610,no,0,2025-06-20,yes,
+cus_Brightline022,brightline-analytics.example.com,Brightline Analytics,finance@brightline-analytics.example.com,,USD,US,card_amex_3301,no,0,2024-09-01,yes,
