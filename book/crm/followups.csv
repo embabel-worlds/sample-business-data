@@ -3,7 +3,7 @@ followup-0001,initech.example.com,Mike Davis,2026-06-09,2026-07-03,Get a fix dat
 followup-0002,dunder.example.com,Mike Davis,2026-05-07,2026-06-12,Get Liam's signature on the regional licence,"He asked for time after their period-end push; try his mobile first, then Siobhán.",open,
 followup-0003,spacelytech.example.com,Mike Davis,2026-06-17,2026-07-03,Countersign the Spacely order form once Lena returns it,,open,
 followup-0004,xanatos.example.com,Mike Davis,2026-06-12,2026-06-19,Send Owen the 30-day deal-desk pilot plan,"One deal team, about 60 users; Elena runs it day to day.",open,
-followup-0005,blue-sun.example.com,Mike Davis,2026-05-04,2026-07-08,Re-approach Ingrid once audit season is over,Hudson says her team is free from July 1.,open,
+followup-0005,blue-sun.example.com,Mike Davis,2026-05-04,2026-07-08,Re-approach Ingrid once audit season is over,Hudson says her team is free about a week before this is due.,open,
 followup-0006,hephaestus.example.com,Mike Davis,2026-06-03,2026-06-10,Send Rosa the phased proposal with on-site training,,done,2026-06-09
 followup-0007,blackmesa.example.com,Mike Davis,2026-04-20,2026-04-27,Share the lab-inventory template with Noah,,done,2026-04-24
 followup-0008,piedpiper.example.com,Jenna Lopez,2026-06-09,2026-06-19,"Send Jared a ten-seat, six-month startup option",Same per-seat rate; true up in six months.,open,
@@ -22,5 +22,5 @@ followup-0020,massivedyn.example.com,Sophie Turner,2026-06-05,2026-06-12,Get Giu
 followup-0021,sterling-cooper.example.com,Dana Whitfield,2026-04-21,2026-06-05,Complete Sterling Cooper's supplier onboarding form,Their portal needs our insurance certificate and W-9.,open,
 followup-0022,umbrella.example.com,Dana Whitfield,2026-06-10,2026-06-22,Register us in Umbrella's supplier portal,Procurement can't raise a PO until we're registered.,open,
 followup-0023,spacelytech.example.com,Dana Whitfield,2026-06-17,2026-07-03,Get a PO number from Lena for the order form,,open,
-followup-0024,oceanic.example.com,Dana Whitfield,2026-06-11,2026-07-10,Send W-9 and vendor setup form to Oceanic procurement,Their review cycle starts July 1.,open,
+followup-0024,oceanic.example.com,Dana Whitfield,2026-06-11,2026-07-10,Send W-9 and vendor setup form to Oceanic procurement,Their review cycle opens before this is due.,open,
 followup-0025,los-pollos.example.com,Dana Whitfield,2026-06-16,2026-07-15,Update the billing contact for the twelve new franchise locations,Jasmine is sending the new regional contacts.,open,

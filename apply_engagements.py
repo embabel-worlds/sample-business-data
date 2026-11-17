@@ -77,30 +77,76 @@ TROUBLE = r"\b(issue|problem|bug|outage|overdue|late|fail\w*|escalat\w*|complain
 FORBIDDEN = {"chumbucket.com": r"pay|invoice|card|billing", "northwind-traders.example": r"export",
              **{k: TROUBLE for k in CONTROLS}}
 ANY, EMAIL = {"email", "call", "meeting"}, {"email"}
-# A loader moves the dates inside texts as it moves the date fields: ISO, "June 16", "16 June".
+# A loader moves the dates inside texts as it moves the date fields: ISO, "June 16" or "Jun. 16th", "16 June" or
+# "16th June", the month capitalised. It moves them by whole weeks, so a weekday beside a date stays true.
 MONTH = "|".join(sorted({n for m in calendar.month_name[1:] for n in (m, m[:3])} | {"Sept"}, key=len, reverse=True))
 TEXT_DATE = re.compile(rf"(?:\b(?P<wd>{'|'.join(calendar.day_name)}),? )?(?:\b(?P<iso>\d{{4}}-\d\d-\d\d)\b"
                        rf"|\b(?P<m>{MONTH})\.? (?P<d>\d{{1,2}})(?:st|nd|rd|th)?\b"
                        rf"|\b(?P<d2>\d{{1,2}})(?:st|nd|rd|th)? (?P<m2>{MONTH})\b)")
+# Only free text carries dates a loader moves; a name, an email or an id is never read as one ("June" Kowal).
+TEXT_COLUMNS = {"note", "body", "subject", "title", "summary", "description"}
 # A loader reads a month-day without a year in the book's year and writes it back without one, so a moved date
 # must stay in that year. shortcut: holds for loads up to 20 weeks after as-of (as-of 2026-06-27 lands on
 # 2026-11-14); a later load needs more dates in ISO, or a loader that writes the year.
 SHIFT_HORIZON = timedelta(weeks=20)
 # What it cannot move: a day without its month, or a numeric month/day.
 DAY_ONLY = re.compile(r"\bthe \d{1,2}(?:st|nd|rd|th)\b|(?<![\d/])\d{1,2}/\d{1,2}(?![\d/])")
-# A day that borrows its month from a date beside it: "June 10 or 11", "10-12 June". The loader moves the date, not the day.
+# A day that borrows its month from a date beside it: "June 10 or 11", "June 10, 11", "June 10 - 12", "June 10/11",
+# "10-12 June". The loader moves the date, not the day.
 ORD = r"\d{1,2}(?:st|nd|rd|th)?"
-JOIN = r"(?: (?:or|and|to|through|till|until|&) | ?[–—] ?|-)"  # a spaced hyphen is a dash between clauses
+JOIN = r"(?: ?(?:or|and|to|through|till|until|&) | ?[-–—/] ?| ?[,;] ?(?:(?:and|or) )?)"
 ELIDED = re.compile(rf"{JOIN}{ORD}\b(?! ?(?:{MONTH})\b)")
 ELIDED_BEFORE = re.compile(rf"\b{ORD}{JOIN}$")
-# What it cannot move and that stops being true once the dates move: a month without its day, a quarter, a
-# season, a holiday, the end of a calendar year or quarter, a year.
-PERIOD = re.compile(rf"\b(?:{MONTH})\b"
-                    r"|\b[QH][1-4]\b|(?i:\b(?:spring|summer|autumn|winter|holidays?)\b|\b(?:the|this|next|last|in|by) fall\b"
-                    r"|\b(?:this|next|last|the|current|coming|that) quarter\b|\bquarter[- ]end\b|\bend of (?:the|this) (?:year|quarter)\b"
-                    r"|\byear[- ]end\b|\bhalf of (?:the|this) year\b)|(?<![\w.+-])(?:19|20)\d\d(?!\w|\.\d)")
-# "May" opening a sentence and followed by its subject or "not" asks or hedges; it names no month.
-VERB_MAY = re.compile(r"(?:(?<=^)|(?<=[.!?] )|(?<=\n))May(?= (?:I|we|you|he|she|it|they|not)\b)")
+# A month word is a date when a day or year sits beside it, when it is possessive, or when a word that times
+# something comes before it; "May", "March", "June", "April", "August" and "Jan" are ordinary words or names
+# otherwise ("May we?", "it may slip", "March towards"). Any other month word always is one.
+WORD_MONTH = re.compile(rf"\b(?i:{MONTH})\b")
+AMBIGUOUS = {"may", "march", "mar", "june", "jun", "april", "august", "jan"}
+DAY_OR_YEAR_AFTER = re.compile(r"\.? ?\d|'s\b")
+TIMING_BEFORE = re.compile(rf"(?i)(?:\b(?:in|by|until|till|since|before|after|from|through|during|for|of|the|this|"
+                           rf"next|last|each|every|early|mid|late)|\b{ORD})[ -]$")
+# What it cannot move and that stops being true once the dates move: a quarter, a season, a holiday, a calendar
+# month or year named relative to the text ("next month", "this year"), a period's end, a bare year.
+PERIOD = re.compile(
+    r"\b[QH][1-4]\b|(?<![\w.+-])(?:19|20)\d\d(?!\w|\.\d)|\b[A-Z][a-z]+(?:'s|s')? Day\b|(?i:"
+    r"\b(?:spring|summer|autumn|winter|holidays?|christmas|xmas|thanksgiving|new year(?:'s)?|easter|good friday"
+    r"|black friday|cyber monday|halloween|hanukkah|diwali|ramadan|passover|valentine'?s)\b"
+    r"|\b(?:this|next|last|in(?: the)?|by(?: the)?|until(?: the)?|since(?: the)?|before(?: the)?|after(?: the)?"
+    r"|early|late) fall\b"
+    r"|\b(?:this|next|last|coming|previous|following|current|that|the new) (?:(?:fiscal|financial) )?(?:month|year|quarter|half(?! hour))(?:'s)?\b"
+    r"|\b(?:earlier|later) (?:this|that|in the) (?:month|year)\b|\brest of (?:the|this) (?:month|year|quarter)\b|\b(?:mid|early|late)[- ](?:month|year)\b"
+    r"|\bquarters\b|\b(?:month|quarter|year)[- ]end\b|\b(?:end|start|beginning) of (?:the|this|next|last) "
+    r"(?:month|year|quarter)\b|\bhalf of (?:the|this) year\b)")
+# Each probe: (column, text, the loader can move every time it names). to_book.py runs these before the book.
+PROBES = [
+    ("body", "Meet June 10, 11 and 12.", False), ("body", "Meet June 10 - 12.", False),
+    ("body", "Meet June 10/11.", False), ("body", "Meet June 10; 11 if not.", False),
+    ("body", "Meet June 10 or 11.", False), ("body", "Meet 10-12 June.", False),
+    ("body", "Meet June 10 or June 11.", True), ("body", "Meet Jun. 10th or 10th June.", True),
+    ("body", "Deliver in july.", False), ("body", "Deliver JUNE 10.", False), ("body", "Deliver june 10.", False),
+    ("body", "Deliver by may.", False), ("body", "Deliver in May.", False), ("body", "The July QBR.", False),
+    ("body", "May's invoice.", False), ("body", "Mid-June works.", False),
+    ("body", "Deliver by Christmas.", False), ("body", "Before Thanksgiving.", False),
+    ("body", "After New Year.", False), ("body", "Over Easter.", False), ("body", "Ahead of Black Friday.", False),
+    ("body", "Before Labor Day.", False), ("body", "Over the holidays.", False),
+    ("body", "Upsell in the next two quarters.", False), ("body", "Close this quarter.", False),
+    ("body", "Live in Q3.", False), ("body", "Signed in 2027.", False), ("body", "Over the summer.", False),
+    ("body", "In the fall.", False), ("body", "Following up on our call last month.", False),
+    ("body", "We go live next month.", False), ("body", "Rollout next year.", False),
+    ("body", "Expanding this year.", False), ("body", "A POC earlier this year.", False),
+    ("body", "Any slot this month.", False), ("body", "Tooling this half.", False), ("body", "Join for the last half hour.", True), ("body", "Approved for this financial year.", False),
+    ("body", "Roadmap for the rest of the year.", False), ("body", "Before month-end.", False),
+    ("body", "By the end of the year.", False), ("body", "Due the 11th.", False), ("body", "Sent 4/22.", False),
+    ("body", "Meet June 31.", False), ("body", "Tuesday, June 10.", False),
+    ("first_name", "June", True), ("last_name", "May", True), ("email", "june.10@x.com", True),
+    ("body", "May the team proceed?", True), ("body", "The rollout may slip.", True),
+    ("body", "It may, or may not.", True), ("body", "March towards the target.", True),
+    ("body", "The fall in revenue is temporary.", True), ("body", "Wednesday, June 10, 3 seats.", False),
+    ("body", "Meet Wednesday, June 10.", True), ("body", "Due 2026-11-25.", True),
+    ("body", "Signature in about four weeks.", True), ("body", "A quarterly review.", True),
+    ("body", "In about six months.", True), ("note", "Renews each June 1.", True),
+    ("body", "Ask June from finance.", True), ("body", "Prepares the June renewal.", False),
+]
 
 
 def day(text):
@@ -112,22 +158,29 @@ def check_far(when, cut, what):
 
 
 def check_text_dates(tables, year):
-    """Every date a text names is a real day, a weekday beside it is that day's, and none is a form a loader
-    cannot move: a day without its month, a month without its day, a quarter, a season or a year. A month-day
-    without a year is read in `year`, and stays in it when moved by up to SHIFT_HORIZON; a later one is ISO."""
+    """Every date a free text names is a form a loader moves - ISO, or a capitalised month with its day - and a
+    real day, and a weekday beside it is that day's. No free text names a time a loader cannot move: a day without
+    its month, a month without its day or in the wrong case, a quarter, a season, a holiday, a calendar period
+    relative to the text, or a year. A month-day without a year is read in `year`, and stays in it when moved by up
+    to SHIFT_HORIZON; a later one is ISO."""
     n = 0
     for name, rows in tables.items():
         for r in rows:
             for k, v in r.items():
-                if not isinstance(v, str) or re.fullmatch(r"\d{4}-\d\d-\d\d(?:[ T][\d:.+Z-]+)?", v):
+                if k not in TEXT_COLUMNS or not isinstance(v, str):
                     continue
                 where = f"{name} {r.get('source_id') or r.get('email')} {k}"
                 bad = DAY_ONLY.search(v)
                 assert not bad, f"{where}: '{bad and bad[0]}' names a day a loader cannot move"
                 dates = list(TEXT_DATE.finditer(v))
-                bad = next((p for p in PERIOD.finditer(v) if not VERB_MAY.match(v, p.start())
-                            and not any(m.start() <= p.start() < m.end() for m in dates)), None)
+                bad = next((p for p in PERIOD.finditer(v) if not any(m.start() <= p.start() < m.end() for m in dates)), None)
                 assert not bad, f"{where}: '{bad and bad[0]}' names a time a loader cannot move"
+                for w in WORD_MONTH.finditer(v):
+                    if any(m.start() <= w.start() < m.end() for m in dates):
+                        continue
+                    timed = w[0].lower() not in AMBIGUOUS or DAY_OR_YEAR_AFTER.match(v, w.end()) \
+                        or TIMING_BEFORE.search(v, 0, w.start())
+                    assert not timed, f"{where}: '{w[0]}' names a month without its day, or not capitalised"
                 bad = next((m for m in dates if ELIDED.match(v, m.end()) or any(
                     not any(o.start() <= e.start() < o.end() for o in dates) for e in [ELIDED_BEFORE.search(v, 0, m.start())] if e)), None)
                 assert not bad, f"{where}: a day beside '{bad and bad[0]}' borrows its month, so a loader cannot move it"
@@ -144,6 +197,20 @@ def check_text_dates(tables, year):
                         f"{where}: '{m[0]}' but {when} is a {calendar.day_name[when.weekday()]}"
                     n += 1
     return n
+
+
+def self_test():
+    """The probes give their expected outcome; returns them with the outcome for a report."""
+    out = []
+    for column, text, ok in PROBES:
+        try:
+            check_text_dates({"probe": [{column: text}]}, 2026)
+            got = True
+        except AssertionError:
+            got = False
+        assert got == ok, f"probe {column}={text!r}: {'accepted' if got else 'rejected'}, expected the opposite"
+        out.append((column, text, got))
+    return out
 
 
 def apply(root, as_of):
@@ -206,6 +273,11 @@ def apply(root, as_of):
             if r["opportunity_id"]:
                 assert deals[r["opportunity_id"]]["account_key"] == r["account_key"], r["source_id"]
                 deal_touches[r["opportunity_id"]].append((when, r["direction"]))
+    for c in contacts:  # an added person's note is written on the day of their newest logged email or call
+        if int(c["source_id"]) >= FIRST_CONTACT_ID and c["note"]:
+            logged = max((w.isoformat() for w, _, _ in touches[c["email"]]), default="")
+            assert c["note_on"] == logged, f"{c['email']} note_on {c['note_on']}, newest email or call {logged}"
+    print("assert ok: every added contact's note is dated on their newest logged email or call")
     for m in read(root, "crm/meetings.csv"):
         if m["attendee_email"]:
             touches[m["attendee_email"]].append((day(m["starts_at"]), "meeting", "outbound"))

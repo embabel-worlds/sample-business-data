@@ -72,7 +72,7 @@ email-0011,blue-sun.com,h.bailey@blue-sun.com,339,Mike Davis,outbound,2026-04-08
 
 Thanks for the session yesterday. As we discussed, the multi-region deployment is settled technically; the gating item is Ingrid's security sign-off. Could you introduce me, or forward the attached architecture summary covering regional data residency, SSO enforcement and our penetration-test cadence?
 
-I'd like 45 minutes with her and our security lead before April 30 so we hold the May 29 target.
+I'd like 45 minutes with her and our security lead before April 30 so we hold the May 31 target.
 
 Mike"
 email-0012,aperture.com,aisha.k@aperture.com,319,Jenna Lopez,outbound,2026-04-08 17:00:00,HRIS integration: scoping questions,"Hi Aisha,
@@ -84,31 +84,31 @@ This is a slightly unusual project for us, so I'd like to get the scoping right 
 Jenna"
 email-0013,brightline-analytics.example,priya.raman@brightline-analytics.example,,Sophie Turner,outbound,2026-04-09 15:00:00,Invitation: customer advisory board,"Hi Priya,
 
-Your team gives us some of the sharpest product feedback we receive, so I'd love to invite you to our customer advisory board. It meets virtually once a quarter for 90 minutes, and the first session on May 20 covers our analytics roadmap for the rest of the year.
+Your team gives us some of the sharpest product feedback we receive, so I'd love to invite you to our customer advisory board. It meets virtually once a quarter for 90 minutes, and the first session, in about six weeks, covers our analytics roadmap for the next six months.
 
 There's no commitment beyond that. Let me know and I'll send the calendar hold.
 
 Sophie"
 email-0014,blue-sun.com,h.bailey@blue-sun.com,339,Mike Davis,inbound,2026-04-09 17:15:00,Re: Blue Sun multi-region: next step with your CISO,"Mike,
 
-Sent your summary to Ingrid and copied you on the intro. Fair warning: her team is buried in an internal audit until about May 8, so she may be slow to respond. She did say regional data residency is her main question, so the summary should help when she gets to it.
+Sent your summary to Ingrid and copied you on the intro. Fair warning: her team is buried in an internal audit for about another month, so she may be slow to respond. She did say regional data residency is her main question, so the summary should help when she gets to it.
 
 Hudson"
 email-0015,globex.io,d.chen@globex.io,302,Jenna Lopez,inbound,2026-04-09 20:40:00,Re: Globex MSA: our legal team's responses to the redlines,"Jenna,
 
 Thanks for the quick turnaround. I've passed the redlines to Michael, but procurement has a queue right now, so I can't promise a date. The onboarding timeline looks right to me.
 
-One ask: can you confirm the implementation team would be the same people who ran the POC with us last month? That continuity matters to my engineers. Thursday doesn't work this week; let's aim for next week.
+One ask: can you confirm the implementation team would be the same people who ran the POC with us a few weeks ago? That continuity matters to my engineers. Thursday doesn't work this week; let's aim for next week.
 
 David"
 email-0016,brightline-analytics.example,priya.raman@brightline-analytics.example,,Sophie Turner,inbound,2026-04-10 17:15:00,Re: Invitation: customer advisory board,"Hi Sophie,
 
-I'd be delighted, thank you for thinking of us. Count me in for May 20. Could you send the hold to my calendar and to Ben Okoro as an optional attendee? He's keen to hear where the roadmap is going before our planning later this year.
+I'd be delighted, thank you for thinking of us. Count me in for the first session. Could you send the hold to my calendar and to Ben Okoro as an optional attendee? He's keen to hear where the roadmap is going before our planning cycle in about six months.
 
 Priya"
 email-0017,aperture.com,aisha.k@aperture.com,319,Jenna Lopez,inbound,2026-04-10 18:20:00,Re: HRIS integration: scoping questions,"Hi Jenna,
 
-We're on Workday. Yes, automatic provisioning for new hires and deprovisioning for leavers is the main goal. Caroline Ward runs the HRIS and would own it; I'll introduce you once we're through our planning cycle. Realistically that's around June 5.
+We're on Workday. Yes, automatic provisioning for new hires and deprovisioning for leavers is the main goal. Caroline Ward runs the HRIS and would own it; I'll introduce you once we're through our planning cycle. Realistically that's about eight weeks away.
 
 Aisha"
 email-0018,plumbus.com,j.reed@plumbus.com,,Jenna Lopez,outbound,2026-04-13 16:45:00,Closing the loop,"Hi Jackson,
@@ -120,14 +120,14 @@ If someone else handles operations tools, a name would be much appreciated. Othe
 Jenna"
 email-0019,stark.com,priya.patel@stark.com,305,Jenna Lopez,inbound,2026-04-14 20:20:00,Re: Stark three-year expansion: agreement out for signature,"Jenna,
 
-Sorry for the silence. The agreement is fine on our side, but multi-year commitments now go through our new capital review board, which meets monthly, and we missed this month's slot. I'll push for next month's, but I can't promise it. There's nothing for you to do right now; I'll come back to you once it's on the agenda.
+Sorry for the silence. The agreement is fine on our side, but multi-year commitments now go through our new capital review board, which meets monthly, and we missed its last meeting. I'll push for the next one, but I can't promise it. There's nothing for you to do right now; I'll come back to you once it's on the agenda.
 
 Priya"
 email-0020,vandelay.com,r.singh@vandelay.com,,Mike Davis,outbound,2026-04-15 14:00:00,Checking in ahead of your next planning cycle,"Hi Robert,
 
-I know the budget freeze put everything on hold last month, and I'm not looking to restart anything before you're ready. I wanted to share one thing: we've launched a lighter mid-market package that starts at about 40% of the quote you saw, with the same shipment-tracking workflows your team liked.
+I know the budget freeze put everything on hold on March 20, and I'm not looking to restart anything before you're ready. I wanted to share one thing: we've launched a lighter mid-market package that starts at about 40% of the quote you saw, with the same shipment-tracking workflows your team liked.
 
-I'll reconnect on 2026-09-01, ahead of planning for your new fiscal year.
+I'll reconnect about a month before your new fiscal year starts on 2026-10-01.
 
 All the best,
 Mike"
@@ -140,7 +140,7 @@ No need if your current twelve cover it.
 Jenna"
 email-0022,wayfarer-travel.example,tom.harlow@wayfarer-travel.example,,Jenna Lopez,inbound,2026-04-16 14:50:00,Re: Extra logins for your busy season,"Hi Jenna,
 
-Good thought, thanks. Twelve should cover us this year, since we've moved two part-timers onto the reservations desk full time and they already have logins. If the new Breckenridge office opens before August 1 I'll shout, because they would need two more.
+Good thought, thanks. Twelve should cover us for now, since we've moved two part-timers onto the reservations desk full time and they already have logins. If the new Breckenridge office opens before August 1 I'll shout, because they would need two more.
 
 Tom"
 email-0023,wayne-ent.com,evance@wayne-ent.com,306,Mike Davis,outbound,2026-04-16 19:00:00,Wayne Enterprises MSA: responses to your redlines,"Hi Elaine,
@@ -178,7 +178,7 @@ email-0027,xyzcorp.com,n.rivera@xyzcorp.com,,Jenna Lopez,outbound,2026-04-28 15:
 
 Thanks for joining our campaign operations webinar. Here's the recording and the planning template we walked through; a lot of agencies adapt it for client retainers.
 
-If your agency is reviewing its project tools this year, I'd love to speak with whoever owns that decision. Would you be open to introducing me to your director of operations?
+If your agency is reviewing its project tools soon, I'd love to speak with whoever owns that decision. Would you be open to introducing me to your director of operations?
 
 Thanks,
 Jenna"
@@ -206,7 +206,7 @@ email-0031,blue-sun.com,i.sorensen@blue-sun.com,339,Mike Davis,outbound,2026-05-
 
 Hudson introduced us a few weeks ago. I know your team is deep in audit season, so I'll keep this short. Our security lead would like 45 minutes to walk you through regional data residency and key management for the multi-region rollout. I've attached our latest SOC 2 report and a completed CAIQ so you can review ahead of time.
 
-Any slot this month works on our side.
+Any slot in the next four weeks works on our side.
 
 Best,
 Mike Davis"
@@ -240,7 +240,7 @@ email-0036,massivedyn.it,i.romano@massivedyn.it,318,Sophie Turner,outbound,2026-
 
 Thank you for hosting our CRO in Milan. He came away convinced that the strategic initiative is the right next step for both of us. As agreed, Giulia will receive our comments on the framework agreement this week, and Francesca and I will start the programme plan for phase one.
 
-Is the 2026-09-17 board still the target?
+Is the board meeting in about three and a half months still the target?
 
 Cordiali saluti,
 Sophie Turner"
@@ -260,7 +260,7 @@ Atenciosamente,
 Sophie Turner"
 email-0039,xanatos.com,r.hughes@xanatos.com,325,Mike Davis,inbound,2026-06-02 14:00:00,Introducing Owen Burnett,"Hi Mike,
 
-Following up on our call last month. I know I was vague about the initiative. It's now been scoped: we're overhauling our deal-desk process across the investment banking group. Owen Burnett, our chief of staff, owns it, so I'm handing the conversation over to him. He's copied here and expects to hear from you.
+Following up on our May 6 call. I know I was vague about the initiative. It's now been scoped: we're overhauling our deal-desk process across the investment banking group. Owen Burnett, our chief of staff, owns it, so I'm handing the conversation over to him. He's copied here and expects to hear from you.
 
 Ryan"
 email-0040,momcorp.com,walter.b@momcorp.com,328,Mike Davis,outbound,2026-06-02 15:00:00,Mom Corp MSA: final redlines,"Hi Walter,
@@ -285,7 +285,7 @@ Would 30 minutes next week work for a discovery call? I'd like to understand how
 Mike Davis"
 email-0043,tyrellcorp.com,r.moreau@tyrellcorp.com,316,Jenna Lopez,outbound,2026-06-02 17:00:00,50 additional seats: co-terming with your 2026-11-25 renewal,"Hi Rachael,
 
-Following your conversation with Hannah, here's how we'd add the 50 research seats. Rather than a separate agreement, we'd co-term them with your 2026-11-25 renewal, so the new seats start next month at a prorated price and everything renews on one date.
+Following your conversation with Hannah, here's how we'd add the 50 research seats. Rather than a separate agreement, we'd co-term them with your 2026-11-25 renewal, so the new seats start as soon as you sign, at a prorated price and everything renews on one date.
 
 I've copied Owen, since procurement will want to review the structure. Happy to walk through the numbers whenever suits.
 
@@ -308,7 +308,7 @@ email-0046,rekall.com,douglas.q@rekall.com,346,Sophie Turner,outbound,2026-06-02
 
 Following last week's demo, here's our final proposal for the sales ops suite: 40 seats on annual billing and a dedicated onboarding manager for the first 60 days. Ethan's team has reviewed the scope.
 
-I'd love to get this signed before your sales kickoff on July 1 so the reps start on the new suite. Any questions, just let me know.
+I'd love to get this signed before your sales kickoff in about four weeks so the reps start on the new suite. Any questions, just let me know.
 
 Sophie"
 email-0047,yoyodyne.com,raymond.c@yoyodyne.com,337,Jenna Lopez,outbound,2026-06-02 18:00:00,Evaluation plan for your propulsion test teams,"Hi Raymond,
@@ -357,7 +357,7 @@ Best,
 Jenna"
 email-0053,oscorp.com,curtis.connors@oscorp.com,349,Jenna Lopez,outbound,2026-06-03 14:00:00,Sister lab expansion: what the research add-on covers,"Hi Dr. Connors,
 
-Olivia suggested I introduce myself ahead of the July 15 QBR. Her team has used the research lab add-on since April 15 for sample tracking and protocol versioning, and she thought your genomics lab might want the same setup.
+Olivia suggested I introduce myself ahead of the QBR in about six weeks. Her team has used the research lab add-on since April 15 for sample tracking and protocol versioning, and she thought your genomics lab might want the same setup.
 
 I'd be glad to show you what her team built in a 30-minute call. No preparation needed on your side.
 
@@ -377,7 +377,7 @@ Would June 10 or June 11 work?
 Sophie"
 email-0056,wayne-ent.com,evance@wayne-ent.com,306,Mike Davis,inbound,2026-06-03 15:20:00,Re: Wayne Enterprises MSA: responses to your redlines,"Mike,
 
-Apologies for the long gap; the rollout went through our global IT steering review last month. We accept your position on the liability cap and the super-cap. Two items remain: the DPA must name sub-processors per region, and we need a termination right if a sub-processor changes without 30 days' notice.
+Apologies for the long gap; the rollout went through our global IT steering review a few weeks ago. We accept your position on the liability cap and the super-cap. Two items remain: the DPA must name sub-processors per region, and we need a termination right if a sub-processor changes without 30 days' notice.
 
 If you can agree to both, I can recommend signature to Marcus.
 
@@ -387,7 +387,7 @@ email-0057,hephaestus.com,r.delgado@hephaestus.com,332,Mike Davis,outbound,2026-
 
 Thanks for joining the final session of the deep dive. Attached is the commercial proposal: 110 seats across your three engineering groups, the CAD integration pack, and a structured rollout over the next three months so your teams aren't disrupted mid-project.
 
-Ian mentioned the board reviews new commitments on July 8. If that's the target, we'd want terms agreed by July 1. Happy to adjust the rollout order if needed.
+Ian mentioned the board reviews new commitments in about five weeks. If that's the target, we'd want terms agreed a week before that. Happy to adjust the rollout order if needed.
 
 Mike"
 email-0058,hyperion.com,n.petrov@hyperion.com,323,Sophie Turner,outbound,2026-06-03 17:00:00,Re: Questions on API rate limits,"Hi Nadia,
@@ -523,7 +523,7 @@ Thank you, this is unusually thorough for a first submission. We'll need our sta
 Helen Ashworth"
 email-0079,oscorp.com,curtis.connors@oscorp.com,349,Jenna Lopez,inbound,2026-06-08 16:10:00,Re: Sister lab expansion: what the research add-on covers,"Jenna,
 
-Olivia has been singing its praises. I'm interested, particularly in protocol versioning, as our sequencing protocols change weekly. Gwen manages our lab operations and would decide how seats are allocated, so please include her. The week of June 29 suits us better than next week.
+Olivia has been singing its praises. I'm interested, particularly in protocol versioning, as our sequencing protocols change weekly. Gwen manages our lab operations and would decide how seats are allocated, so please include her. In about three weeks suits us better than next week.
 
 Curtis"
 email-0080,spacelytech.com,mia.r@spacelytech.com,322,Mike Davis,inbound,2026-06-08 17:15:00,Re: Spacely Tech: our counter-offer,"Mike,
@@ -533,7 +533,7 @@ Sorry for the long silence; Derek wanted to rerun the numbers after our board me
 Mia"
 email-0081,hephaestus.com,r.delgado@hephaestus.com,332,Mike Davis,inbound,2026-06-08 19:00:00,Re: Hephaestus: commercial proposal,"Mike,
 
-The proposal is in line with what I expected. Two requests before I take it to the board: phase the seats so we start with 60 and add 50 on 2026-10-01, and include two days of on-site training in Boulder. If you can do both, I'll put it on the July 8 agenda.
+The proposal is in line with what I expected. Two requests before I take it to the board: phase the seats so we start with 60 and add 50 about four months later, and include two days of on-site training in Boulder. If you can do both, I'll put it on the board's agenda in about four weeks.
 
 Rosa Delgado
 COO"
@@ -551,7 +551,7 @@ email-0084,solyent.com,javier.n@solyent.com,312,Jenna Lopez,outbound,2026-06-09 
 
 Sofia tells me she shared the trial results with you on Friday. Attached is our proposal for 20 users on an annual plan, at 24k. Everything Lucía built during the trial carries over unchanged, so your team can keep working without a rebuild.
 
-I'd welcome 30 minutes to answer any questions before your July 2 budget review.
+I'd welcome 30 minutes to answer any questions before your next budget review.
 
 Best regards,
 Jenna Lopez"
@@ -580,7 +580,7 @@ We can accept the eighteen-month cap and the 5% ceiling at renewal. I've marked 
 Walter Brandt"
 email-0089,piedpiper.com,jared.o@piedpiper.com,308,Jenna Lopez,inbound,2026-06-09 23:10:00,Re: Startup bundle: proposal for 15 seats,"Hi Jenna,
 
-Thanks for this. The product is clearly a fit, but 12k is more than we'd planned for tooling this half. Could we start at 10 seats for six months and true up when we hire after that? If the per-seat rate stays the same, I think Carlos and I could approve that this month.
+Thanks for this. The product is clearly a fit, but 12k is more than we'd planned for tooling right now. Could we start at 10 seats for six months and true up when we hire after that? If the per-seat rate stays the same, I think Carlos and I could approve that within a few weeks.
 
 Jared"
 email-0090,nakamoto.jp,m.sato@nakamoto.jp,310,Sophie Turner,inbound,2026-06-10 02:00:00,Vendor risk questions for the decision committee,"Dear Ms Turner,
@@ -618,13 +618,13 @@ email-0095,wayne-ent.com,mwilliams@wayne-ent.com,306,Mike Davis,outbound,2026-06
 
 Thanks for yesterday. As requested, the attached order form splits the global rollout by business unit, so each regional lead sees their own seat count and go-live date: North America and EMEA by 2026-09-30, APAC and LATAM by 2026-12-31, and corporate functions last.
 
-Elaine has the final DPA. Once she signs off, I'll send execution copies ahead of your steering committee on July 14.
+Elaine has the final DPA. Once she signs off, I'll send execution copies ahead of your steering committee in about five weeks.
 
 Best,
 Mike"
 email-0096,oceanic.com,kakana@oceanic.com,327,Mike Davis,inbound,2026-06-11 22:00:00,Re: Oceanic: recordkeeping requirements mapped to the logistics suite,"Mike,
 
-I've reviewed the mapping with our records manager and we're comfortable with it, including the two amber items. Please go ahead and involve Owen. Procurement will want to see the final proposal with enterprise tier pricing before the end of the month, since their next review cycle starts July 1.
+I've reviewed the mapping with our records manager and we're comfortable with it, including the two amber items. Please go ahead and involve Owen. Procurement will want to see the final proposal with enterprise tier pricing within about two weeks, since their next review cycle starts in about three weeks.
 
 Kate Akana"
 email-0097,nakamoto.jp,y.tanaka@nakamoto.jp,310,Sophie Turner,outbound,2026-06-12 01:30:00,Committee date confirmed: July 14,"Dear Tanaka-san,
@@ -658,7 +658,7 @@ If it helps your planning, I can also put together a go-live schedule with Peter
 Jenna"
 email-0101,fernhollow.example,sam.ortega@fernhollow.example,355,Mike Davis,outbound,2026-06-15 15:00:00,Pilot scope for Fernhollow,"Hi Sam,
 
-Thanks for the time last week. Here's the pilot scope as I understood it: ten seats for your operations team, a 60-day pilot starting July 1, and a check-in at day 30 to review adoption against the three workflows you picked.
+Thanks for the time last week. Here's the pilot scope as I understood it: ten seats for your operations team, a 60-day pilot starting in about two weeks, and a check-in at day 30 to review adoption against the three workflows you picked.
 
 If that matches your notes, I'll send the pilot agreement for signature. Any changes, just reply here.
 
@@ -673,7 +673,7 @@ Best,
 Jenna Lopez"
 email-0103,spacelytech.com,lena.f@spacelytech.com,322,Mike Davis,outbound,2026-06-17 15:30:00,Spacely Tech: our counter-offer in writing,"Hi Lena,
 
-Derek asked me to send you our counter-offer in writing for review: 120 seats over 24 months at 8% off list, with the option to add up to 15% more seats mid-term at the same rate. The MSA is unchanged from the version your team reviewed earlier this year.
+Derek asked me to send you our counter-offer in writing for review: 120 seats over 24 months at 8% off list, with the option to add up to 15% more seats mid-term at the same rate. The MSA is unchanged from the version your team reviewed about five months ago.
 
 Derek will let us know once you've both decided. If you go ahead and need a PO reference on the order form, let me know and I'll add it.
 
@@ -681,13 +681,13 @@ Thanks,
 Mike Davis"
 email-0104,northwind-traders.example,andrew.fuller@northwind-traders.example,351,Jenna Lopez,inbound,2026-06-17 21:00:00,Re: Northwind warehouse expansion: order form,"Jenna,
 
-Thanks. I'll review it this week and check the co-term dates with Laura before I sign. I'll come back to you by the end of the month.
+Thanks. I'll review it this week and check the co-term dates with Laura before I sign. I'll come back to you within two weeks.
 
 Andrew Fuller
 VP Finance"
 email-0105,chumbucket.com,s.planck@chumbucket.com,333,Sophie Turner,outbound,2026-06-19 14:00:00,Chum Bucket renewal: signature,"Hi Sheldon,
 
-Ariana mentioned she's prepared the renewal paperwork for your signature. The terms match last year: the same twelve-month platform plan for your locations, renewing on July 10. I've sent the agreement through DocuSign; it should take about two minutes.
+Ariana mentioned she's prepared the renewal paperwork for your signature. The terms match the current agreement: the same twelve-month platform plan for your locations. Our forecast has your signature by July 10; I've sent the agreement through DocuSign, and it should take about two minutes.
 
 If you have any questions about the terms, I'm around all week. Thanks for another year with us.
 
@@ -733,7 +733,7 @@ We've just added a calendar view that a couple of studios asked for. Happy to sh
 Jenna"
 email-0112,dharmainit.com,aaron.g@dharmainit.com,,Jenna Lopez,outbound,2026-06-10 14:00:00,Quick hello,"Hi Aaron,
 
-Just a quick note to say thanks for another good year with us. If your team grows this year, I'm happy to talk through options, but no rush.
+Just a quick note to say thanks for another good year with us. If your team grows, I'm happy to talk through options, but no rush.
 
 Jenna"
 email-0113,globex.io,m.feldman@globex.io,,Jenna Lopez,outbound,2026-06-12 15:30:00,Updated supplier details,"Hi Michael,
@@ -773,12 +773,12 @@ Would a 45-minute slot in the next two weeks work?
 Jenna"
 email-0119,oscorp.com,olivia.brown@oscorp.com,,Jenna Lopez,outbound,2026-06-23 15:30:00,Thanks for the call,"Hi Olivia,
 
-Thanks for the time on the phone. I'll get the QBR on the calendar for July 15 and include the sister team's seat estimate so we can talk through it together.
+Thanks for the time on the phone. I'll get the QBR on the calendar for about three weeks from now and include the sister team's seat estimate so we can talk through it together.
 
 Jenna"
 email-0120,oscorp.com,gwen.mallory@oscorp.com,,Jenna Lopez,outbound,2026-06-17 14:00:00,Seat allocation for the genomics lab,"Hi Gwen,
 
-Olivia mentioned you'd decide seat allocation for the genomics lab. When you have a rough headcount, I can put together options for the July 15 review.
+Olivia mentioned you'd decide seat allocation for the genomics lab. When you have a rough headcount, I can put together options for the review in about four weeks.
 
 Jenna"
 email-0121,piedpiper.com,carlos.f@piedpiper.com,,Jenna Lopez,outbound,2026-06-10 16:00:00,Startup bundle,"Hi Carlos,
@@ -824,7 +824,7 @@ Thanks for registering for our construction planning webinar. Could you tell me 
 Jenna"
 email-0129,wayfarer-travel.example,jess.harlow@wayfarer-travel.example,,Jenna Lopez,outbound,2026-06-19 15:00:00,Adding a new login,"Hi Jess,
 
-Tom mentioned a new starter joins your team next month. You can add their login from the admin page, and I've attached a two-minute guide in case it helps.
+Tom mentioned a new starter joins your team soon. You can add their login from the admin page, and I've attached a two-minute guide in case it helps.
 
 Jenna"
 email-0130,yoyodyne.com,sandra.b@yoyodyne.com,,Jenna Lopez,outbound,2026-06-10 15:00:00,Our security overview for your files,"Hi Sandra,
@@ -834,10 +834,10 @@ Raymond mentioned you'd handle contracts if the evaluation goes ahead. There's n
 Jenna"
 email-0131,acmecorp.com,sarah.johnson@acmecorp.com,,Mike Davis,outbound,2026-06-09 15:00:00,EMEA expansion: next steps,"Hi Sarah,
 
-Thanks for championing the EMEA expansion. I've drafted a rollout outline for next year and will share it with Hannah ahead of our next call.
+Thanks for championing the EMEA expansion. I've drafted a phased rollout outline and will share it with Hannah ahead of our next call.
 
 Mike"
-email-0132,acmecorp.com,gavin.shaw@acmecorp.com,,Mike Davis,outbound,2026-06-11 16:00:00,Seat counts for next year,"Hi Gavin,
+email-0132,acmecorp.com,gavin.shaw@acmecorp.com,,Mike Davis,outbound,2026-06-11 16:00:00,Seat counts for the EMEA proposal,"Hi Gavin,
 
 When you have a moment, could you confirm your current seat count by team? It'll help us size the EMEA proposal accurately.
 
@@ -962,7 +962,7 @@ Kind regards,
 Sophie Turner"
 email-0156,brightline-analytics.example,ben.okoro@brightline-analytics.example,,Sophie Turner,outbound,2026-06-10 15:00:00,Thanks from all of us,"Hi Ben,
 
-A quick thank you to you and your team. Priya's reports keep making the product better. Let me know if there's anything you'd like from us before your planning later this year.
+A quick thank you to you and your team. Priya's reports keep making the product better. Let me know if there's anything you'd like from us before your planning cycle in about four months.
 
 Sophie"
 email-0157,chumbucket.com,a.cole@chumbucket.com,,Sophie Turner,outbound,2026-06-17 15:00:00,Renewal paperwork,"Hi Ariana,
@@ -977,7 +977,7 @@ Thanks for handling this. I'll send you a copy of the signed agreement as soon a
 Sophie"
 email-0159,contoso.example,marcus.webb@contoso.example,,Sophie Turner,outbound,2026-06-09 15:00:00,Quarterly review,"Hi Marcus,
 
-Thanks again for renewing with us. I'd like to set up a quarterly review next month. Would you like Diane to join?
+Thanks again for renewing with us. I'd like to set up a quarterly review in the next few weeks. Would you like Diane to join?
 
 Sophie"
 email-0160,contoso.example,diane.kowal@contoso.example,,Sophie Turner,outbound,2026-06-09 15:30:00,Renewal documents for your files,"Hi Diane,

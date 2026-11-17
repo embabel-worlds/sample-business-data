@@ -1,6 +1,6 @@
 source_id,account_key,opportunity_id,author,written_on,body
 note-0001,northwind-traders.example.com,351,Jenna Lopez,2026-06-12,Great call with Laura. They want Portland live before peak season and see us as the obvious choice. Expansion is all but done.
-note-0002,initech.example.com,303,Mike Davis,2026-05-20,"Emily called: their scheduled export times out on the big workspace, which is why the May 10 invoice is late. Told her engineering has the export timeout; she will pay once the export runs."
+note-0002,initech.example.com,303,Mike Davis,2026-05-20,"Emily called: their scheduled export times out on the big workspace, which is why the May 10 invoice is unpaid. Told her engineering has the export timeout; she will pay once the export runs."
 note-0003,initech.example.com,,Mike Davis,2026-06-09,"Follow-up with Emily. The export timeout is still open, and now dashboard filters reset when they refresh the page. Patient, but wants a date. Holding off chasing the overdue invoices until we have a fix date for the export."
 note-0004,glimmerfordstudios.example.com,,Dana Whitfield,2024-10-03,"Payment for INV-100044 (USD 60,000) failed yesterday: card declined. Emailed billing@glimmerfordstudios.example.com to ask them to check the card details; retrying in three days."
 note-0005,glimmerfordstudios.example.com,,Dana Whitfield,2024-10-06,"Payment for INV-100044 (USD 60,000) failed yesterday: insufficient funds. Emailed billing@glimmerfordstudios.example.com to ask them to check the card details; the retry is due on 2024-10-08."

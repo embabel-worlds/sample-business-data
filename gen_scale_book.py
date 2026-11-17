@@ -81,7 +81,7 @@ CASE_SHAPES = {
  ],
  "billing": [
   ("Invoice shows the wrong currency","Our latest invoice came through in USD but our contract is in GBP. Finance cannot process it until it is reissued.","blocked","neutral","problem"),
-  ("Card charged twice for the same period","We were billed twice for this month. Please refund the duplicate — it has already cleared.","degraded","frustrated","problem"),
+  ("Card charged twice for the same period","We were billed twice for the current period. Please refund the duplicate — it has already cleared.","degraded","frustrated","problem"),
   ("Purchase order number on invoices","Can you add our PO number to the invoice header? Our AP system rejects invoices without it.","asking","neutral","question"),
  ],
  "api": [
@@ -91,7 +91,7 @@ CASE_SHAPES = {
  ],
  "reporting": [
   ("Scheduled report has not arrived for two weeks","The Monday exec report stopped arriving. Nothing changed our side. The board meeting is Thursday.","blocked","frustrated","problem"),
-  ("CSV export truncates at 10,000 rows","Exports silently stop at 10k rows — no warning, so we published a partial number last month before noticing.","degraded","frustrated","bug"),
+  ("CSV export truncates at 10,000 rows","Exports silently stop at 10k rows — no warning, so we published a partial number a few weeks ago before noticing.","degraded","frustrated","bug"),
   ("Custom report builder","Is a custom report builder on the roadmap? We are rebuilding several by hand each month.","asking","neutral","question"),
  ],
  "perf": [
@@ -118,13 +118,13 @@ CASE_SHAPES = {
 # CRM notes that say nothing about support — what most real notes look like.
 NEUTRAL_NOTES = [
  "{industry} firm in {city}. Renewal due in about three months; no blockers flagged by the account team.",
- "Expanding headcount in {city} this year. Watching seat count against the current plan.",
+ "Expanding headcount in {city} over the coming months. Watching seat count against the current plan.",
  "Multi-stakeholder evaluation. Procurement is the long pole, not the product.",
  "Steady account since {since}. Low touch, pays on time, no escalations to date.",
  "Moved from annual to monthly billing at their request soon after signing.",
  "Strategic account for the {industry} vertical. Exec sponsor engaged.",
- "Growing fast post-funding. Likely upsell conversation in the next two quarters.",
- "Consolidating vendors this year; we are the incumbent in this category.",
+ "Growing fast post-funding. Likely upsell conversation in about six months.",
+ "Consolidating vendors; we are the incumbent in this category.",
 ]
 # Notes that DO touch the case's area — the `aware` half of the awareness judgement.
 AWARE_NOTES = [

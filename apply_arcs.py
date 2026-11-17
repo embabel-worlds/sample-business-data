@@ -249,7 +249,7 @@ def withholding(b):
                        "Year 3 - Platform Enterprise (100 seats)")
     case = b.case(key, "Contoso Ltd", email, "Marcus Webb", "CSV export silently drops rows over 10,000",
                   "open", "high", "bug", "area:export", "2026-06-02", "2026-06-24", 4,
-                  "Our month-end CSV export stops at 10,000 rows without any warning, so every report we send "
+                  "Our monthly CSV export stops at 10,000 rows without any warning, so every report we send "
                   "the board has been wrong. We need a fix, not a workaround. To be clear: we will not pay "
                   "the invoice due June 10 until the export is fixed.")
     assert case["opened_on"] <= unpaid["due_on"]
@@ -287,7 +287,7 @@ def acknowledged_trouble(b):
     deal_id = deal["source_id"]
     b.note(key, "Mike Davis", "2026-05-20",
            "Emily called: their scheduled export times out on the big workspace, which is why the May 10 invoice "
-           "is late. Told her engineering has the export timeout; she will pay once the export runs.", deal_id)
+           "is unpaid. Told her engineering has the export timeout; she will pay once the export runs.", deal_id)
     b.note(key, "Mike Davis", "2026-06-09",
            "Follow-up with Emily. The export timeout is still open, and now dashboard filters reset when "
            "they refresh the page. Patient, but wants a date. Holding off chasing the overdue invoices "

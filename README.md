@@ -122,15 +122,24 @@ each in its realm under `seed/load_book.py`.
   The workbooks' CRM records were written in early May 2026; the logged emails and calls run
   from March to 2026-06-25, and open follow-ups fall due between early June and mid-July. A
   demo that wants the story to stay current should turn dates into an age relative to that day.
-- **Dates inside texts** are ISO or a month and day ("June 16", "16 June", read in 2026), so a
-  loader that moves the dates can move them too. Each is a real day, and a weekday beside one is its
-  weekday. A month and day must still fall in 2026 when moved 20 weeks; a later one is ISO
-  ("2026-11-25"). A text never names a time a loader cannot move: no day without its month ("the
-  11th", "4/22", "June 10 or 11" - write "June 10 or June 11"), no month without its day ("in July",
-  "mid-June"), no quarter, season or holiday ("Q3", "this quarter", "summer"), no year end and no bare
-  year ("2027"). Those become a day, or wording relative to the text's own date ("next month", "in
-  about two months"). `to_book.py` rewrites the workbooks' texts so (`REWORD`, and "4/22" becomes
-  "April 22"), and `apply_engagements.py` fails on any that slips through.
+- **Dates inside texts** (the `note`, `body`, `subject`, `title`, `summary` and `description`
+  columns) are ISO or a capitalised month with its day ("June 16", "Jun. 16th", "16 June", "16th
+  June", read in 2026), so a loader that moves the dates by whole weeks can move them too. Each is a
+  real day, and a weekday beside one is its weekday. A month and day must still fall in 2026 when
+  moved 20 weeks; a later one is ISO ("2026-11-25"). A text never names a time a loader cannot move:
+  no day without its month ("the 11th", "4/22", "June 10 or 11", "June 10, 11", "June 10 - 12",
+  "June 10/11" - write "June 10 or June 11"), no month without its day or in the wrong case ("in
+  July", "mid-June", "the July QBR", "in july", "JUNE 10"), no quarter, season or holiday ("Q3",
+  "next two quarters", "summer", "in the fall", "Christmas", "Labor Day"), no calendar period named
+  relative to the text ("last month", "next year", "this half", "earlier this year", "month-end"),
+  and no bare year ("2027"). A month word that is not a date stays: a name in a name column, "May
+  we?", "it may slip", "March towards", "the fall in revenue". A month word counts as a date when a
+  day or year sits beside it, when it is possessive, or when a timing word (in, by, until, since,
+  the, early, mid, end of, ...) comes before it. A day a text does not name exactly is written as an
+  elapsed time from the text's own date ("about four weeks ago", "in about six months") or taken
+  from a linked record's date field. `to_book.py` rewrites the workbooks' texts so (`REWORD`, and
+  "4/22" becomes "April 22"), and `apply_engagements.py` fails on any that slips through; its
+  `PROBES` table pins what the check accepts and rejects.
 - **Issue state is only `open` or `closed`.** In-progress is implied by assignees and a
   recent `Updated At`. Priority and type live inside the comma-separated `Labels`.
 - **An issue has one `Body` and a `Comments` count**, not a thread. A product that needs

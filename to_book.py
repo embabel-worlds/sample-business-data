@@ -53,8 +53,8 @@ MONTH_DAY = re.compile(r"(?<![\d/])(1[0-2]|[1-9])/(3[01]|[12]\d|[1-9])(?![\d/])"
 # becomes the day its own row's fields give, or wording relative to the text's own date. Keyed by the row's id.
 REWORD = {
     "hubspot/companies.csv": {
-        "201": [("Expanding into EMEA in 2026.", "Expanding into EMEA this year.")],
-        "205": [("through 2027.", "through 2027-05-15.")],
+        "201": [("Expanding into EMEA in 2026.", "Expanding into EMEA.")],
+        "205": [("through 2027.", "through 2027-05-15."), ("potential next year.", "potential.")],
         "213": [("expecting close in May.", "expecting close within a month.")],
         "215": [("Closed-lost in March", "Closed-lost on March 20"), ("Re-engage Q4 2026.", "Re-engage from 2026-10-01.")],
         "216": [("Renewal in November", "Renewal on 2026-11-25")],
@@ -64,14 +64,15 @@ REWORD = {
     },
     "hubspot/contacts.csv": {
         "101": [("in EMEA next quarter.", "in EMEA in a few months.")],
-        "102": [("Ran POC in March,", "Ran a POC earlier this year,")],
-        "103": [("Budget cycle starts in July.", "Budget cycle starts July 1.")],
-        "105": [("user conference in October.", "user conference on 2026-10-14.")],
-        "111": [("add-on in April.", "add-on on April 15."), ("Schedule QBR for July.", "Schedule the next QBR for July 15.")],
+        "102": [("Ran POC in March,", "Ran a POC about two months ago,")],
+        "103": [("Budget cycle starts in July.", "Budget cycle starts in about two months.")],
+        "105": [("user conference in October.", "user conference in about five months.")],
+        "111": [("add-on in April.", "add-on on April 15."), ("to her sister team next year.", "to her sister team in a year or so."),
+                ("Schedule QBR for July.", "Schedule the next QBR in about ten weeks.")],
         "115": [("Lost deal in March", "Lost deal on March 20"),
                 ("Re-engage in Q4 2026 when new fiscal year starts.", "Re-engage from 2026-10-01, when their new fiscal year starts.")],
         "116": [("Renewal up in November.", "Renewal up on 2026-11-25.")],
-        "122": [("Last QBR in March was positive.", "Last QBR on March 12 was positive.")],
+        "122": [("Last QBR in March was positive.", "Last QBR, about six weeks ago, was positive.")],
         "123": [("try again in Q3.", "try again from July 1.")],
         "127": [("Renewed last December.", "Renewed 2025-12-04.")],
         "148": [("Researching for Q3 implementation.", "Researching for an implementation by 2026-09-30.")],
@@ -80,7 +81,11 @@ REWORD = {
         "315": [("Re-engage Q4 2026.", "Re-engage from 2026-10-01.")],
         "338": [("Duff Beer - Q3 Implementation", "Duff Beer - Brewery Implementation"),
                 ("Q3 implementation target.", "Implementation target 2026-09-30.")],
-        "349": [("QBR scheduled July.", "QBR scheduled July 15.")],
+        "349": [("QBR scheduled July.", "QBR scheduled.")],
+        "308": [("Expansion play next year.", "Expansion play as they hire.")],
+        "309": [("targeted for next year.", "targeted for about a year after this add-on.")],
+        # Amsterdam about four months after the 2026-09-15 close, as the emails and calls about it say.
+        "344": [("EMEA expansion deal for next year.", "EMEA expansion deal; Amsterdam goes live about four months after it closes.")],
     },
     "github-issues/issues.csv": {
         "1238": [("needed by Q3.", "needed by July 1.")],
@@ -125,7 +130,7 @@ REWORD = {
     "stripe/charges.csv": {
         **{f"ch_bluth_2026_00{n}": [(f"Bluth {m} 2026", f"Bluth, invoice of {calendar.month_name[n]} 3")]
            for n, m in ((1, "Jan"), (2, "Feb"), (3, "Mar"))},
-        **{f"ch_bluth_2026_004{x}": [("Bluth April -", "Bluth, invoice of April 3 -")] for x in "abc"},
+        **{f"ch_bluth_2026_004{x}": [(f"Bluth April - {n}", f"Bluth, invoice of April 3: {n}")] for x, n in zip("abc", ("1st", "2nd", "3rd"))},
     },
 }
 
@@ -181,6 +186,7 @@ def rewrite_domains(book):
 
 
 def main():
+    print(f"assert ok: {len(apply_engagements.self_test())} text-date probes give their expected outcome")
     companies = read("hubspot/companies.csv")
     key_by_name = {c["Company Name"]: c["Domain"] for c in companies}
     key_by_id = {c["Record ID"]: c["Domain"] for c in companies}
